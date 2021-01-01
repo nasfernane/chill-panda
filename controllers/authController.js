@@ -22,6 +22,7 @@ exports.signup = catchAsync(async (req, res, next) => {
         email: req.body.email,
         password: req.body.password,
         passwordConfirm: req.body.passwordConfirm,
+        passwordChangedAt: req.body.passwordChangedAt,
     });
 
     const token = signToken(newUser._id);
@@ -50,7 +51,7 @@ exports.login = catchAsync(async (req, res, next) => {
     // 2) vérifie si l'utilisateur existe && si le mot de passe est correct
     const user = await User.findOne({ email }).select('+password');
 
-    // si l'utilisateur n'existe pas OU le mt de passe est incorrect...
+    // si l'utilisateur n'existe pas OU le mot de passe est incorrect...
     if (!user || !(await user.correctPassword(password, user.password))) {
         // ... return et fait suivre l'erreur
         return next(new AppError('Vos identifiants sont incorrects', 401));
@@ -70,7 +71,6 @@ exports.protect = catchAsync(async (req, res, next) => {
     if (req.headers.authorization && req.headers.authorization.startsWith('Bearer')) {
         token = req.headers.authorization.split(' ')[1];
     }
-    console.log(token);
     if (!token) {
         // si le token n'existe pas, on return et transmet l'erreur
         return next(
@@ -83,11 +83,24 @@ exports.protect = catchAsync(async (req, res, next) => {
 
     // 2) vérification du token
     const decoded = await promisify(jwt.verify)(token, process.env.JWT_SECRET);
-    console.log(decoded);
 
     // 3) vérification si l'utilisateur existe encore
+    const currentUser = await User.findById(decoded.id);
+    if (!currentUser) {
+        return next(new AppError(`L'utilisateur lié à cet accès n'existe plus`));
+    }
 
     // 4) vérification si l'utilisateur a changé son mdp après que le token ait été fourni
+    if (currentUser.changedPasswordAfter(decoded.iat)) {
+        return next(
+            new AppError(
+                `Vous avez changé votre mot de passe récemment, veuillez vous reconnecter`,
+                401
+            )
+        );
+    }
 
+    // procure accès à l'tinéraire protégé
+    req.user = currentUser;
     next();
 });

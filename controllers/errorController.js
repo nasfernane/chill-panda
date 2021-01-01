@@ -25,7 +25,9 @@ const handleValidationErrorDB = err => {
 const handleJWTError = err =>
     new AppError('Accès invalide, veuillez vous identifier à nouveau', 401);
 
-//
+// gestion d'erreur token jtw expiré
+const handleJWTExpiredError = () =>
+    new AppError('Votre accès a expiré. Veuillez vous reconnecter', 401);
 
 // gestion des erreurs en mode développement
 const sendErrorDev = (err, res) => {
@@ -54,6 +56,7 @@ const sendErrorProd = (err, res) => {
         });
     }
 };
+
 module.exports = (err, req, res, next) => {
     // définit le statusCode de l'erreur sur elle même si elle est définie || 500 (internal server error)
     err.statusCode = err.statusCode || 500;
@@ -74,6 +77,7 @@ module.exports = (err, req, res, next) => {
         if (error._message === 'Project validation failed') error = handleValidationErrorDB(error);
         // si c'est une erreur de json web token
         if (error.name === 'JsonWebTokenError') error = handleJWTError(error);
+        if (error.name === 'TokenExpiredError') error = handleJWTExpiredError();
 
         sendErrorProd(error, res);
     }
