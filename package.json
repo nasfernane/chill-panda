@@ -1,0 +1,48 @@
+{
+    "name": "stealth-panda",
+    "version": "1.0.0",
+    "description": "Projet stage",
+    "main": "index.js",
+    "scripts": {
+        "start": "nodemon server.js",
+        "start:prod": "SET NODE_ENV=production & node server.js",
+        "scss": "node sass sass/main.scss sass/style.css",
+        "debug": "ndb server.js"
+    },
+    "author": "Nassim",
+    "license": "ISC",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/nasfernane/stealth-panda.git"
+    },
+    "bugs": {
+        "url": "https://github.com/nasfernane/stealth-panda/issues"
+    },
+    "homepage": "https://github.com/nasfernane/stealth-panda#readme",
+    "dependencies": {
+        "bcryptjs": "^2.4.3",
+        "dotenv": "^8.2.0",
+        "eslint": "^7.16.0",
+        "eslint-config-airbnb": "^18.2.1",
+        "eslint-config-prettier": "^7.1.0",
+        "eslint-plugin-import": "^2.22.1",
+        "eslint-plugin-jsx-a11y": "^6.4.1",
+        "eslint-plugin-node": "^11.1.0",
+        "eslint-plugin-prettier": "^3.3.0",
+        "eslint-plugin-react": "^7.21.5",
+        "express": "^4.17.1",
+        "jsonwebtoken": "^8.5.1",
+        "mongoose": "^5.11.8",
+        "morgan": "^1.10.0",
+        "prettier": "^2.2.1",
+        "slugify": "^1.4.6",
+        "validator": "^13.5.2"
+    },
+    "devDependencies": {
+        "nodemon": "^2.0.6",
+        "sass": "^1.30.0"
+    },
+    "engines": {
+        "node": "^14"
+    }
+}
