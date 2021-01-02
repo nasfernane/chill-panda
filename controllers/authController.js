@@ -104,3 +104,14 @@ exports.protect = catchAsync(async (req, res, next) => {
     req.user = currentUser;
     next();
 });
+
+// création d'une fonction enveloppant le middleware pour lui faire passer des arguments multiples sous la forme d'un spread operator
+exports.restrictTo = (...roles) => (req, res, next) => {
+    // roles est un tableau. par ex: ['admin', 'lead-guide']
+    // si le tableau entré en paramètre pour les permissions ne contient pas le rôle de l'utilisateur, return et transmet l'erreur
+    if (!roles.includes(req.user.role)) {
+        return next(new AppError(`Vous n'êtes pas autorisé(e) à effectuer cette action.`, 403));
+    }
+
+    next();
+};
