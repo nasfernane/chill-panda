@@ -7,6 +7,7 @@ const User = require('../models/userModel');
 // fonction pour remplacer les blocs catch/try
 const catchAsync = require('../utils/catchAsync');
 const AppError = require('../utils/appError');
+const sendEmail = require('../utils/email');
 
 // génère le token d'authentification
 const signToken = id =>
@@ -129,8 +130,34 @@ exports.forgotPassword = catchAsync(async (req, res, next) => {
     await user.save({ validateBeforeSave: false });
 
     // 3) envoi à l'utilisateur par mail
+    const resetURL = `${req.protocol}://${req.get(
+        'host'
+    )}/api/v1/users/resetPassword/${resetToken}`;
+    console.log(resetURL);
 
-    next();
+    const message = `Vous avez oublié votre mot de passe ? Mettez le à jour avec un nouveau mot de passe et confirmation à ${resetURL}\nSi vous n'avez pas changé votre mot de passe, veuillez ignorer cet email`;
+
+    try {
+        await sendEmail({
+            email: user.email,
+            subject: 'Réinitialisation de votre mot de passe (valable 10 minutes)',
+            message,
+        });
+
+        res.status(200).json({
+            status: 'success',
+            message: 'Le token a été envoyé par email !',
+        });
+    } catch (err) {
+        user.passwordResetToken = undefined;
+        user.passwordResetExpires = undefined;
+        await user.save({ validateBeforeSave: false });
+
+        return next(
+            new AppError(`L'envoi d'email a rencontré une erreur, veuillez ré-essayer plus tard`),
+            500
+        );
+    }
 });
 
 exports.resetPassword = (req, res, next) => {};
