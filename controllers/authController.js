@@ -16,6 +16,19 @@ const signToken = id =>
         expiresIn: process.env.JWT_EXPIRES_IN,
     });
 
+// creation et envoi d'un token avec la réponse
+const createSendToken = (user, statusCode, res) => {
+    const token = signToken(user._id);
+
+    res.status(statusCode).json({
+        status: 'Success',
+        token,
+        data: {
+            user,
+        },
+    });
+};
+
 // fonction asynchrone pour la création d'un nouvel utilisateur
 exports.signup = catchAsync(async (req, res, next) => {
     const newUser = await User.create({
@@ -27,15 +40,7 @@ exports.signup = catchAsync(async (req, res, next) => {
         passwordChangedAt: req.body.passwordChangedAt,
     });
 
-    const token = signToken(newUser._id);
-
-    res.status(201).json({
-        status: 'Success',
-        token,
-        data: {
-            user: newUser,
-        },
-    });
+    createSendToken(newUser, 201, res);
 });
 
 // fonction asynchrone pour la connexion d'un utilisateur
@@ -60,11 +65,7 @@ exports.login = catchAsync(async (req, res, next) => {
     }
 
     // 3) Si tout est OK, on envoie la réponse et le token à l'utilisateur
-    const token = signToken(user._id);
-    res.status(200).json({
-        status: 'success',
-        token,
-    });
+    createSendToken(user, 200, res);
 });
 
 exports.protect = catchAsync(async (req, res, next) => {
@@ -182,9 +183,22 @@ exports.resetPassword = catchAsync(async (req, res, next) => {
     // 3) met à jour la propriété changedPasswordAt sur l'utilisateur sous forme de hook pre-save dans le userModel
 
     // 4) connecte l'utilisateur et lui envoie un json web token
-    const token = signToken(user._id);
-    res.status(200).json({
-        status: 'success',
-        token,
-    });
+    createSendToken(user, 200, res);
+});
+
+exports.updatePassword = catchAsync(async (req, res, next) => {
+    // 1) récupérer l'utilisateur
+    const user = await User.findById(req.user.id).select('+password');
+    console.log(user);
+    // 2) Si le mdp est incorrect...
+    if (!(await user.correctPassword(req.body.currentPassword, user.password))) {
+        // ... return et faire suivre erreur (unauthorised)
+        return next(new AppError(`Vos identifiants sont incorrects`), 401);
+    }
+    // 3) mise à jour du mdp
+    user.password = req.body.password;
+    user.passwordConfirm = req.body.passwordConfirm;
+    await user.save();
+    // 4) connecter l'utilisateur, envoyer le json web token
+    createSendToken(user, 200, res);
 });
