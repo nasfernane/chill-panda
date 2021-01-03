@@ -115,3 +115,22 @@ exports.restrictTo = (...roles) => (req, res, next) => {
 
     next();
 };
+
+exports.forgotPassword = catchAsync(async (req, res, next) => {
+    // 1) Récupérer l'utilisateur sur son mail
+    const user = await User.findOne({ email: req.body.email });
+    if (!user) {
+        return next(new AppError(`Il n'y a pas d'utilisateur lié à cette adresse mail`, 404));
+    }
+
+    // 2) Génération token aléatoire
+    const resetToken = user.createPasswordResetToken();
+    // met à jour la bdd utilisateur sans les validateurs, pour intégrer le token crypté et sa date d'expiration
+    await user.save({ validateBeforeSave: false });
+
+    // 3) envoi à l'utilisateur par mail
+
+    next();
+});
+
+exports.resetPassword = (req, res, next) => {};

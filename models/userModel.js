@@ -1,8 +1,10 @@
-// voir tourModel.js pour commentaires de structure
+// module Node pour fonctionnalités cryptographiques, wrappers, hash, etc.
+const crypto = require('crypto');
+// lib ODM pour mongoDB
 const mongoose = require('mongoose');
-// librairie pour faciliter validators
+// lib pour faciliter validators
 const validator = require('validator');
-// librairie encryptage mdp
+// lib encryptage mdp
 const bcrypt = require('bcryptjs');
 // créations de slugs
 const slugify = require('slugify');
@@ -48,9 +50,11 @@ const userSchema = new mongoose.Schema({
         },
     },
     passwordChangedAt: Date,
+    passwordResetToken: String,
+    passwordResetExpires: Date,
 });
 
-// cryptage des mots de passe
+// cryptage des mots de passe avant de stocker dans la bdd
 userSchema.pre('save', async function (next) {
     // si le mot de passe n'a pas été modifié ou créé à l'instant, on skip ce middleware
     if (!this.isModified('password')) return next();
@@ -87,6 +91,19 @@ userSchema.methods.changedPasswordAfter = function (JWTTimestamp) {
 
     // si l'utilisateur n'a pas changé son mdp
     return false;
+};
+
+// méthode instanciée pour générer un token aléatoire quand l'utilisateur modifie son mdp
+userSchema.methods.createPasswordResetToken = function () {
+    // token aléatoire crypté de 32 bytes, qu'on transforme en chaîne de caractères hexadécimale
+    const resetToken = crypto.randomBytes(32).toString('hex');
+    // hash le token en algorithme sha256 et le stocke dans la bdd utilisateur
+    this.passwordResetToken = crypto.createHash('sha256').update(resetToken).digest('hex');
+    console.log({ resetToken }, this.passwordResetToken);
+    // définit l'expiration du token aléatoire à 10 minutes
+    this.passwordResetExpires = Date.now() + 10 * 60 * 1000;
+
+    return resetToken;
 };
 
 const User = mongoose.model('User', userSchema);
