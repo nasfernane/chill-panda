@@ -1,5 +1,18 @@
 const User = require('../models/userModel');
+const AppError = require('../utils/appError');
 const catchAsync = require('../utils/catchAsync');
+
+// fonction pour filtrer les champs autorisés
+const filterObj = (obj, ...allowedFields) => {
+    // objet vide qui accueillera les champs validés
+    const newObj = {};
+    // boucle sur les clés de l'objet entré en paramètre
+    Object.keys(obj).forEach(el => {
+        // si le tableau allowdFields contient une des clés de l'objet sur lequel on boucle, on l'ajoute au nouvel objet
+        if (allowedFields.includes(el)) newObj[el] = obj[el];
+    });
+    return newObj;
+};
 
 // GET tous les utilisateurs
 exports.getAllUsers = catchAsync(async (req, res, next) => {
@@ -12,6 +25,31 @@ exports.getAllUsers = catchAsync(async (req, res, next) => {
         data: {
             users,
         },
+    });
+});
+
+// maj données d'un utilisateur
+exports.updateUserData = catchAsync(async (req, res, next) => {
+    // 1) Création d'erreur si l'utilisateur essaie de modifier son mdp
+    if (req.body.password || req.body.passwordConfirm) {
+        return next(new AppError(`Vous ne pouvez pas modifier votre mot de passe ici`, 400));
+    }
+
+    // 2) filtre les champs non autorisés
+    const filteredBody = filterObj(req.body, 'name', 'email');
+
+    // 3) Mise à jour des données utilisateur
+    const updatedUser = await User.findByIdAndUpdate(req.user.id, filteredBody, {
+        new: true,
+        runValidators: true,
+    });
+
+    res.status(200).json({
+        status: 'success',
+        data: {
+            user: updatedUser,
+        },
+        message: 'Vos données ont été mises à jour correctement',
     });
 });
 

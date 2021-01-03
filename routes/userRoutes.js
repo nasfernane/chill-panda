@@ -18,6 +18,8 @@ router.post('/forgotPassword', authController.forgotPassword);
 router.patch('/resetPassword/:token', authController.resetPassword);
 // maj mdp pour utilisateur déjà connecté
 router.patch('/updatePassword', authController.protect, authController.updatePassword);
+// maj données utilisateur
+router.patch('/updateUserData', authController.protect, userController.updateUserData);
 
 // itinéraire général pour récupérer tous les utilisateurs ou en créer un nouveau
 router.route('/').get(userController.getAllUsers).post(userController.createUser);
