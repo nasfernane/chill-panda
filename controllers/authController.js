@@ -1,3 +1,4 @@
+const crypto = require('crypto');
 // récupère la méthode promisify du module built-in Util de Node
 const { promisify } = require('util');
 // import librairie json web token
@@ -130,9 +131,7 @@ exports.forgotPassword = catchAsync(async (req, res, next) => {
     await user.save({ validateBeforeSave: false });
 
     // 3) envoi à l'utilisateur par mail
-    const resetURL = `${req.protocol}://${req.get(
-        'host'
-    )}/api/v1/users/resetPassword/${resetToken}`;
+    const resetURL = `${req.protocol}://${req.get('host')}/users/resetPassword/${resetToken}`;
     console.log(resetURL);
 
     const message = `Vous avez oublié votre mot de passe ? Mettez le à jour avec un nouveau mot de passe et confirmation à ${resetURL}\nSi vous n'avez pas changé votre mot de passe, veuillez ignorer cet email`;
@@ -160,4 +159,32 @@ exports.forgotPassword = catchAsync(async (req, res, next) => {
     }
 });
 
-exports.resetPassword = (req, res, next) => {};
+exports.resetPassword = catchAsync(async (req, res, next) => {
+    // 1) récupération de l'utilisateur grâce au token
+    // enccryptage du token envoyé par l'utilisateur en paramètre
+    const hashedToken = crypto.createHash('sha256').update(req.params.token).digest('hex');
+    // récupère l'utilisateur avec le token crypté pour qu'il corresponde à celui de la bdd, et vérifie si il n'est pas expiré
+    const user = await User.findOne({
+        passwordResetToken: hashedToken,
+        passwordResetExpires: { $gt: Date.now() },
+    });
+
+    // 2) Si le token n'est pas expiré et que l'utilisateur existe, définit le nouveau mdp et supprime le token
+    if (!user) {
+        return next(new AppError(`Le token est invalide ou expiré`, 400));
+    }
+    user.password = req.body.password;
+    user.passwordConfirm = req.body.passwordConfirm;
+    user.passwordResetToken = undefined;
+    user.passwordResetExpires = undefined;
+    await user.save();
+
+    // 3) met à jour la propriété changedPasswordAt sur l'utilisateur sous forme de hook pre-save dans le userModel
+
+    // 4) connecte l'utilisateur et lui envoie un json web token
+    const token = signToken(user._id);
+    res.status(200).json({
+        status: 'success',
+        token,
+    });
+});

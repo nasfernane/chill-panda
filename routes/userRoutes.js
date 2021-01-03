@@ -15,7 +15,7 @@ router.post('/login', authController.login);
 // suppression ancien mdp et envoi token aléatoire temporaire par mail
 router.post('/forgotPassword', authController.forgotPassword);
 // création du nouveau mdp
-router.post('/resetPassword', authController.resetPassword);
+router.patch('/resetPassword/:token', authController.resetPassword);
 
 // itinéraire général pour récupérer tous les utilisateurs ou en créer un nouveau
 router.route('/').get(userController.getAllUsers).post(userController.createUser);

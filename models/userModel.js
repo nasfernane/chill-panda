@@ -54,7 +54,7 @@ const userSchema = new mongoose.Schema({
     passwordResetExpires: Date,
 });
 
-// cryptage des mots de passe avant de stocker dans la bdd
+// hook pre-save : cryptage des mots de passe avant de stocker dans la bdd
 userSchema.pre('save', async function (next) {
     // si le mot de passe n'a pas été modifié ou créé à l'instant, on skip ce middleware
     if (!this.isModified('password')) return next();
@@ -68,9 +68,18 @@ userSchema.pre('save', async function (next) {
     next();
 });
 
-// création d'un slug basé sur le nom
+// hook pre-save : création d'un slug basé sur le nom
 userSchema.pre('save', function (next) {
     this.slug = slugify(this.name, { lower: true });
+    next();
+});
+
+// hook pre-save : maj de la date de modification du mdp
+userSchema.pre('save', function (next) {
+    // si le mot de passe n'a pas été modifié ou si c'est un nouveau document, on skip ce middleware, sinon...
+    if (!this.isModified('password') || this.isNew) return next();
+    // ... on met à jour la date de modification du mdp. On enlève une seconde être sûr que le token soit créé après la modification
+    this.passwordChangedAt = Date.now() - 1000;
     next();
 });
 
