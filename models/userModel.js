@@ -52,6 +52,11 @@ const userSchema = new mongoose.Schema({
     passwordChangedAt: Date,
     passwordResetToken: String,
     passwordResetExpires: Date,
+    active: {
+        type: Boolean,
+        default: true,
+        select: false,
+    },
 });
 
 // hook pre-save : cryptage des mots de passe avant de stocker dans la bdd
@@ -83,6 +88,13 @@ userSchema.pre('save', function (next) {
     next();
 });
 
+// middleware pre-find : selectionne seulement les utilisateurs actifs
+userSchema.pre(/^find/, function (next) {
+    // pointe sur la requête en cours
+    this.find({ active: { $ne: false } });
+    next();
+});
+
 // méthode instanciée pour comparer le mot de passe crypté avec la saisie utilisateur
 userSchema.methods.correctPassword = async function (candidatePassword, userPassword) {
     return await bcrypt.compare(candidatePassword, userPassword);
@@ -106,7 +118,7 @@ userSchema.methods.changedPasswordAfter = function (JWTTimestamp) {
 userSchema.methods.createPasswordResetToken = function () {
     // token aléatoire crypté de 32 bytes, qu'on transforme en chaîne de caractères hexadécimale
     const resetToken = crypto.randomBytes(32).toString('hex');
-    // hash le token en algorithme sha256 et le stocke dans la bdd utilisateur
+    // hash le token en sha256 et le stocke dans la bdd utilisateur
     this.passwordResetToken = crypto.createHash('sha256').update(resetToken).digest('hex');
     console.log({ resetToken }, this.passwordResetToken);
     // définit l'expiration du token aléatoire à 10 minutes

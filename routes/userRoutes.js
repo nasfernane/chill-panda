@@ -20,6 +20,7 @@ router.patch('/resetPassword/:token', authController.resetPassword);
 router.patch('/updatePassword', authController.protect, authController.updatePassword);
 // maj données utilisateur
 router.patch('/updateUserData', authController.protect, userController.updateUserData);
+router.delete('/deleteMe', authController.protect, userController.deleteMe);
 
 // itinéraire général pour récupérer tous les utilisateurs ou en créer un nouveau
 router.route('/').get(userController.getAllUsers).post(userController.createUser);
