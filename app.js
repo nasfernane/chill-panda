@@ -1,4 +1,7 @@
 const express = require('express');
+// middlewares pour headers http
+const helmet = require('helmet');
+// middleware pour limiter le nombre de requêtes
 const rateLimit = require('express-rate-limit');
 // middleware qui renvoie un log des requêtes http
 const morgan = require('morgan');
@@ -12,10 +15,12 @@ const userRouter = require('./routes/userRoutes');
 // création de l'app express
 const app = express();
 
-// MIDDLEWARES
-//
+// MIDDLEWARES GLOBAUX
 
-// log les requêtes sur server avec Morgan si le process est en mode développement
+// Utilisation du middleware helmet pour définir les headers http
+app.use(helmet());
+
+// Logs des requêtes en mode développement
 if (process.env.NODE_ENV === 'development') {
     app.use(morgan('dev'));
 }
@@ -30,11 +35,9 @@ const limiter = rateLimit({
 });
 app.use(limiter);
 
-app.use(express.json());
-app.use((req, res, next) => {
-    console.log('Welcome to Chill panda');
-    next();
-});
+// Parser pour lire les données du body dans les requêtes. Limite le nombre de données pour améliorer la sécurité
+app.use(express.json({ limit: '10kb' }));
+
 app.use((req, res, next) => {
     req.requestTime = new Date().toLocaleTimeString();
     next();
