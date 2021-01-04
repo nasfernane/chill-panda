@@ -1,13 +1,10 @@
-_Projet de stage de Nassim Fernane du 04/01/2021 au 29/01/2021_
+##*Projet de stage de Nassim Fernane du 04/01/2021 au 29/01/2021*
 
-# Table of Contents
+# Table des matières
 1. [Objectifs du projet](#objectifs)
-2. [Example2](#example2)
-3. [Third Example](#third-example)
-
-## Example
-## Example2
-## Third Example
+2. [Fonctionnement et description du site](#description)
+3. [Organisation du code](#organisation)
+4. [Journal de bord](#journal)
 
 ## **OBJECTIFS DU PROJET <a name="objectifs"></a>**
 
@@ -19,3 +16,14 @@ _Projet de stage de Nassim Fernane du 04/01/2021 au 29/01/2021_
 - la base de données (via l’API).
 - Publication de front-end et back-end sur un serveur de production.
 - Réalisation de tests fonctionnels.
+
+## **FONCTIONNEMENT ET DESCRIPTION DU SITE <a name="description"></a>**
+
+### Page 1 ###
+...
+### Page 2 ###
+...
+
+## **ORGANISATION DU CODE<a name="organisation"></a>**
+
+## **JOURNAL DE BORD<a name="journal"></a>**
