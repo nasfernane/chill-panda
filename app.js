@@ -3,6 +3,7 @@ const express = require('express');
 const helmet = require('helmet');
 const mongoSanitize = require('express-mongo-sanitize');
 const xss = require('xss-clean');
+const hpp = require('hpp');
 const rateLimit = require('express-rate-limit');
 const morgan = require('morgan');
 const AppError = require('./utils/appError');
@@ -43,6 +44,13 @@ app.use(mongoSanitize());
 
 // nettoyage des données contre les attaques XSS
 app.use(xss());
+
+// prévention de la pollution des paramètres. La whitelist contient les champs autorisés en doublons
+app.use(
+    hpp({
+        whitelist: ['client', 'quote', 'bill', 'status', 'projectType', 'name'],
+    })
+);
 
 app.use((req, res, next) => {
     req.requestTime = new Date().toLocaleTimeString();
