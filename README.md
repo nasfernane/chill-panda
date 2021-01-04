@@ -1,4 +1,4 @@
-##*Projet de stage de Nassim Fernane du 04/01/2021 au 29/01/2021*
+## *Projet de stage de Nassim Fernane du 04/01/2021 au 29/01/2021*
 
 # Table des matières
 1. [Objectifs du projet](#objectifs)
