@@ -27,3 +27,13 @@
 ## **ORGANISATION DU CODE<a name="organisation"></a>**
 
 ## **JOURNAL DE BORD<a name="journal"></a>**
+
+Définition du projet et de ses objectifs. 
+
+Distinction des problématiques et choix technologiques en conséquence.
+
+Création du projet sur VS-Code et mise en place des outils de travail : Installation de Node.js et Express pour la gestion du back-end, puis de MongoDB et Mongoose pour la base de données. Ajout de compass en tant qu'interface graphique, et Postman pour gérer les tests de requêtes au serveur. 
+
+Initialisation du projet sur Git et mise en relation sur Github. Installation des outils de formatage du code (eslint, prettier) puis configuration de leur spécificités dans un fichier dédié, afin d'uniformiser les pratiques et rendus pour de potentiels futurs collaborateurs.
+
+Côté front-end, installation du framework CSS Sass et première ébauche de son architecture basée sur le pattern 7-1.
