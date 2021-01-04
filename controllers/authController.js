@@ -16,9 +16,22 @@ const signToken = id =>
         expiresIn: process.env.JWT_EXPIRES_IN,
     });
 
-// creation et envoi d'un token avec la réponse
+// creation du token et envoi du cookie
 const createSendToken = (user, statusCode, res) => {
     const token = signToken(user._id);
+    const cookieOptions = {
+        // expire dans maintenant + date d'expiration (trois mois)
+        expires: new Date(Date.now() + process.env.JWT_COOKIE_EXPIRES_IN * 24 * 60 * 60 * 1000),
+        httpOnly: true,
+    };
+
+    // option secure seulement en mode production
+    if (process.env.NODE_ENV === 'production') cookieOptions.secure = true;
+    // envoi du cookie
+    res.cookie('jwt', token, cookieOptions);
+
+    // enlève le mdp de la réponse à l'utilisateur
+    user.password = undefined;
 
     res.status(statusCode).json({
         status: 'Success',
