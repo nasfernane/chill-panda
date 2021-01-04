@@ -1,4 +1,5 @@
 const express = require('express');
+const rateLimit = require('express-rate-limit');
 // middleware qui renvoie un log des requêtes http
 const morgan = require('morgan');
 const AppError = require('./utils/appError');
@@ -18,13 +19,22 @@ const app = express();
 if (process.env.NODE_ENV === 'development') {
     app.use(morgan('dev'));
 }
-app.use(express.json());
 
+// limite le nombre de requêtes pour pallier aux "brute force attacks"
+const limiter = rateLimit({
+    // max 100...
+    max: 100,
+    // ... sur une fenêtre d'une heure
+    windowMs: 60 * 60 * 1000,
+    message: `Vous avez envoyé trop de requêtes, veuillez ré-essayer dans une heure`,
+});
+app.use(limiter);
+
+app.use(express.json());
 app.use((req, res, next) => {
     console.log('Welcome to Chill panda');
     next();
 });
-
 app.use((req, res, next) => {
     req.requestTime = new Date().toLocaleTimeString();
     next();
