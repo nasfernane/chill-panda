@@ -1,9 +1,9 @@
+// modules - Middlewares
 const express = require('express');
-// middlewares pour headers http
 const helmet = require('helmet');
-// middleware pour limiter le nombre de requêtes
+const mongoSanitize = require('express-mongo-sanitize');
+const xss = require('xss-clean');
 const rateLimit = require('express-rate-limit');
-// middleware qui renvoie un log des requêtes http
 const morgan = require('morgan');
 const AppError = require('./utils/appError');
 const globalErrorHandler = require('./controllers/errorController');
@@ -38,12 +38,18 @@ app.use(limiter);
 // Parser pour lire les données du body dans les requêtes. Limite le nombre de données pour améliorer la sécurité
 app.use(express.json({ limit: '10kb' }));
 
+// nettoyage des données contre les injections de requêtes NoSQL
+app.use(mongoSanitize());
+
+// nettoyage des données contre les attaques XSS
+app.use(xss());
+
 app.use((req, res, next) => {
     req.requestTime = new Date().toLocaleTimeString();
     next();
 });
 
-// WATCH ROUTES
+// ITINERAIRES
 
 // route pour les projets liés à la bdd
 app.use('/projects', projectRouter);

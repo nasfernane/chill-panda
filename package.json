@@ -31,6 +31,7 @@
         "eslint-plugin-prettier": "^3.3.0",
         "eslint-plugin-react": "^7.21.5",
         "express": "^4.17.1",
+        "express-mongo-sanitize": "^2.0.1",
         "express-rate-limit": "^5.2.3",
         "helmet": "^4.3.1",
         "jsonwebtoken": "^8.5.1",
@@ -39,7 +40,8 @@
         "nodemailer": "^6.4.17",
         "prettier": "^2.2.1",
         "slugify": "^1.4.6",
-        "validator": "^13.5.2"
+        "validator": "^13.5.2",
+        "xss-clean": "^0.1.1"
     },
     "devDependencies": {
         "nodemon": "^2.0.6",
