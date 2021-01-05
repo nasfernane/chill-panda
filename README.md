@@ -27,7 +27,9 @@
 
 ## **JOURNAL DE BORD<a name="journal"></a>**
 
-Définition du projet et de ses objectifs. 
+##**Jour1**
+
+###*Définition du projet et de ses objectifs.* 
 
 Distinction des problématiques et choix technologiques en conséquence.
 
@@ -37,7 +39,7 @@ Initialisation du projet sur Git et mise en relation sur Github. Installation de
 
 Côté front-end, installation du framework CSS Sass et première ébauche de son architecture basée sur le pattern 7-1.
 
-Fondations du Back-End:
+###*Fondations du Back-End:*
 
 Premiers pas dans les fondations du back-end. Je découvre Express et ses premières fonctionnalités pour structurer une application Node. Création du serveur en local, et d'un fichier de configuration pour les variables environementales. Celui-ci me servira à gérer les données sensibles et tout ce qui touche à la connexion et l'authentification sur les différents services (base de donnée, web tokens, identifiants de mailing, etc.). Je définis un port par défaut (en plus de celui choisi dans le fichier config), et un écouteur sur ce dernier afin de log la connexion et le port. Création d'un fichier gitignore pour garder le fichier de configuration en local pour des raisons évidentes de sécurité.
 
@@ -47,7 +49,7 @@ J'expérimente et je met également en place les premiers routeurs qui serviront
 
 Début de la construction de l'API : gestion basique des requêtes GET, POST, PATCH, et DELETE pour pallier à nos premiers besoins de persistance des données. Je paramètre Postman pour éprouver chacune des requêtes. Ce dernier est très utile pour simuler des requêtes très précises par navigateur, sauvegarder ces requêtes et les organiser pour tester efficacement notre API. A cette occasion j'implémente/factorise grâce à Express des routeurs séparés pour les utilisateurs et les projets, afin de les dissocier dans des fichiers séparés qui accueilleront leur modules, et la définition de chacun des itinéraires qui desserviront les deux bases de données.
 
-J'approndis davantage mes connaissances sur les middlewares en experimentant sur les paramètres (comme par exemple un iténaire /:id pour les utilisateurs) et en apprenant comment enchaîner différents middlewares à la suite. 
+J'approndis davantage mes connaissances sur les middlewares en experimentant sur les paramètres (comme par exemple un itinéraire /:id pour les utilisateurs) et en apprenant comment enchaîner différents middlewares à la suite. 
 
 Introduction à MongoDB : Création de la première base de données en ligne sur Atlas. MongoDB propose une gestion de base de données qui, contrairement à des bases de données relationnelles classiques, se base sur des données sauvegardées en format JSON, avec le double bénéfice d'une syntaxe plus accessible et plus lisible pour les utilisateurs déjà initiés à JavaScript. 
 
@@ -57,7 +59,9 @@ Définition de deux modes séparés pour l'application, développement et produc
 
 Je continue ensuite sur les opérations CRUD avec des requêtes pour créer un nouveau document, le mettre à jour ou le supprimer. 
 
-Introduction de Mongoose : Je connecte enfin la base de données à l'application Express, en apprenant les premiers rudiments de cette librairie qui facilite grandement la modélisation des données orientées objet. Mongoose permet notamment de créer des schémas qui sont des classes JS desquelles découlent les modèles pour créer les données qui alimenteront nos bases de données. Je commence par créer un modèle Utilisateur, sous format JSON, avec pour chaque propriété le détail de ses options. Par exemple on peut définir le type de données du nom de l'utilisateur sur String, indiquer que le champ est obligatoire, lui imposer une taille minimale ou maximale, ou encore forcer le lowercase. 
+###*Introduction de Mongoose*
+
+ Je connecte enfin la base de données à l'application Express, en apprenant les premiers rudiments de cette librairie qui facilite grandement la modélisation des données orientées objet. Mongoose permet notamment de créer des schémas qui sont des classes JS desquelles découlent les modèles pour créer les données qui alimenteront nos bases de données. Je commence par créer un modèle Utilisateur, sous format JSON, avec pour chaque propriété le détail de ses options. Par exemple on peut définir le type de données du nom de l'utilisateur sur String, indiquer que le champ est obligatoire, lui imposer une taille minimale ou maximale, ou encore forcer le lowercase. 
 
 Il est également possible d'intégrer des validateurs, pour par exemple vérifier que l'email entré par un utilisateur est au bon format, ou que le mot de passe correspond à celui de confirmation. Chaque type de données possède des propriétés spécifiques pour personnaliser chaque champ.
 
@@ -73,7 +77,7 @@ Découverte des aggregation pipelines : processus pour faire transiter des donn�
 
 Import du module Validator pour faciliter certains validateurs dans les schémas mangoose. Développement de validateurs personnalisés.
 
-Gestion des erreurs avec Express :
+###*Phase Gestion des Erreurs*
 
 Test et ajout de ndb (Node Debugguer) qui ouvre une interface dédiée à la visibilité et corrections des bugs sur Node.JS. En plus de proposer des breakpoints classiques, il offre un visuel clair et très détaillé sur le callstack, les processus Node, et la portée des variables déclarées à chaque étape. Il permet également d'accéder à la console, aux performances live de l'application et de jeter un oeil à certaines fonctionnalitées relatives à la mémoire allouée. 
 
@@ -84,3 +88,39 @@ Création d'un middleware de gestion globale des erreurs dans les controllers. I
 Ajout de gestion des erreurs dans les fonctions asynchrones, et d'une fonction catchAsync pour remplacer tous les blocs try/catch en vue de mieux factoriser le site et améliorer la lisibilité. Dans la même optique, création d'un constructor AppError pour avoir un "modèle" d'erreur à renvoyer de façon plus concise avec deux paramètres : message personnalisé et le status. 
 
 En fin de code du serveur, ajout de la gestion des erreurs survenant en dehors d'express : promesses rejetées pour fermer l'application puis le serveur proprement.  Dans le controller d'erreurs, ajout d'une erreur générique pour les exceptions et erreurs inconnues. 
+
+##*Phase Authentication et Sécurité*
+
+Création d'un authController pour les middlewares chargés de gérer l'authentification et la sécurisation des utilisateurs. 
+
+Amélioration de la gestion des mots de passe. Mise en place d'un mot de passe de confirmation avec validateur, et ajout d'un hook pre-save (méthodes appliquée au schéma qui se lanceront automatiquement dans la chaîne des middlewares avant chaque sauvegarde des données) pour hasher le mot de passe avec le module bcrypt. 
+
+Implémentation des json web token. 
+
+Une première fonction signToken est chargée de générer un token basé sur les informations secrètes stockées dans le fichier de config.env, et sur l'id de l'utilisateur. Elle crée également une date d'expiration sur ce même token. 
+
+Une deuxième fonction, createSendToken, récupère en paramètre un utilisateur, un status code, et envoie ce token et le cookie correspondant à l'utilisateur par email . J'utilise le module natif NodeMailer et j'en profite pour débuter sur MailTrap, qui permet avec un peu de configuration de "piéger" comme son nom l'indique les mails en local, pour les visualiser/traiter plus efficacement. Si l'application est en mode production, on ajoute l'option secure sur les options du cookie pour qu'il ne soit compatible qu'avec le protocole HTTPS. 
+
+Cette fonction sendToken est ensuite utilisée pour créer plusieurs fonctionnalités liées à l'authentification de l'utilisateur : 
+-signup pour la création d'un new user, avec des options spécifiant seulement les données autorisées nécessaires à sa création pour éviter des failles de sécurité.
+-login qui récupère email et le mot de passe envoyés en requête pas l'utilisateur pour l'identifier.
+
+J'implémente par la suite un middleware de protection d'itinéraires
+
+
+
+
+
+
+ et le second pour ajouter une date de modification du mdp dans les infos de l'utilisateur lorsque son mot de passe est modifié.
+
+
+
+
+
+
+
+
+
+
+
