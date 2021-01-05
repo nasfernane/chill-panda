@@ -124,14 +124,16 @@ exports.protect = catchAsync(async (req, res, next) => {
 // création d'une fonction enveloppant le middleware pour lui faire passer des arguments multiples sous la forme d'un spread operator
 exports.restrictTo = (...roles) => (req, res, next) => {
     // roles est un tableau. par ex: ['admin', 'lead-guide']
-    // si le tableau entré en paramètre pour les permissions ne contient pas le rôle de l'utilisateur, return et transmet l'erreur
+    // si le tableau entré en paramètre pour les permissions ne contient pas le rôle de l'utilisateur...
     if (!roles.includes(req.user.role)) {
+        // return et transmet l'erreur 403 (forbidden)
         return next(new AppError(`Vous n'êtes pas autorisé(e) à effectuer cette action.`, 403));
     }
 
     next();
 };
 
+// middleware pour supprimer le mot de passe et envoyer un token aléatoire par mail
 exports.forgotPassword = catchAsync(async (req, res, next) => {
     // 1) Récupérer l'utilisateur sur son mail
     const user = await User.findOne({ email: req.body.email });
@@ -199,6 +201,7 @@ exports.resetPassword = catchAsync(async (req, res, next) => {
     createSendToken(user, 200, res);
 });
 
+// modification du mot de passe en direct
 exports.updatePassword = catchAsync(async (req, res, next) => {
     // 1) récupérer l'utilisateur
     const user = await User.findById(req.user.id).select('+password');
