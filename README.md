@@ -35,7 +35,7 @@
 
 ## **Jour1**<a name="jour1"></a>
 
-### <ins>_Définition du projet et de ses objectifs._</ins>
+### <ins>_Définition du projet et de ses objectifs_</ins>
 
 Distinction des problématiques et choix technologiques en conséquence.
 
@@ -45,7 +45,7 @@ Initialisation du projet sur Git et mise en relation sur Github. Installation de
 
 Côté front-end, installation du framework CSS Sass et première ébauche de son architecture basée sur le pattern 7-1.
 
-### <ins>_Fondations du Back-End:_</ins>
+### <ins>_Fondations du Back-End_</ins>
 
 Premiers pas dans les fondations du back-end. Je découvre Express et ses premières fonctionnalités pour structurer une application Node. Création du serveur en local, et d'un fichier de configuration
 pour les variables environementales. Celui-ci me servira à gérer les données sensibles et tout ce qui touche à la connexion et l'authentification sur les différents services (base de donnée, web
@@ -155,10 +155,26 @@ Ajout de fonctionnalités pour mettre à jour les informations utilisateur ou le
 
 ### <ins>_Phase Sécurité_</ins>
 
-Installation et configuration du module express-rate-limier pour ajouter un limiteur de requêtes en début de chaîne sur l'application, afin de pallier à d'éventuelles "brute force attacks".
+Installation et configuration du module express-rate-limiter pour ajouter un limiteur de requêtes en début de chaîne sur l'application, afin de pallier à d'éventuelles "brute force attacks".
 
 Ajout de headers HTTP avec le module helmet. Il inclut une collection de petits middlewares permettant d'améliorer la sécurité de l'application. 
 
 Installation de mongoSanitizer, pour corriger les failles permettant des requêtes NoSQL malicieuses vouées par exemple à un utilisateur sans identifiant de prendre contrôler d'un compte admin. 
 
 Enfin, utilisation du module hpp pour éviter la pollution des paramètres et déterminer une "whitelist" de champs autorisés en doublons lorsqu'un utilisateur faire une requête avec des fonctions de type sort().
+
+### <ins>*Phase Modélisation des données*</ins>
+
+*Apprentissage théorique.*
+
+Découverte des différents patterns de modélisation des données sur la base des relations 1:1, 1:MANY, 1:TON et MANY:MANY, avantages et inconvénients des structures imbriquées ou référencées selon la situation. 
+
+Dans le but de structurer les données en fonction des besoins de l'application, il faut identifier les cas d'utilisation, la nature des données et la relation qu'elles entretiennent entre elles.
+
+C'est en général une bonne pratique d'opter pour des données imbriquées, surtout dans les relations 1:few et 1:MANY, tandis que des relations référencées seront plus adaptées pour les cas relevant du 1:ton ou MANY:MANY. 
+
+Il est également conseillé d'utiliser le référencement quand les données sont souvent mises à jour, tandis que l'imbrication est plus adaptée lorsque les données sont souvent lues mais rarement mises à jour, ou quand deux types de données sont sont fondamentalement liées. 
+
+Dans le cas d'utilisation de données référencées, il est nécessaire d'empêcher un tableau de références de grandir indéfiniment. Selon l'usage, on préfèrera le "parent referencing" au "child referencing" pour que ce soit la sous-donnée qui pointe vers son parent.
+
+On utilise le référencement à double sens dans les relations MANY:MANY
