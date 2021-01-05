@@ -37,9 +37,7 @@
 
 Distinction des problématiques et choix technologiques en conséquence.
 
-Création du projet sur VS-Code et mise en place des outils de travail : Installation de Node.js et
-Express pour la gestion du back-end, puis de MongoDB et Mongoose pour la base de données. Ajout de
-compass en tant qu'interface graphique, et Postman pour gérer les tests de requêtes au serveur.
+Création du projet sur VS-Code et mise en place des outils de travail : Installation de Node.js et Express pour la gestion du back-end, puis de MongoDB et Mongoose pour la base de données. Ajout de compass en tant qu'interface graphique, et Postman pour gérer les tests de requêtes au serveur.
 
 Initialisation du projet sur Git et mise en relation sur Github. Installation des outils de
 formatage du code (eslint, prettier) puis configuration de leur spécificités dans un fichier dédié,
