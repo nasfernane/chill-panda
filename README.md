@@ -103,6 +103,8 @@ jalonné d'étapes pour traiter et recouper des données ou encore établir des 
 Import du module Validator pour faciliter certains validateurs dans les schémas mangoose.
 Développement de validateurs personnalisés.
 
+## <ins>**JOUR 2**</ins>
+
 ### _Phase Gestion des Erreurs_
 
 Test et ajout de ndb (Node Debugguer) qui ouvre une interface dédiée à la visibilité et corrections
