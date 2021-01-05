@@ -18,7 +18,7 @@
 
 ## **FONCTIONNEMENT ET DESCRIPTION DU SITE <a name="description"></a>**
 
-### Page 1 ###
+### <ins>Page 1</ins> ###
 ...
 ### Page 2 ###
 ...
