@@ -6,8 +6,10 @@
 2. [Fonctionnement et description du site](#description)
 3. [Organisation du code](#organisation)
 4. [Journal de bord](#journal)
+   1. [Jour 1](#jour1)
+   2. [Jour 2](#jour2)
 
-## **OBJECTIFS DU PROJET <a name="objectifs"></a>**
+# **OBJECTIFS DU PROJET <a name="objectifs"></a>**
 
 -   Maquetter les interfaces de saisies et de consultations.
 -   Création d’une base de données.
@@ -17,7 +19,7 @@
 -   Publication de front-end et back-end sur un serveur de production.
 -   Réalisation de tests fonctionnels.
 
-## **FONCTIONNEMENT ET DESCRIPTION DU SITE <a name="description"></a>**
+# **FONCTIONNEMENT ET DESCRIPTION DU SITE <a name="description"></a>**
 
 ### Page 1
 
@@ -27,13 +29,13 @@
 
 ...
 
-## **ORGANISATION DU CODE<a name="organisation"></a>**
+# **ORGANISATION DU CODE<a name="organisation"></a>**
 
-## **JOURNAL DE BORD<a name="journal"></a>**
+# **JOURNAL DE BORD<a name="journal"></a>**
 
-## <ins>**Jour1**</ins>
+## **Jour1**<a name="jour1"></a>
 
-### _Définition du projet et de ses objectifs._
+### <ins>_Définition du projet et de ses objectifs._</ins>
 
 Distinction des problématiques et choix technologiques en conséquence.
 
@@ -43,7 +45,7 @@ Initialisation du projet sur Git et mise en relation sur Github. Installation de
 
 Côté front-end, installation du framework CSS Sass et première ébauche de son architecture basée sur le pattern 7-1.
 
-### _Fondations du Back-End:_
+### <ins>_Fondations du Back-End:_</ins>
 
 Premiers pas dans les fondations du back-end. Je découvre Express et ses premières fonctionnalités pour structurer une application Node. Création du serveur en local, et d'un fichier de configuration
 pour les variables environementales. Celui-ci me servira à gérer les données sensibles et tout ce qui touche à la connexion et l'authentification sur les différents services (base de donnée, web
@@ -71,7 +73,7 @@ Définition de deux modes séparés pour l'application, développement et produc
 
 Je continue ensuite sur les opérations CRUD avec des requêtes pour créer un nouveau document, le mettre à jour ou le supprimer.
 
-### _Introduction de Mongoose_
+### <ins>_Introduction de Mongoose_</ins>
 
 Je connecte enfin la base de données à l'application Express, en apprenant les premiers rudiments de cette librairie qui facilite grandement la modélisation des données orientées objet. Mongoose permet notamment de créer des schémas qui sont des classes JS desquelles découlent les modèles pour créer les données qui alimenteront nos bases de données. Je commence par créer un modèle Utilisateur, sous format JSON, avec pour chaque propriété le détail de ses options. Par exemple on peut définir le type de données du nom de l'utilisateur sur String, indiquer que le champ est obligatoire, lui imposer une taille minimale ou maximale, ou encore forcer le lowercase.
 
@@ -103,7 +105,7 @@ jalonné d'étapes pour traiter et recouper des données ou encore établir des 
 Import du module Validator pour faciliter certains validateurs dans les schémas mangoose.
 Développement de validateurs personnalisés.
 
-## **JOUR 2**
+## **JOUR 2**<a name="jour2"></a>
 
 ### <ins>_Phase Gestion des Erreurs_</ins>
 
