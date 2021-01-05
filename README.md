@@ -103,9 +103,9 @@ jalonné d'étapes pour traiter et recouper des données ou encore établir des 
 Import du module Validator pour faciliter certains validateurs dans les schémas mangoose.
 Développement de validateurs personnalisés.
 
-## <ins>**JOUR 2**</ins>
+## **JOUR 2**
 
-### _Phase Gestion des Erreurs_
+### <ins>_Phase Gestion des Erreurs_</ins>
 
 Test et ajout de ndb (Node Debugguer) qui ouvre une interface dédiée à la visibilité et corrections
 des bugs sur Node.JS. En plus de proposer des breakpoints classiques, il offre un visuel clair et très détaillé sur le callstack, les processus Node, et la portée des variables déclarées à chaque
@@ -123,7 +123,7 @@ Dans la même optique, création d'un constructor AppError pour avoir un "modèl
 
 En fin de code du serveur, ajout de la gestion des erreurs survenant en dehors d'express : promesses rejetées pour fermer l'application puis le serveur proprement. Dans le controller d'erreurs, ajout d'une erreur générique pour les exceptions et erreurs inconnues.
 
-### _Phase Authentication_
+### <ins>_Phase Authentication_</ins>
 
 Création d'un authController pour les middlewares chargés de gérer l'authentification et la sécurisation des utilisateurs.
 
@@ -151,7 +151,7 @@ Ajout de deux fonctionnalités de changement de mot de passe. La première se ba
 
 Ajout de fonctionnalités pour mettre à jour les informations utilisateur ou le supprimer de la base de données.
 
-### _Phase Sécurité_
+### <ins>_Phase Sécurité_</ins>
 
 Installation et configuration du module express-rate-limier pour ajouter un limiteur de requêtes en début de chaîne sur l'application, afin de pallier à d'éventuelles "brute force attacks".
 
