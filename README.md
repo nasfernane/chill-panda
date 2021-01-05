@@ -18,7 +18,7 @@
 
 ## **FONCTIONNEMENT ET DESCRIPTION DU SITE <a name="description"></a>**
 
-### <ins>Page 1</ins> ###
+### Page 1 ###
 ...
 ### Page 2 ###
 ...
@@ -27,7 +27,7 @@
 
 ## **JOURNAL DE BORD<a name="journal"></a>**
 
-### **Jour1**
+### <ins>**Jour1**</ins>
 
 #### *Définition du projet et de ses objectifs.* 
 
