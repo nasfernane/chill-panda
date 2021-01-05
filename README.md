@@ -177,7 +177,7 @@ En fin de code du serveur, ajout de la gestion des erreurs survenant en dehors d
 rejetées pour fermer l'application puis le serveur proprement. Dans le controller d'erreurs, ajout
 d'une erreur générique pour les exceptions et erreurs inconnues.
 
-## _Phase Authentication et Sécurité_
+### _Phase Authentication et Sécurité_
 
 Création d'un authController pour les middlewares chargés de gérer l'authentification et la
 sécurisation des utilisateurs.
@@ -206,7 +206,16 @@ spécifiant seulement les données autorisées nécessaires à sa création pour
 sécurité. -login qui récupère email et le mot de passe envoyés en requête pas l'utilisateur pour
 l'identifier.
 
-J'implémente par la suite un middleware de protection d'itinéraires
+J'implémente par la suite un middleware de protection d'itinéraires qu'on pourra utiliser dans les
+routeurs avant d'autres fonctions pour vérifier que l'utilisateur possède bien un token valide. Il
+check les headers pour le token, vérifie qu'il existe, utilise la fonction native verify de jwt pour
+l'encrypter et le comparer à celui stocké dans la base de données, vérifie que l'utilisateur existe
+encore et qu'il n'a pas été supprimé après la provision du token, et finalement opère encore une
+dernière opération pour vérifier si l'utilisateur n'a pas changé son mot de passe après la provision
+du même token. Si tout est Ok, il autorise l'accès et fait suivre au prochain middleware.
 
-et le second pour ajouter une date de modification du mdp dans les infos de l'utilisateur lorsque
-son mot de passe est modifié.
+Pour faire echo à ce middleware, ajout d'un hook pre-save pour ajouter une date de modification de
+mot de passe quand celui-ci se produit, dans la bdd utilisateurs.
+
+Configuration avancée de Postman : ajout des environnements pour le mode production et
+développement,
