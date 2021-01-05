@@ -31,7 +31,7 @@
 
 ## **JOURNAL DE BORD<a name="journal"></a>**
 
-### <ins>**Jour1**</ins>
+## <ins>**Jour1**</ins>
 
 ### _Définition du projet et de ses objectifs._
 
@@ -61,17 +61,13 @@ Début de la construction de l'API : gestion basique des requêtes GET, POST, PA
 chacune des requêtes. Ce dernier est très utile pour simuler des requêtes très précises par navigateur, sauvegarder ces requêtes et les organiser pour tester efficacement notre API. A cette
 occasion j'implémente/factorise grâce à Express des routeurs séparés pour les utilisateurs et les projets, afin de les dissocier dans des fichiers séparés qui accueilleront leur modules, et la définition de chacun des itinéraires qui desserviront les deux bases de données.
 
-J'approndis davantage mes connaissances sur les middlewares en experimentant sur les paramètres (comme par exemple un itinéraire /:id pour les utilisateurs) et en apprenant comment enchaîner
-différents middlewares à la suite.
+J'approndis davantage mes connaissances sur les middlewares en experimentant sur les paramètres (comme par exemple un itinéraire /:id pour les utilisateurs) et en apprenant comment enchaîner différents middlewares à la suite.
 
-Introduction à MongoDB : Création de la première base de données en ligne sur Atlas. MongoDB propose une gestion de base de données qui, contrairement à des bases de données relationnelles classiques,
-se base sur des données sauvegardées en format JSON, avec le double bénéfice d'une syntaxe plus accessible et plus lisible pour les utilisateurs déjà initiés à JavaScript.
+Introduction à MongoDB : Création de la première base de données en ligne sur Atlas. MongoDB propose une gestion de base de données qui, contrairement à des bases de données relationnelles classiques, se base sur des données sauvegardées en format JSON, avec le double bénéfice d'une syntaxe plus accessible et plus lisible pour les utilisateurs déjà initiés à JavaScript.
 
-Mise en jambes : setup de la base de données et première collection sur Atlas et expérimentation de Compass, l'interface graphique permettant d'accéder à notre base de données plus facilement. J'en
-profite pour lier la base de donnée Atlas au mongo shell, puis à l'application en local, et enfin à Compass en vue de faciliter le développement.
+Mise en jambes : setup de la base de données et première collection sur Atlas et expérimentation de Compass, l'interface graphique permettant d'accéder à notre base de données plus facilement. J'en profite pour lier la base de donnée Atlas au mongo shell, puis à l'application en local, et enfin à Compass en vue de faciliter le développement.
 
-Définition de deux modes séparés pour l'application, développement et production afin de distinguer la version en phase de construction et la version qui sera déployée pour l'utilisateur. Ca nous
-permettra d'avoir des comportements différents, notemment à terme une gestion des erreurs personnalisée en fonction du contexte.
+Définition de deux modes séparés pour l'application, développement et production afin de distinguer la version en phase de construction et la version qui sera déployée pour l'utilisateur. Ca nous permettra d'avoir des comportements différents, notemment à terme une gestion des erreurs personnalisée en fonction du contexte.
 
 Je continue ensuite sur les opérations CRUD avec des requêtes pour créer un nouveau document, le mettre à jour ou le supprimer.
 
@@ -125,7 +121,7 @@ Dans la même optique, création d'un constructor AppError pour avoir un "modèl
 
 En fin de code du serveur, ajout de la gestion des erreurs survenant en dehors d'express : promesses rejetées pour fermer l'application puis le serveur proprement. Dans le controller d'erreurs, ajout d'une erreur générique pour les exceptions et erreurs inconnues.
 
-### _Phase Authentication et Sécurité_
+### _Phase Authentication_
 
 Création d'un authController pour les middlewares chargés de gérer l'authentification et la sécurisation des utilisateurs.
 
@@ -135,8 +131,7 @@ Implémentation des json web token.
 
 Une première fonction signToken est chargée de générer un token basé sur les informations secrètes stockées dans le fichier de config.env, et sur l'id de l'utilisateur. Elle crée également une date d'expiration sur ce même token.
 
-Une deuxième fonction, createSendToken, récupère en paramètre un utilisateur, un status code, et envoie ce token et le cookie correspondant à l'utilisateur par email . J'utilise le module natif
-NodeMailer et j'en profite pour débuter sur MailTrap, qui permet avec un peu de configuration de "piéger" comme son nom l'indique les mails en local, pour les visualiser/traiter plus efficacement.
+Une deuxième fonction, createSendToken, récupère en paramètre un utilisateur, un status code, et envoie ce token et le cookie correspondant à l'utilisateur. J'utilise le module natif NodeMailer et j'en profite pour débuter sur MailTrap, qui permet avec un peu de configuration de "piéger" comme son nom l'indique les mails en local, pour les visualiser/traiter plus efficacement.
 Si l'application est en mode production, on ajoute l'option secure sur les options du cookie pour qu'il ne soit compatible qu'avec le protocole HTTPS.
 
 Cette fonction sendToken est ensuite utilisée pour créer plusieurs fonctionnalités liées à l'authentification de l'utilisateur : -signup pour la création d'un new user, avec des options spécifiant seulement les données autorisées nécessaires à sa création pour éviter des failles de
@@ -146,4 +141,20 @@ J'implémente par la suite un middleware de protection d'itinéraires qu'on pour
 
 Pour faire echo à ce middleware, ajout d'un hook pre-save pour ajouter une date de modification de mot de passe quand celui-ci se produit, dans la bdd utilisateurs.
 
-Configuration avancée de Postman : ajout des environnements pour le mode production et développement,
+Configuration avancée de Postman : ajout des environnements pour le mode production et développement, et d'une variable environementale JWT pour stocker plus facilement le token après un login ou signup et gagner en fluidité sur les tests liés aux requêtes. 
+
+Ajout des rôles à l'utilisateur et d'un middleware restrictTo pour l'empêcher d'effectuer des actions en dehors de ses permissions autorisées. 
+
+Ajout de deux fonctionnalités de changement de mot de passe. La première se base sur l'email de l'utilisateur pour le trouver dans la bdd, supprime son mot de passe et lui envoie par mail un lien valable 10 minutes contenant un token aléatoire crypté de 32 bits pour qu'il puisse réinitialiser son mot de passe. La deuxième lui permet de modifier son mot de passe en direct si il dispose de ses identifiants corrects. 
+
+Ajout de fonctionnalités pour mettre à jour les informations utilisateur ou le supprimer de la base de données.
+
+### _Phase Sécurité_
+
+Installation et configuration du module express-rate-limier pour ajouter un limiteur de requêtes en début de chaîne sur l'application, afin de pallier à d'éventuelles "brute force attacks".
+
+Ajout de headers HTTP avec le module helmet. Il inclut une collection de petits middlewares permettant d'améliorer la sécurité de l'application. 
+
+Installation de mongoSanitizer, pour corriger les failles permettant des requêtes NoSQL malicieuses vouées par exemple à un utilisateur sans identifiant de prendre contrôler d'un compte admin. 
+
+Enfin, utilisation du module hpp pour éviter la pollution des paramètres et déterminer une "whitelist" de champs autorisés en doublons lorsqu'un utilisateur faire une requête avec des fonctions de type sort().
