@@ -27,9 +27,9 @@
 
 ## **JOURNAL DE BORD<a name="journal"></a>**
 
-##**Jour1**
+### **Jour1**
 
-###*Définition du projet et de ses objectifs.* 
+#### *Définition du projet et de ses objectifs.* 
 
 Distinction des problématiques et choix technologiques en conséquence.
 
@@ -39,7 +39,7 @@ Initialisation du projet sur Git et mise en relation sur Github. Installation de
 
 Côté front-end, installation du framework CSS Sass et première ébauche de son architecture basée sur le pattern 7-1.
 
-###*Fondations du Back-End:*
+#### *Fondations du Back-End:*
 
 Premiers pas dans les fondations du back-end. Je découvre Express et ses premières fonctionnalités pour structurer une application Node. Création du serveur en local, et d'un fichier de configuration pour les variables environementales. Celui-ci me servira à gérer les données sensibles et tout ce qui touche à la connexion et l'authentification sur les différents services (base de donnée, web tokens, identifiants de mailing, etc.). Je définis un port par défaut (en plus de celui choisi dans le fichier config), et un écouteur sur ce dernier afin de log la connexion et le port. Création d'un fichier gitignore pour garder le fichier de configuration en local pour des raisons évidentes de sécurité.
 
@@ -59,7 +59,7 @@ Définition de deux modes séparés pour l'application, développement et produc
 
 Je continue ensuite sur les opérations CRUD avec des requêtes pour créer un nouveau document, le mettre à jour ou le supprimer. 
 
-###*Introduction de Mongoose*
+#### *Introduction de Mongoose*
 
  Je connecte enfin la base de données à l'application Express, en apprenant les premiers rudiments de cette librairie qui facilite grandement la modélisation des données orientées objet. Mongoose permet notamment de créer des schémas qui sont des classes JS desquelles découlent les modèles pour créer les données qui alimenteront nos bases de données. Je commence par créer un modèle Utilisateur, sous format JSON, avec pour chaque propriété le détail de ses options. Par exemple on peut définir le type de données du nom de l'utilisateur sur String, indiquer que le champ est obligatoire, lui imposer une taille minimale ou maximale, ou encore forcer le lowercase. 
 
@@ -77,7 +77,7 @@ Découverte des aggregation pipelines : processus pour faire transiter des donn�
 
 Import du module Validator pour faciliter certains validateurs dans les schémas mangoose. Développement de validateurs personnalisés.
 
-###*Phase Gestion des Erreurs*
+#### *Phase Gestion des Erreurs*
 
 Test et ajout de ndb (Node Debugguer) qui ouvre une interface dédiée à la visibilité et corrections des bugs sur Node.JS. En plus de proposer des breakpoints classiques, il offre un visuel clair et très détaillé sur le callstack, les processus Node, et la portée des variables déclarées à chaque étape. Il permet également d'accéder à la console, aux performances live de l'application et de jeter un oeil à certaines fonctionnalitées relatives à la mémoire allouée. 
 
