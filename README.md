@@ -175,6 +175,14 @@ C'est en général une bonne pratique d'opter pour des données imbriquées, sur
 
 Il est également conseillé d'utiliser le référencement quand les données sont souvent mises à jour, tandis que l'imbrication est plus adaptée lorsque les données sont souvent lues mais rarement mises à jour, ou quand deux types de données sont sont fondamentalement liées. 
 
-Dans le cas d'utilisation de données référencées, il est nécessaire d'empêcher un tableau de références de grandir indéfiniment. Selon l'usage, on préfèrera le "parent referencing" au "child referencing" pour que ce soit la sous-donnée qui pointe vers son parent.
+Dans le cas d'utilisation de données référencées, il est nécessaire d'empêcher un tableau de références de grandir indéfiniment. Selon l'usage, on préfèrera le "parent referencing" au "child referencing" pour que ce soit la sous-donnée qui pointe vers son parent. On utilise le référencement à double sens dans les relations MANY:MANY
 
-On utilise le référencement à double sens dans les relations MANY:MANY
+*Mise en application*
+
+Dans le cas de ce projet, l'utilisateur doit pouvoir avoir accès à ses projets/devis, chaque projet contient des factures et avenants, mais les factures doivent pouvoir être accessibles facilement même en dehors des projets. 
+
+Installation de l'extensin Drawio pour pouvoir directement créer des diagrammes sur VS-Code. Je commence à modéliser mes données, en partant sur une base de trois bases de données distinctes : Users, Projects et Bills. Le nombre de projets et de facturs étant voué à grandir de manière constante, chacun doit renvoyer à l'utilisateur en *parent referencing*. Les projets et les factures sont dans une relation à double sens, car les projets contiennent les quelques factures qui leur sont associées mais chaque facture, si prise à part, doit également pouvoir donner des informations sur le projet auquel elle est rattachée. 
+
+L'utilisateur ne possèdera donc aucun autre ID que lui-même, tandis que les deux modèles Projets et Factures possèderont des références pointant aux deux autres bases de données. 
+
+Transformation du drawio en PNG pour le rendre facilement accessible sur GitHub.
