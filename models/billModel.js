@@ -22,8 +22,14 @@ const billSchema = new mongoose.Schema({
     billNumber: {
         type: Number,
     },
-    projectId: mongoose.Schema.ObjectId,
-    userId: mongoose.Schema.ObjectId,
+    projectId: {
+        type: mongoose.Schema.ObjectId,
+        ref: 'Project',
+    },
+    userId: {
+        type: mongoose.Schema.ObjectId,
+        ref: 'User',
+    },
 });
 
 // FIXME
@@ -34,6 +40,18 @@ const billSchema = new mongoose.Schema({
 //     this.find({ userId: this.userId });
 //     next();
 // });
+
+billSchema.pre(/^find/, function (next) {
+    this.populate({
+        path: 'projectId',
+        select: 'name',
+    }).populate({
+        path: 'userId',
+        select: 'name',
+    });
+
+    next();
+});
 
 // hook post save qui ajoute la facture crée dans le projet concerné
 billSchema.post('save', async (doc, next) => {

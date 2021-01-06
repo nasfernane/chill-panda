@@ -36,7 +36,10 @@ const projectSchema = new mongoose.Schema({
             ref: 'Bill',
         },
     ],
-    userId: mongoose.Schema.ObjectId,
+    userId: {
+        type: mongoose.Schema.ObjectId,
+        ref: 'User',
+    },
     status: {
         type: String,
         required: [true, 'Le projet doit avoir un statut'],
@@ -46,6 +49,18 @@ const projectSchema = new mongoose.Schema({
             message: `Le statut d'un projet doit être défini sur: En cours, Proposition, A régler ou Terminé`,
         },
     },
+});
+
+projectSchema.pre(/^find/, function (next) {
+    this.populate({
+        path: 'bills',
+        select: 'name price',
+    }).populate({
+        path: 'userId',
+        select: 'name',
+    });
+
+    next();
 });
 
 const Project = mongoose.model('Project', projectSchema);
