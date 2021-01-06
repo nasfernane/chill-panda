@@ -42,15 +42,6 @@ billSchema.post('save', async (doc, next) => {
     next();
 });
 
-// hook post save qui ajoute la facture crée dans le projet concerné
-billSchema.pre('remove', async (doc, next) => {
-    const project = await Project.findOne({ _id: doc.projectId });
-    project.bills.splice(doc._id, 1);
-
-    project.save();
-    next();
-});
-
 //
 const Bill = mongoose.model('Bill', billSchema);
 module.exports = Bill;

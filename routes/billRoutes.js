@@ -9,6 +9,9 @@ const router = express.Router();
 
 router.route('/').get(authController.protect, billController.getAllBills);
 
-router.route('/:id').get(authController.protect, billController.getBill);
+router
+    .route('/:id')
+    .get(authController.protect, billController.getBill)
+    .delete(authController.protect, billController.deleteBill);
 
 module.exports = router;

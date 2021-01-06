@@ -53,6 +53,15 @@ exports.getBill = catchAsync(async (req, res, next) => {
 
 // crée une nouvelle facture depuis le projet concerné
 exports.createBill = catchAsync(async (req, res, next) => {
+    const project = await Project.findById(req.params.id);
+
+    // vérifie que le projet dans lequel l'utillisateur essaie d'ajouter une facture lui appartient
+    if (!project.userId.equals(req.user._id)) {
+        return next(
+            new AppError(`Vous n'avez pas la permission de créer une facture dans ce projet`)
+        );
+    }
+
     const newBill = await Bill.create({
         name: req.body.name,
         price: req.body.price,
@@ -60,7 +69,8 @@ exports.createBill = catchAsync(async (req, res, next) => {
         date: Date.now(),
         projectId: req.params.id,
         userId: req.user._id,
-        billNumber: (await Bill.countDocuments()) + 1,
+        // détermine le numéro de facture en fonction du nombre de documents lié à l'utilisateur
+        billNumber: (await Bill.countDocuments({ userId: req.user._id })) + 1,
     });
 
     res.status(201).json({
@@ -70,4 +80,30 @@ exports.createBill = catchAsync(async (req, res, next) => {
         },
     });
     console.log('Nouvelle facture créée');
+});
+
+// supprime une facture
+exports.deleteBill = catchAsync(async (req, res, next) => {
+    const bill = await Bill.findByIdAndDelete(req.params.id);
+
+    if (!bill) {
+        return next(new AppError(`La facture est introuvable n°${req.params.id}`));
+    }
+
+    // vérifie que la facture appartient à l'utilisateur
+    if (!bill.userId.equals(req.user._id)) {
+        return next(new AppError(`Vous n'avez pas la permission de modifier cette facture`));
+    }
+
+    // supprime la référence de la facture dans le projet concerné
+    const project = await Project.findById(bill.projectId);
+    const billIndex = project.bills.indexOf(`${req.params.id}`);
+    project.bills.splice(billIndex, 1);
+    project.save();
+
+    res.status(204).json({
+        status: 'success',
+        // on ne renvoie rien si les données sont correctement supprimées
+        data: null,
+    });
 });
