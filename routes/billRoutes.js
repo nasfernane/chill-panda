@@ -7,8 +7,8 @@ const authController = require('../controllers/authController');
 // création du routeur avec le middleware d'express
 const router = express.Router();
 
-router.route('/').get(billController.getAllBills);
+router.route('/').get(authController.protect, billController.getAllBills);
 
-router.route('/:id').get(billController.getBill);
+router.route('/:id').get(authController.protect, billController.getBill);
 
 module.exports = router;

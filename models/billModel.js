@@ -20,21 +20,15 @@ const billSchema = new mongoose.Schema({
     number: {
         type: Number,
     },
-    projectId: String,
+    projectId: mongoose.Schema.ObjectId,
+    userId: mongoose.Schema.ObjectId,
 });
 
-// FIXME
-
-// billSchema.pre('save', async function (req, res, next) {
-//     this.date = Date.now();
-//     this.projectId = req.params.id;
-// });
-
+// hook post save qui ajoute la facture crée dans le projet concerné
 billSchema.post('save', async (doc, next) => {
     const project = await Project.findOne({ _id: doc.projectId });
     console.log(doc);
     project.bills.push(doc._id);
-
     project.save();
 
     next();

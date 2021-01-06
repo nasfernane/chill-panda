@@ -14,7 +14,7 @@ router
     .post(projectController.createProject);
 router
     .route('/:id')
-    .post(billController.createBill)
+    .post(authController.protect, billController.createBill)
     .get(projectController.getProject)
     .patch(projectController.updateProject)
     .delete(
