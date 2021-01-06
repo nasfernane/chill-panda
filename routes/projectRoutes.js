@@ -11,7 +11,7 @@ const router = express.Router();
 router
     .route('/')
     .get(authController.protect, projectController.getAllProjects)
-    .post(projectController.createProject);
+    .post(authController.protect, projectController.createProject);
 router
     .route('/:id')
     .post(authController.protect, billController.createBill)

@@ -36,6 +36,7 @@ const projectSchema = new mongoose.Schema({
             ref: 'Bill',
         },
     ],
+    userId: mongoose.Schema.ObjectId,
     status: {
         type: String,
         required: [true, 'Le projet doit avoir un statut'],

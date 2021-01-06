@@ -8,7 +8,7 @@ const catchAsync = require('../utils/catchAsync');
 // constructeur d'erreur
 const AppError = require('../utils/appError');
 
-// récupère tous les projets de la BDD correspondant à l'id de l'utilisateur connecté, avec options de tri filtre et pagination
+// récupère tous les projets de la BDD correspondant à l'id de l'utilisateur connecté, avec options de tri, filtre et pagination
 exports.getAllBills = catchAsync(async (req, res) => {
     const features = new APIFeatures(Bill.find({ userId: `${req.user._id}` }), req.query)
         .filter()

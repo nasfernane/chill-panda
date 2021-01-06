@@ -10,7 +10,7 @@ const AppError = require('../utils/appError');
 
 // récupère tous les projets de la BDD
 exports.getAllProjects = catchAsync(async (req, res) => {
-    const features = new APIFeatures(Project.find(), req.query)
+    const features = new APIFeatures(Project.find({ userId: `${req.user._id}` }), req.query)
         .filter()
         .sort()
         .limitFields()
@@ -47,7 +47,14 @@ exports.getProject = catchAsync(async (req, res, next) => {
 
 // crée un nouveau projet
 exports.createProject = catchAsync(async (req, res) => {
-    const newProject = await Project.create(req.body);
+    const newProject = await Project.create({
+        client: req.body.client,
+        name: req.body.name,
+        quote: req.body.quote,
+        status: req.body.status,
+        projectType: req.body.projectType,
+        userId: req.user._id,
+    });
 
     res.status(201).json({
         status: 'success',
