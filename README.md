@@ -184,15 +184,14 @@ Dans le cas d'utilisation de données référencées, il est nécessaire d'empê
 
 Dans le cas de ce projet, l'utilisateur doit pouvoir avoir accès à ses projets/devis, chaque projet contient des factures et avenants, mais les factures doivent pouvoir être accessibles facilement même en dehors des projets. 
 
-Installation de l'extensin Drawio pour pouvoir directement créer des diagrammes sur VS-Code. Je commence à modéliser mes données, en partant sur une base de trois bases de données distinctes : Users, Projects et Bills. Le nombre de projets et de facturs étant voué à grandir de manière constante, chacun doit renvoyer à l'utilisateur en *parent referencing*. Les projets et les factures sont dans une relation à double sens, car les projets contiennent les quelques factures qui leur sont associées mais chaque facture, si prise à part, doit également pouvoir donner des informations sur le projet auquel elle est rattachée. 
+Installation de l'extensin Drawio pour pouvoir directement créer des diagrammes sur VS-Code. Je commence à modéliser mes données, en partant sur le postulat de trois bases de données distinctes : Users, Projects et Bills. Le nombre de projets et de factures étant voué à grandir de manière constante, chacun doit renvoyer à l'utilisateur en *parent referencing*. Les projets et les factures sont dans une relation à double sens, car les projets contiennent les quelques factures qui leur sont associées mais chaque facture, si prise à part, doit également pouvoir donner des informations sur le projet auquel elle est rattachée. 
 
 L'utilisateur ne possèdera donc aucun autre ID que lui-même, tandis que les deux modèles Projets et Factures possèderont des références pointant aux deux autres bases de données. 
 
-Transformation du drawio en PNG pour le rendre facilement accessible sur GitHub.
+Transformation du drawio en PNG pour le rendre facilement accessible sur GitHub. Création d'une troisième base de données pour les factures et du modèle correspondant. Experimentations sur le child referencing avec la requête mongoose populate().
 
-Création d'une troisième base de données pour les factures et du modèle correspondant. Experimentations sur le child referencing avec la requête mongoose populate().
+Ajout fonctionnalités pour récupérer toutes les factures, une facture avec Id, et création d'une nouvelle facture. Addition d'un hook post save sur la facture qui trouve le projet correspondant à la facture et ajoute cette dernière dans le tableau prévu à cet effet.
 
-Ajout fonctionnalités pour récupérer toutes les factures, une facture avec Id, et création d'une nouvelle facture. En addition, un hook post save sur la facture qui trouve le projet correspondant à la facture et ajoute cette dernière dans le tableau prévu à cet effet.
 
 
 

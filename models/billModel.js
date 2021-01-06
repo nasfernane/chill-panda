@@ -24,13 +24,30 @@ const billSchema = new mongoose.Schema({
     userId: mongoose.Schema.ObjectId,
 });
 
+// FIXME
+// // middleware pre-find : selectionne seulement les utilisateurs actifs
+// billSchema.pre(/^find/, function (next) {
+//     console.log(this.req);
+//     // pointe sur la requête en cours
+//     this.find({ userId: this.userId });
+//     next();
+// });
+
 // hook post save qui ajoute la facture crée dans le projet concerné
 billSchema.post('save', async (doc, next) => {
     const project = await Project.findOne({ _id: doc.projectId });
-    console.log(doc);
     project.bills.push(doc._id);
     project.save();
 
+    next();
+});
+
+// hook post save qui ajoute la facture crée dans le projet concerné
+billSchema.pre('remove', async (doc, next) => {
+    const project = await Project.findOne({ _id: doc.projectId });
+    project.bills.splice(doc._id, 1);
+
+    project.save();
     next();
 });
 
