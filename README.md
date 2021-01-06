@@ -192,5 +192,7 @@ Transformation du drawio en PNG pour le rendre facilement accessible sur GitHub.
 
 Création d'une troisième base de données pour les factures et du modèle correspondant. Experimentations sur le child referencing avec la requête mongoose populate().
 
-Ajout fonctionnalités pour récupérer toutes les factures, une facture avec Id, et création d'une nouvelle facture. En addition, un hook post save sur la facture qui qui trouve le projet correspondant à la facture et ajoute cette dernière dans le tableau prévu à cet effet.
+Ajout fonctionnalités pour récupérer toutes les factures, une facture avec Id, et création d'une nouvelle facture. En addition, un hook post save sur la facture qui trouve le projet correspondant à la facture et ajoute cette dernière dans le tableau prévu à cet effet.
+
+
 

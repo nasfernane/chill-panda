@@ -148,7 +148,6 @@ exports.forgotPassword = catchAsync(async (req, res, next) => {
 
     // 3) envoi à l'utilisateur par mail
     const resetURL = `${req.protocol}://${req.get('host')}/users/resetPassword/${resetToken}`;
-    console.log(resetURL);
 
     const message = `Vous avez oublié votre mot de passe ? Mettez le à jour avec un nouveau mot de passe et confirmation à ${resetURL}\nSi vous n'avez pas changé votre mot de passe, veuillez ignorer cet email`;
 

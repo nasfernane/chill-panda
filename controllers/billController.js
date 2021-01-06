@@ -32,7 +32,6 @@ exports.getAllBills = catchAsync(async (req, res) => {
 // récupère une facture avec son ID
 exports.getBill = catchAsync(async (req, res, next) => {
     const bill = await Bill.findById(req.params.id).select('-__v');
-    console.log(bill.userId, req.user._id);
 
     // vérifie que lo facture existe
     if (!bill) {
@@ -61,11 +60,8 @@ exports.createBill = catchAsync(async (req, res, next) => {
         date: Date.now(),
         projectId: req.params.id,
         userId: req.user._id,
+        billNumber: (await Bill.countDocuments()) + 1,
     });
-
-    // const project = await Project.findOne({ _id: req.params.id });
-    // project.bills.push()
-    // newBill.number = await Bill.find()
 
     res.status(201).json({
         status: 'success',

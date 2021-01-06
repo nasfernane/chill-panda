@@ -17,7 +17,7 @@ const billSchema = new mongoose.Schema({
         type: Boolean,
         default: false,
     },
-    number: {
+    billNumber: {
         type: Number,
     },
     projectId: mongoose.Schema.ObjectId,
