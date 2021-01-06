@@ -66,7 +66,6 @@ exports.createBill = catchAsync(async (req, res, next) => {
         name: req.body.name,
         price: req.body.price,
         endorsement: req.body.endorsement,
-        date: Date.now(),
         projectId: req.params.id,
         userId: req.user._id,
         // détermine le numéro de facture en fonction du nombre de documents lié à l'utilisateur

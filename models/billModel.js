@@ -6,12 +6,14 @@ const billSchema = new mongoose.Schema({
         type: String,
         required: [true, `Vous devez renseigner un nom de facture`],
     },
-    date: {
+    createdAt: {
         type: Date,
+        default: Date.now,
     },
     price: {
         type: Number,
         required: true,
+        min: 1,
     },
     endorsement: {
         type: Boolean,

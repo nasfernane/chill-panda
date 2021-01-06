@@ -192,6 +192,8 @@ Transformation du drawio en PNG pour le rendre facilement accessible sur GitHub.
 
 Ajout fonctionnalités pour récupérer toutes les factures, une facture avec Id, et création d'une nouvelle facture. Addition d'un hook post save sur la facture qui trouve le projet correspondant à la facture et ajoute cette dernière dans le tableau prévu à cet effet.
 
+Ajout itinéraire et fonction pour supprimer une facture, qui se charge également de supprimer la référence de cette facture dans le projet concerné.
+
 
 
 
