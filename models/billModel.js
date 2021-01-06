@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const Project = require('./projectModel');
 
 const billSchema = new mongoose.Schema({
     name: {
@@ -22,10 +23,22 @@ const billSchema = new mongoose.Schema({
     projectId: String,
 });
 
+// FIXME
+
 // billSchema.pre('save', async function (req, res, next) {
 //     this.date = Date.now();
 //     this.projectId = req.params.id;
 // });
+
+billSchema.post('save', async (doc, next) => {
+    const project = await Project.findOne({ _id: doc.projectId });
+    console.log(doc);
+    project.bills.push(doc._id);
+
+    project.save();
+
+    next();
+});
 
 //
 const Bill = mongoose.model('Bill', billSchema);

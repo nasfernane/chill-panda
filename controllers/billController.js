@@ -1,5 +1,6 @@
 // import du modèle Project
 const Bill = require('../models/billModel');
+const Project = require('../models/projectModel');
 // import des méthodes API
 const APIFeatures = require('../utils/apiFeatures');
 // import module pour remplacer les blocs try/catch
@@ -30,7 +31,7 @@ exports.getAllBills = catchAsync(async (req, res) => {
 
 // récupère une facture avec son ID
 exports.getBill = catchAsync(async (req, res, next) => {
-    const bill = await (await Bill.findById(req.params.id)).isSelected('-__v');
+    const bill = await Bill.findById(req.params.id).select('-__v');
 
     if (!bill) {
         return next(new AppError('La facture est introuvable'));
@@ -53,9 +54,10 @@ exports.createBill = catchAsync(async (req, res, next) => {
         date: Date.now(),
         projectId: req.params.id,
     });
-    // newBill.date = Date.now();
-    // newBill.projectId = req.params.id;
-    // // newBill.number = await Bill.find()
+
+    // const project = await Project.findOne({ _id: req.params.id });
+    // project.bills.push()
+    // newBill.number = await Bill.find()
 
     res.status(201).json({
         status: 'success',

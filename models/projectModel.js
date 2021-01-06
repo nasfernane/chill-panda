@@ -30,16 +30,12 @@ const projectSchema = new mongoose.Schema({
     quote: {
         type: Number,
     },
-    bill: {
-        type: Number,
-        validate: {
-            // vérifie que la facture n'est pas plus élevée que le devis
-            validator: function (val) {
-                return val <= this.quote;
-            },
-            message: `La facture est plus élevée que le devis`,
+    bills: [
+        {
+            type: mongoose.Schema.ObjectId,
+            ref: 'Bill',
         },
-    },
+    ],
     status: {
         type: String,
         required: [true, 'Le projet doit avoir un statut'],
