@@ -1,22 +1,31 @@
 const mongoose = require('mongoose');
 
 const billSchema = new mongoose.Schema({
-    name: String,
+    name: {
+        type: String,
+        required: [true, `Vous devez renseigner un nom de facture`],
+    },
     date: {
         type: Date,
-        required: [true, `La date de la facture est manquante`],
-    },
-    number: {
-        type: Number,
-        required: true,
     },
     price: {
         type: Number,
         required: true,
     },
-    endorsement: Boolean,
+    endorsement: {
+        type: Boolean,
+        default: false,
+    },
+    number: {
+        type: Number,
+    },
     projectId: String,
 });
+
+// billSchema.pre('save', async function (req, res, next) {
+//     this.date = Date.now();
+//     this.projectId = req.params.id;
+// });
 
 //
 const Bill = mongoose.model('Bill', billSchema);

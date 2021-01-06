@@ -30,7 +30,7 @@ exports.getAllBills = catchAsync(async (req, res) => {
 
 // récupère une facture avec son ID
 exports.getBill = catchAsync(async (req, res, next) => {
-    const bill = await Bill.findById(req.params.id);
+    const bill = await (await Bill.findById(req.params.id)).isSelected('-__v');
 
     if (!bill) {
         return next(new AppError('La facture est introuvable'));
@@ -45,8 +45,17 @@ exports.getBill = catchAsync(async (req, res, next) => {
 });
 
 // crée une nouvelle facture depuis le projet concerné
-exports.createBill = catchAsync(async (req, res) => {
-    const newBill = await Bill.create(req.body);
+exports.createBill = catchAsync(async (req, res, next) => {
+    const newBill = await Bill.create({
+        name: req.body.name,
+        price: req.body.price,
+        endorsement: req.body.endorsement,
+        date: Date.now(),
+        projectId: req.params.id,
+    });
+    // newBill.date = Date.now();
+    // newBill.projectId = req.params.id;
+    // // newBill.number = await Bill.find()
 
     res.status(201).json({
         status: 'success',
