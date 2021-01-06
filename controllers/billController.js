@@ -65,5 +65,5 @@ exports.createBill = catchAsync(async (req, res, next) => {
             bill: newBill,
         },
     });
-    console.log('Nouveau projet créé');
+    console.log('Nouvelle facture créée');
 });

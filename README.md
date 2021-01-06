@@ -34,7 +34,7 @@
 
 # **JOURNAL DE BORD<a name="journal"></a>**
 
-## **Jour1**<a name="jour1"></a>
+## **Jour 1**<a name="jour1"></a>
 
 ### <ins>_Définition du projet et de ses objectifs_</ins>
 
@@ -154,7 +154,7 @@ Ajout de deux fonctionnalités de changement de mot de passe. La première se ba
 
 Ajout de fonctionnalités pour mettre à jour les informations utilisateur ou le supprimer de la base de données.
 
-## **Jour1**<a name="jour1"></a>
+## **Jour 3**<a name="jour3"></a>
 
 ### <ins>_Phase Sécurité_</ins>
 
@@ -191,3 +191,6 @@ L'utilisateur ne possèdera donc aucun autre ID que lui-même, tandis que les de
 Transformation du drawio en PNG pour le rendre facilement accessible sur GitHub.
 
 Création d'une troisième base de données pour les factures et du modèle correspondant. Experimentations sur le child referencing avec la requête mongoose populate().
+
+Ajout fonctionnalités pour récupérer toutes les factures, une facture avec Id, et création d'une nouvelle facture. En addition, un hook post save sur la facture qui qui trouve le projet correspondant à la facture et ajoute cette dernière dans le tableau prévu à cet effet.
+
