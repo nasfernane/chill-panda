@@ -1,5 +1,6 @@
-// import du modèle Project
+// import des modèles
 const Project = require('../models/projectModel');
+const Bill = require('../models/billModel');
 // import des méthodes API
 const APIFeatures = require('../utils/apiFeatures');
 // import module pour remplacer les blocs try/catch

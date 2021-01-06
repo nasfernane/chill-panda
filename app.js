@@ -10,8 +10,9 @@ const AppError = require('./utils/appError');
 const globalErrorHandler = require('./controllers/errorController');
 
 //routeurs
-const projectRouter = require('./routes/projectRoutes.js');
+const projectRouter = require('./routes/projectRoutes');
 const userRouter = require('./routes/userRoutes');
+const billRouter = require('./routes/billRoutes');
 
 // création de l'app express
 const app = express();
@@ -59,10 +60,9 @@ app.use((req, res, next) => {
 
 // ITINERAIRES
 
-// route pour les projets liés à la bdd
 app.use('/projects', projectRouter);
-// route pour les utilisateurs
 app.use('/users', userRouter);
+app.use('/bills', billRouter);
 
 // gestion des routes qui n'existent pas
 app.all('*', (req, res, next) => {
