@@ -1,4 +1,4 @@
-## _Projet de stage de Nassim Fernane du 04/01/2021 au 29/01/2021_
+## *Projet de stage de Nassim Fernane du 04/01/2021 au 29/01/2021*
 
 # Table des matières
 
@@ -8,6 +8,7 @@
 4. [Journal de bord](#journal)
    1. [Jour 1](#jour1)
    2. [Jour 2](#jour2)
+   3. [Jour 3](#jour3)
 
 # **OBJECTIFS DU PROJET <a name="objectifs"></a>**
 
@@ -153,6 +154,8 @@ Ajout de deux fonctionnalités de changement de mot de passe. La première se ba
 
 Ajout de fonctionnalités pour mettre à jour les informations utilisateur ou le supprimer de la base de données.
 
+## **Jour1**<a name="jour1"></a>
+
 ### <ins>_Phase Sécurité_</ins>
 
 Installation et configuration du module express-rate-limiter pour ajouter un limiteur de requêtes en début de chaîne sur l'application, afin de pallier à d'éventuelles "brute force attacks".
@@ -171,7 +174,7 @@ Découverte des différents patterns de modélisation des données sur la base d
 
 Dans le but de structurer les données en fonction des besoins de l'application, il faut identifier les cas d'utilisation, la nature des données et la relation qu'elles entretiennent entre elles.
 
-C'est en général une bonne pratique d'opter pour des données imbriquées, surtout dans les relations 1:few et 1:MANY, tandis que des relations référencées seront plus adaptées pour les cas relevant du 1:ton ou MANY:MANY. 
+C'est en général une bonne pratique d'opter pour des données imbriquées, surtout dans les relations 1:FEW et 1:MANY, tandis que des relations référencées seront plus adaptées pour les cas relevant du 1:TON ou MANY:MANY. 
 
 Il est également conseillé d'utiliser le référencement quand les données sont souvent mises à jour, tandis que l'imbrication est plus adaptée lorsque les données sont souvent lues mais rarement mises à jour, ou quand deux types de données sont sont fondamentalement liées. 
 
@@ -186,3 +189,5 @@ Installation de l'extensin Drawio pour pouvoir directement créer des diagrammes
 L'utilisateur ne possèdera donc aucun autre ID que lui-même, tandis que les deux modèles Projets et Factures possèderont des références pointant aux deux autres bases de données. 
 
 Transformation du drawio en PNG pour le rendre facilement accessible sur GitHub.
+
+Création d'une troisième base de données pour les factures et du modèle correspondant. Experimentations sur le child referencing avec la requête mongoose populate().
