@@ -206,6 +206,7 @@ Modification de l'itinéraire pour créer une facture pour qu'il devienne imbriq
 
 Amélioration de la query getAllBills. Au filtre déjà existant pour trier les factures selon l'utilisateur connecté, ajout d'une option pour ajouter l'id du projet concerné si il est présent dans les paramètres de l'url. On peut donc maintenant query sur toutes les factures, ou bien sur toutes les factures appaertenant à un projet précis.
 
+Création d'un handlerFactory pour regrouper des middlewares de factorisation pour supprimer, mettre à jour, créer ou lire un document. Transposition dans tous les documents.
 
 
 

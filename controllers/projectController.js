@@ -7,6 +7,7 @@ const APIFeatures = require('../utils/apiFeatures');
 const catchAsync = require('../utils/catchAsync');
 // constructeur d'erreur
 const AppError = require('../utils/appError');
+const factory = require('./handlerFactory');
 
 // récupère tous les projets de la BDD
 exports.getAllProjects = catchAsync(async (req, res) => {
@@ -87,16 +88,4 @@ exports.updateProject = catchAsync(async (req, res, next) => {
 });
 
 // supprime un projet
-exports.deleteProject = catchAsync(async (req, res, next) => {
-    const project = await Project.findByIdAndDelete(req.params.id);
-
-    if (!project) {
-        return next(new AppError('Le projet est introuvable'));
-    }
-
-    res.status(204).json({
-        status: 'success',
-        // on ne renvoie rien si les données sont correctement supprimées
-        data: null,
-    });
-});
+exports.deleteProject = factory.deleteOne(Project);

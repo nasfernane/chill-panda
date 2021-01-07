@@ -7,6 +7,7 @@ const APIFeatures = require('../utils/apiFeatures');
 const catchAsync = require('../utils/catchAsync');
 // constructeur d'erreur
 const AppError = require('../utils/appError');
+const factory = require('./handlerFactory');
 
 // récupère toutes les factures de la BDD correspondant à l'id de l'utilisateur connecté, avec options de tri, filtre et pagination
 exports.getAllBills = catchAsync(async (req, res) => {
@@ -90,21 +91,4 @@ exports.createBill = catchAsync(async (req, res, next) => {
 });
 
 // supprime une facture
-exports.deleteBill = catchAsync(async (req, res, next) => {
-    const bill = await Bill.findByIdAndDelete(req.params.id);
-
-    if (!bill) {
-        return next(new AppError(`La facture est introuvable n°${req.params.id}`));
-    }
-
-    // vérifie que la facture appartient à l'utilisateur
-    if (!bill.user.equals(req.user._id)) {
-        return next(new AppError(`Vous n'avez pas la permission de modifier cette facture`));
-    }
-
-    res.status(204).json({
-        status: 'success',
-        // on ne renvoie rien si les données sont correctement supprimées
-        data: null,
-    });
-});
+exports.deleteBill = factory.deleteOne(Bill);

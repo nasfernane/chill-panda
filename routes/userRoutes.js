@@ -13,14 +13,14 @@ router.post('/signup', authController.signup);
 // itinéraire login utilisateur
 router.post('/login', authController.login);
 // suppression ancien mdp et envoi token aléatoire temporaire par mail
-router.post('/forgotPassword', authController.forgotPassword);
+router.post('/forgotpassword', authController.forgotPassword);
 // création du nouveau mdp
-router.patch('/resetPassword/:token', authController.resetPassword);
+router.patch('/resetpassword/:token', authController.resetPassword);
 // maj mdp pour utilisateur déjà connecté
-router.patch('/updatePassword', authController.protect, authController.updatePassword);
+router.patch('/updatepassword', authController.protect, authController.updatePassword);
 // maj données utilisateur
-router.patch('/updateUserData', authController.protect, userController.updateUserData);
-router.delete('/deleteMe', authController.protect, userController.deleteMe);
+router.patch('/updateuserdata', authController.protect, userController.updateUserData);
+router.delete('/deleteme', authController.protect, userController.deleteMe);
 
 // itinéraire général pour récupérer tous les utilisateurs ou en créer un nouveau
 router.route('/').get(userController.getAllUsers).post(userController.createUser);
