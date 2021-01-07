@@ -9,6 +9,7 @@
    1. [Jour 1](#jour1)
    2. [Jour 2](#jour2)
    3. [Jour 3](#jour3)
+   4. [Jour 4](#jour4)
 
 # **OBJECTIFS DU PROJET <a name="objectifs"></a>**
 
@@ -194,7 +195,11 @@ Ajout fonctionnalités pour récupérer toutes les factures, une facture avec Id
 
 Ajout itinéraire et fonction pour supprimer une facture, qui se charge également de supprimer la référence de cette facture dans le projet concerné.
 
+## **Jour 4**<a name="jour4"></a>
+
 Je reviens finalement sur mes pas pour une cheminement plus logique, au lieu de rajouter et supprimer les facture du projet à chaque fois, je modifie la structure pour récupérer un virtual populate des factures quand je query sur un seul projet. Ainsi, les factures ne polluent pas l'espace quand je query pour tous les projets, et j'alourdis moins l'application.
+
+J'en profite également pour optimiser les factures. Je ne fais plus un populate des projets/user sur toutes les query find, toujours dans l'optique de ne pas polluer les requêtes sur les projets mais je populate à la place sur getBill, quand je query sur une seule facture afin d'avoir ses informations détaillées.
 
 
 
