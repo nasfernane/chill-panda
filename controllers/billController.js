@@ -10,7 +10,7 @@ const AppError = require('../utils/appError');
 
 // récupère tous les projets de la BDD correspondant à l'id de l'utilisateur connecté, avec options de tri, filtre et pagination
 exports.getAllBills = catchAsync(async (req, res) => {
-    const features = new APIFeatures(Bill.find({ userId: `${req.user._id}` }), req.query)
+    const features = new APIFeatures(Bill.find({ user: `${req.user._id}` }), req.query)
         .filter()
         .sort()
         .limitFields()
@@ -39,7 +39,7 @@ exports.getBill = catchAsync(async (req, res, next) => {
     }
 
     // vérifie que la facture appartient à l'utilisateur
-    if (!bill.userId.equals(req.user._id)) {
+    if (!bill.user.equals(req.user._id)) {
         return next(new AppError(`Vous n'avez pas la permission d'accéder à cette facture`));
     }
 
@@ -56,7 +56,7 @@ exports.createBill = catchAsync(async (req, res, next) => {
     const project = await Project.findById(req.params.id);
 
     // vérifie que le projet dans lequel l'utillisateur essaie d'ajouter une facture lui appartient
-    if (!project.userId.equals(req.user._id)) {
+    if (!project.user.equals(req.user._id)) {
         return next(
             new AppError(`Vous n'avez pas la permission de créer une facture dans ce projet`)
         );
@@ -66,10 +66,10 @@ exports.createBill = catchAsync(async (req, res, next) => {
         name: req.body.name,
         price: req.body.price,
         endorsement: req.body.endorsement,
-        projectId: req.params.id,
-        userId: req.user._id,
+        project: req.params.id,
+        user: req.user._id,
         // détermine le numéro de facture en fonction du nombre de documents lié à l'utilisateur
-        billNumber: (await Bill.countDocuments({ userId: req.user._id })) + 1,
+        billNumber: (await Bill.countDocuments({ user: req.user._id })) + 1,
     });
 
     res.status(201).json({
@@ -90,15 +90,15 @@ exports.deleteBill = catchAsync(async (req, res, next) => {
     }
 
     // vérifie que la facture appartient à l'utilisateur
-    if (!bill.userId.equals(req.user._id)) {
+    if (!bill.user.equals(req.user._id)) {
         return next(new AppError(`Vous n'avez pas la permission de modifier cette facture`));
     }
 
-    // supprime la référence de la facture dans le projet concerné
-    const project = await Project.findById(bill.projectId);
-    const billIndex = project.bills.indexOf(`${req.params.id}`);
-    project.bills.splice(billIndex, 1);
-    project.save();
+    // WATCH supprime la référence de la facture dans le projet concerné
+    // const project = await Project.findById(bill.project);
+    // const billIndex = project.bills.indexOf(`${req.params.id}`);
+    // project.bills.splice(billIndex, 1);
+    // project.save();
 
     res.status(204).json({
         status: 'success',

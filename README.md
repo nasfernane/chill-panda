@@ -194,6 +194,8 @@ Ajout fonctionnalités pour récupérer toutes les factures, une facture avec Id
 
 Ajout itinéraire et fonction pour supprimer une facture, qui se charge également de supprimer la référence de cette facture dans le projet concerné.
 
+Je reviens finalement sur mes pas pour une cheminement plus logique, au lieu de rajouter et supprimer les facture du projet à chaque fois, je modifie la structure pour récupérer un virtual populate des factures quand je query sur un seul projet. Ainsi, les factures ne polluent pas l'espace quand je query pour tous les projets, et j'alourdis moins l'application.
+
 
 
 

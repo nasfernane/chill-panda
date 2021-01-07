@@ -10,7 +10,7 @@ const AppError = require('../utils/appError');
 
 // récupère tous les projets de la BDD
 exports.getAllProjects = catchAsync(async (req, res) => {
-    const features = new APIFeatures(Project.find({ userId: `${req.user._id}` }), req.query)
+    const features = new APIFeatures(Project.find({ user: `${req.user._id}` }), req.query)
         .filter()
         .sort()
         .limitFields()
@@ -31,7 +31,7 @@ exports.getAllProjects = catchAsync(async (req, res) => {
 
 // récupère un projet avec son ID
 exports.getProject = catchAsync(async (req, res, next) => {
-    const project = await Project.findById(req.params.id);
+    const project = await Project.findById(req.params.id).populate('bills');
 
     if (!project) {
         return next(new AppError('Le projet est introuvable'));
@@ -53,7 +53,7 @@ exports.createProject = catchAsync(async (req, res) => {
         quote: req.body.quote,
         status: req.body.status,
         projectType: req.body.projectType,
-        userId: req.user._id,
+        user: req.user._id,
     });
 
     res.status(201).json({

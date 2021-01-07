@@ -22,11 +22,11 @@ const billSchema = new mongoose.Schema({
     billNumber: {
         type: Number,
     },
-    projectId: {
+    project: {
         type: mongoose.Schema.ObjectId,
         ref: 'Project',
     },
-    userId: {
+    user: {
         type: mongoose.Schema.ObjectId,
         ref: 'User',
     },
@@ -43,24 +43,24 @@ const billSchema = new mongoose.Schema({
 
 billSchema.pre(/^find/, function (next) {
     this.populate({
-        path: 'projectId',
+        path: 'project',
         select: 'name',
     }).populate({
-        path: 'userId',
+        path: 'user',
         select: 'name',
     });
 
     next();
 });
 
-// hook post save qui ajoute la facture crée dans le projet concerné
-billSchema.post('save', async (doc, next) => {
-    const project = await Project.findOne({ _id: doc.projectId });
-    project.bills.push(doc._id);
-    project.save();
+// // hook post save qui ajoute la facture créee dans le projet concerné
+// billSchema.post('save', async (doc, next) => {
+//     const project = await Project.findOne({ _id: doc.projectId });
+//     project.bills.push(doc._id);
+//     project.save();
 
-    next();
-});
+//     next();
+// });
 
 //
 const Bill = mongoose.model('Bill', billSchema);
