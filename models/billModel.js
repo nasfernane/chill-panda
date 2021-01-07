@@ -32,7 +32,7 @@ const billSchema = new mongoose.Schema({
     },
 });
 
-// FIXME
+// CANCELLED
 // // middleware pre-find : selectionne seulement les utilisateurs actifs
 // billSchema.pre(/^find/, function (next) {
 //     console.log(this.req);
@@ -41,18 +41,21 @@ const billSchema = new mongoose.Schema({
 //     next();
 // });
 
-billSchema.pre(/^find/, function (next) {
-    this.populate({
-        path: 'project',
-        select: 'name',
-    }).populate({
-        path: 'user',
-        select: 'name',
-    });
+//CANCELLED
+// populate les factures sur toutes les query find
+// billSchema.pre(/^find/, function (next) {
+//     this.populate({
+//         path: 'project',
+//         select: 'name',
+//     }).populate({
+//         path: 'user',
+//         select: 'name',
+//     });
 
-    next();
-});
+//     next();
+// });
 
+//CANCELLED
 // // hook post save qui ajoute la facture créee dans le projet concerné
 // billSchema.post('save', async (doc, next) => {
 //     const project = await Project.findOne({ _id: doc.projectId });

@@ -31,7 +31,10 @@ exports.getAllBills = catchAsync(async (req, res) => {
 
 // récupère une facture avec son ID
 exports.getBill = catchAsync(async (req, res, next) => {
-    const bill = await Bill.findById(req.params.id).select('-__v');
+    const bill = await Bill.findById(req.params.id)
+        .select('-__v')
+        .populate('project')
+        .populate('user');
 
     // vérifie que lo facture existe
     if (!bill) {
@@ -94,7 +97,7 @@ exports.deleteBill = catchAsync(async (req, res, next) => {
         return next(new AppError(`Vous n'avez pas la permission de modifier cette facture`));
     }
 
-    // WATCH supprime la référence de la facture dans le projet concerné
+    // CANCELLED supprime la référence de la facture dans le projet concerné
     // const project = await Project.findById(bill.project);
     // const billIndex = project.bills.indexOf(`${req.params.id}`);
     // project.bills.splice(billIndex, 1);

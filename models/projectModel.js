@@ -51,6 +51,7 @@ const projectSchema = new mongoose.Schema(
         toObject: { virtuals: true },
     }
 );
+
 // virtual populate pour les factures
 projectSchema.virtual('bills', {
     ref: 'Bill',
