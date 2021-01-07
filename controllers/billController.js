@@ -56,10 +56,16 @@ exports.getBill = catchAsync(async (req, res, next) => {
 
 // crée une nouvelle facture depuis le projet concerné
 exports.createBill = catchAsync(async (req, res, next) => {
-    const project = await Project.findById(req.params.id);
+    // CANCELLED doublon avec les paramètres de création ?
+    // autorise route imbriquée depuis un projet
+    // // si on précise pas le projet dans le body de la requête, il est récupéré depuis le paramètre dans l'url
+    // if (!req.body.project) req.body.project = req.params.projectid;
+    // // si on ne précise pas l'utilisateur, il est récupéré depuis le middleware protect()
+    // if (!req.body.user) req.body.user = req.user.id;
 
     // vérifie que le projet dans lequel l'utillisateur essaie d'ajouter une facture lui appartient
-    if (!project.user.equals(req.user._id)) {
+    const project = await Project.findById(req.params.projectid);
+    if (!project.user._id.equals(req.user._id)) {
         return next(
             new AppError(`Vous n'avez pas la permission de créer une facture dans ce projet`)
         );
@@ -69,7 +75,7 @@ exports.createBill = catchAsync(async (req, res, next) => {
         name: req.body.name,
         price: req.body.price,
         endorsement: req.body.endorsement,
-        project: req.params.id,
+        project: req.params.projectid,
         user: req.user._id,
         // détermine le numéro de facture en fonction du nombre de documents lié à l'utilisateur
         billNumber: (await Bill.countDocuments({ user: req.user._id })) + 1,

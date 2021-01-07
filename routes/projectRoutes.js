@@ -14,7 +14,6 @@ router
     .post(authController.protect, projectController.createProject);
 router
     .route('/:id')
-    .post(authController.protect, billController.createBill)
     .get(projectController.getProject)
     .patch(projectController.updateProject)
     .delete(
@@ -22,5 +21,8 @@ router
         authController.restrictTo('admin', 'papa-panda', 'bebe-panda'),
         projectController.deleteProject
     );
+
+// route imbriquée pour créer une facture
+router.route('/:projectid/bills').post(authController.protect, billController.createBill);
 
 module.exports = router;
