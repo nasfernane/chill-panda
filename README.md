@@ -201,7 +201,7 @@ Je reviens finalement sur mes pas pour une cheminement plus logique, au lieu de 
 
 J'en profite également pour optimiser les factures. Je ne fais plus un populate des projets/user sur toutes les query find, toujours dans l'optique de ne pas polluer les requêtes sur les projets mais je populate à la place sur getBill, quand je query sur une seule facture afin d'avoir ses informations détaillées.
 
-Modification de l'itinéraire pour créer une facture pour qu'il devienne imbriqué avec le projet concerné. 
+Modification de l'itinéraire pour créer une facture pour qu'il devienne imbriqué avec le projet concerné. Je monte le routeur des factures dans celui des projets pour transmettre toutes les requêtes de type /:projectid/bills grâce à la fusion des paramètres, permettant ainsi de bien séparer dans chaque routeur les middlewares qui leur sont propres. 
 
 
 

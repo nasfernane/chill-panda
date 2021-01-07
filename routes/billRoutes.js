@@ -5,9 +5,12 @@ const authController = require('../controllers/authController');
 //
 
 // création du routeur avec le middleware d'express
-const router = express.Router();
+const router = express.Router({ mergeParams: true });
 
-router.route('/').get(authController.protect, billController.getAllBills);
+router
+    .route('/')
+    .get(authController.protect, billController.getAllBills)
+    .post(authController.protect, billController.createBill);
 
 router
     .route('/:id')

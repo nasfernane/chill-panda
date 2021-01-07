@@ -3,9 +3,12 @@ const express = require('express');
 const projectController = require('../controllers/projectController');
 const authController = require('../controllers/authController');
 const billController = require('../controllers/billController');
+const billRouter = require('./billRoutes');
 
 // création du routeur avec le middleware d'express
 const router = express.Router();
+// monte le routeur des factures pour tu lui transmettre toutes les url de type /:projectid/bills
+router.use('/:projectid/bills', billRouter);
 
 // on lui applique les méthodes du Controller
 router
@@ -21,8 +24,5 @@ router
         authController.restrictTo('admin', 'papa-panda', 'bebe-panda'),
         projectController.deleteProject
     );
-
-// route imbriquée pour créer une facture
-router.route('/:projectid/bills').post(authController.protect, billController.createBill);
 
 module.exports = router;
