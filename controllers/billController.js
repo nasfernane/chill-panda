@@ -8,9 +8,15 @@ const catchAsync = require('../utils/catchAsync');
 // constructeur d'erreur
 const AppError = require('../utils/appError');
 
-// récupère tous les projets de la BDD correspondant à l'id de l'utilisateur connecté, avec options de tri, filtre et pagination
+// récupère toutes les factures de la BDD correspondant à l'id de l'utilisateur connecté, avec options de tri, filtre et pagination
 exports.getAllBills = catchAsync(async (req, res) => {
-    const features = new APIFeatures(Bill.find({ user: `${req.user._id}` }), req.query)
+    // filtre pour ne récupérer que les factures de l'utilisateur
+    let filter = { user: `${req.user._id}` };
+    // si l'url possède un paramètre projectid, le rajoute dans le filtre pour récupérer seulement les factures du projet concerné
+    if (req.params.projectid) filter = { user: `${req.user._id}`, project: req.params.projectid };
+
+    // options de filtres/tris
+    const features = new APIFeatures(Bill.find(filter), req.query)
         .filter()
         .sort()
         .limitFields()
@@ -56,13 +62,6 @@ exports.getBill = catchAsync(async (req, res, next) => {
 
 // crée une nouvelle facture depuis le projet concerné
 exports.createBill = catchAsync(async (req, res, next) => {
-    // CANCELLED doublon avec les paramètres de création ?
-    // autorise route imbriquée depuis un projet
-    // // si on précise pas le projet dans le body de la requête, il est récupéré depuis le paramètre dans l'url
-    // if (!req.body.project) req.body.project = req.params.projectid;
-    // // si on ne précise pas l'utilisateur, il est récupéré depuis le middleware protect()
-    // if (!req.body.user) req.body.user = req.user.id;
-
     // vérifie que le projet dans lequel l'utillisateur essaie d'ajouter une facture lui appartient
     const project = await Project.findById(req.params.projectid);
     if (!project.user._id.equals(req.user._id)) {
@@ -102,12 +101,6 @@ exports.deleteBill = catchAsync(async (req, res, next) => {
     if (!bill.user.equals(req.user._id)) {
         return next(new AppError(`Vous n'avez pas la permission de modifier cette facture`));
     }
-
-    // CANCELLED supprime la référence de la facture dans le projet concerné
-    // const project = await Project.findById(bill.project);
-    // const billIndex = project.bills.indexOf(`${req.params.id}`);
-    // project.bills.splice(billIndex, 1);
-    // project.save();
 
     res.status(204).json({
         status: 'success',

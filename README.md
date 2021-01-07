@@ -147,6 +147,8 @@ J'implémente par la suite un middleware de protection d'itinéraires qu'on pour
 
 Pour faire echo à ce middleware, ajout d'un hook pre-save pour ajouter une date de modification de mot de passe quand celui-ci se produit, dans la bdd utilisateurs.
 
+## **Jour 3**<a name="jour3"></a>
+
 Configuration avancée de Postman : ajout des environnements pour le mode production et développement, et d'une variable environementale JWT pour stocker plus facilement le token après un login ou signup et gagner en fluidité sur les tests liés aux requêtes. 
 
 Ajout des rôles à l'utilisateur et d'un middleware restrictTo pour l'empêcher d'effectuer des actions en dehors de ses permissions autorisées. 
@@ -155,7 +157,6 @@ Ajout de deux fonctionnalités de changement de mot de passe. La première se ba
 
 Ajout de fonctionnalités pour mettre à jour les informations utilisateur ou le supprimer de la base de données.
 
-## **Jour 3**<a name="jour3"></a>
 
 ### <ins>_Phase Sécurité_</ins>
 
@@ -189,19 +190,21 @@ Installation de l'extensin Drawio pour pouvoir directement créer des diagrammes
 
 L'utilisateur ne possèdera donc aucun autre ID que lui-même, tandis que les deux modèles Projets et Factures possèderont des références pointant aux deux autres bases de données. 
 
+## **Jour 4**<a name="jour4"></a>
+
 Transformation du drawio en PNG pour le rendre facilement accessible sur GitHub. Création d'une troisième base de données pour les factures et du modèle correspondant. Experimentations sur le child referencing avec la requête mongoose populate().
 
 Ajout fonctionnalités pour récupérer toutes les factures, une facture avec Id, et création d'une nouvelle facture. Addition d'un hook post save sur la facture qui trouve le projet correspondant à la facture et ajoute cette dernière dans le tableau prévu à cet effet.
 
 Ajout itinéraire et fonction pour supprimer une facture, qui se charge également de supprimer la référence de cette facture dans le projet concerné.
 
-## **Jour 4**<a name="jour4"></a>
-
 Je reviens finalement sur mes pas pour une cheminement plus logique, au lieu de rajouter et supprimer les facture du projet à chaque fois, je modifie la structure pour récupérer un virtual populate des factures quand je query sur un seul projet. Ainsi, les factures ne polluent pas l'espace quand je query pour tous les projets, et j'alourdis moins l'application.
 
 J'en profite également pour optimiser les factures. Je ne fais plus un populate des projets/user sur toutes les query find, toujours dans l'optique de ne pas polluer les requêtes sur les projets mais je populate à la place sur getBill, quand je query sur une seule facture afin d'avoir ses informations détaillées.
 
 Modification de l'itinéraire pour créer une facture pour qu'il devienne imbriqué avec le projet concerné. Je monte le routeur des factures dans celui des projets pour transmettre toutes les requêtes de type /:projectid/bills grâce à la fusion des paramètres, permettant ainsi de bien séparer dans chaque routeur les middlewares qui leur sont propres. 
+
+Amélioration de la query getAllBills. Au filtre déjà existant pour trier les factures selon l'utilisateur connecté, ajout d'une option pour ajouter l'id du projet concerné si il est présent dans les paramètres de l'url. On peut donc maintenant query sur toutes les factures, ou bien sur toutes les factures appaertenant à un projet précis.
 
 
 

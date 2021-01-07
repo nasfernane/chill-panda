@@ -8,7 +8,7 @@ class APIFeatures {
 
     filter() {
         // 1-A) filtres
-        // on hard copy la query, en utilisant un 'hack' (déstructurer puis refaire un objet à partir de la query)
+        // on hard copy la query
         const queryObj = { ...this.queryString };
         const excludedFields = ['page', 'sort', 'limit', 'fields'];
         excludedFields.forEach(el => delete queryObj[el]);
