@@ -76,6 +76,8 @@ Définition de deux modes séparés pour l'application, développement et produc
 
 Je continue ensuite sur les opérations CRUD avec des requêtes pour créer un nouveau document, le mettre à jour ou le supprimer.
 
+## **JOUR 2**<a name="jour2"></a>
+
 ### <ins>_Introduction de Mongoose_</ins>
 
 Je connecte enfin la base de données à l'application Express, en apprenant les premiers rudiments de cette librairie qui facilite grandement la modélisation des données orientées objet. Mongoose permet notamment de créer des schémas qui sont des classes JS desquelles découlent les modèles pour créer les données qui alimenteront nos bases de données. Je commence par créer un modèle Utilisateur, sous format JSON, avec pour chaque propriété le détail de ses options. Par exemple on peut définir le type de données du nom de l'utilisateur sur String, indiquer que le champ est obligatoire, lui imposer une taille minimale ou maximale, ou encore forcer le lowercase.
@@ -108,7 +110,6 @@ jalonné d'étapes pour traiter et recouper des données ou encore établir des 
 Import du module Validator pour faciliter certains validateurs dans les schémas mangoose.
 Développement de validateurs personnalisés.
 
-## **JOUR 2**<a name="jour2"></a>
 
 ### <ins>_Phase Gestion des Erreurs_</ins>
 
@@ -127,6 +128,8 @@ Ajout de gestion des erreurs dans les fonctions asynchrones, et d'une fonction c
 Dans la même optique, création d'un constructor AppError pour avoir un "modèle" d'erreur à renvoyer de façon plus concise avec deux paramètres : message personnalisé et le status.
 
 En fin de code du serveur, ajout de la gestion des erreurs survenant en dehors d'express : promesses rejetées pour fermer l'application puis le serveur proprement. Dans le controller d'erreurs, ajout d'une erreur générique pour les exceptions et erreurs inconnues.
+
+## **Jour 3**<a name="jour3"></a>
 
 ### <ins>_Phase Authentication_</ins>
 
@@ -148,7 +151,6 @@ J'implémente par la suite un middleware de protection d'itinéraires qu'on pour
 
 Pour faire echo à ce middleware, ajout d'un hook pre-save pour ajouter une date de modification de mot de passe quand celui-ci se produit, dans la bdd utilisateurs.
 
-## **Jour 3**<a name="jour3"></a>
 
 Configuration avancée de Postman : ajout des environnements pour le mode production et développement, et d'une variable environementale JWT pour stocker plus facilement le token après un login ou signup et gagner en fluidité sur les tests liés aux requêtes. 
 
@@ -183,6 +185,8 @@ Il est également conseillé d'utiliser le référencement quand les données so
 
 Dans le cas d'utilisation de données référencées, il est nécessaire d'empêcher un tableau de références de grandir indéfiniment. Selon l'usage, on préfèrera le "parent referencing" au "child referencing" pour que ce soit la sous-donnée qui pointe vers son parent. On utilise le référencement à double sens dans les relations MANY:MANY
 
+## **Jour 4**<a name="jour4"></a>
+
 *Mise en application*
 
 Dans le cas de ce projet, l'utilisateur doit pouvoir avoir accès à ses projets/devis, chaque projet contient des factures et avenants, mais les factures doivent pouvoir être accessibles facilement même en dehors des projets. 
@@ -191,7 +195,7 @@ Installation de l'extensin Drawio pour pouvoir directement créer des diagrammes
 
 L'utilisateur ne possèdera donc aucun autre ID que lui-même, tandis que les deux modèles Projets et Factures possèderont des références pointant aux deux autres bases de données. 
 
-## **Jour 4**<a name="jour4"></a>
+
 
 Transformation du drawio en PNG pour le rendre facilement accessible sur GitHub. Création d'une troisième base de données pour les factures et du modèle correspondant. Experimentations sur le child referencing avec la requête mongoose populate().
 
