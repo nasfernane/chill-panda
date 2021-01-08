@@ -10,6 +10,7 @@
    2. [Jour 2](#jour2)
    3. [Jour 3](#jour3)
    4. [Jour 4](#jour4)
+   5. [Jour 5](#jour5)
 
 # **OBJECTIFS DU PROJET <a name="objectifs"></a>**
 
@@ -205,6 +206,9 @@ J'en profite également pour optimiser les factures. Je ne fais plus un populate
 Modification de l'itinéraire pour créer une facture pour qu'il devienne imbriqué avec le projet concerné. Je monte le routeur des factures dans celui des projets pour transmettre toutes les requêtes de type /:projectid/bills grâce à la fusion des paramètres, permettant ainsi de bien séparer dans chaque routeur les middlewares qui leur sont propres. 
 
 Amélioration de la query getAllBills. Au filtre déjà existant pour trier les factures selon l'utilisateur connecté, ajout d'une option pour ajouter l'id du projet concerné si il est présent dans les paramètres de l'url. On peut donc maintenant query sur toutes les factures, ou bien sur toutes les factures appaertenant à un projet précis.
+
+
+## **Jour 5**<a name="jour5"></a>
 
 Création d'un handlerFactory pour regrouper des middlewares de factorisation pour supprimer, mettre à jour, créer ou lire un document. Transposition dans tous les documents.
 

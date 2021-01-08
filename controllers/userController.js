@@ -3,7 +3,7 @@ const AppError = require('../utils/appError');
 const catchAsync = require('../utils/catchAsync');
 const factory = require('./handlerFactory');
 
-// fonction pour filtrer les champs autorisés
+// fonction pour filtrer les champs autorisés quand un utilisateur met ses données à jour
 const filterObj = (obj, ...allowedFields) => {
     // objet vide qui accueillera les champs validés
     const newObj = {};
@@ -29,14 +29,14 @@ exports.getAllUsers = catchAsync(async (req, res, next) => {
     });
 });
 
-// maj données d'un utilisateur
+// maj données d'un utilisateur par lui-même
 exports.updateUserData = catchAsync(async (req, res, next) => {
     // 1) Création d'erreur si l'utilisateur essaie de modifier son mdp
     if (req.body.password || req.body.passwordConfirm) {
         return next(new AppError(`Vous ne pouvez pas modifier votre mot de passe ici`, 400));
     }
 
-    // 2) filtre les champs non autorisés
+    // 2) filtre par champs autorisés
     const filteredBody = filterObj(req.body, 'name', 'email');
 
     // 3) Mise à jour des données utilisateur
@@ -78,11 +78,7 @@ exports.getUser = (req, res) => {
     });
 };
 
-exports.updateUser = (req, res) => {
-    res.status(500).json({
-        status: 'error',
-        messahe: 'this route is not yet defined',
-    });
-};
-
+// mise à jour d'un utilisateur (version admin)
+exports.updateUser = factory.updateOne(User);
+// suppression d'un utilisateur (version admin)
 exports.deleteUser = factory.deleteOne(User);

@@ -10,10 +10,11 @@ const router = express.Router({ mergeParams: true });
 router
     .route('/')
     .get(authController.protect, billController.getAllBills)
-    .post(authController.protect, billController.createBill);
+    .post(authController.protect, billController.checkBeforeCreateBill, billController.createBill);
 
 router
     .route('/:id')
+    .patch(billController.updateBill)
     .get(authController.protect, billController.getBill)
     .delete(authController.protect, billController.deleteBill);
 

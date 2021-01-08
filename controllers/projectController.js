@@ -46,46 +46,9 @@ exports.getProject = catchAsync(async (req, res, next) => {
     });
 });
 
-// crée un nouveau projet
-exports.createProject = catchAsync(async (req, res) => {
-    const newProject = await Project.create({
-        client: req.body.client,
-        name: req.body.name,
-        quote: req.body.quote,
-        status: req.body.status,
-        projectType: req.body.projectType,
-        user: req.user._id,
-    });
-
-    res.status(201).json({
-        status: 'success',
-        data: {
-            project: newProject,
-        },
-    });
-    console.log('Nouveau projet créé');
-});
-
-// update un projet
-exports.updateProject = catchAsync(async (req, res, next) => {
-    const project = await Project.findByIdAndUpdate(req.params.id, req.body, {
-        // renvoie le nouvel objet
-        new: true,
-        // charge à nouveau les validateurs du schéma originel pour valider le nouvel objet
-        runValidators: true,
-    });
-
-    if (!project) {
-        return next(new AppError('Le projet est introuvable'));
-    }
-
-    res.status(200).json({
-        status: 'success',
-        data: {
-            project,
-        },
-    });
-});
-
+// met à jour un projet
+exports.updateProject = factory.updateOne(Project);
 // supprime un projet
 exports.deleteProject = factory.deleteOne(Project);
+// crée un nouveau projet
+exports.createProject = factory.createOne(Project);

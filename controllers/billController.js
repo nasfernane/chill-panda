@@ -1,4 +1,4 @@
-// import du modèle Project
+// import des modèles
 const Bill = require('../models/billModel');
 const Project = require('../models/projectModel');
 // import des méthodes API
@@ -61,8 +61,8 @@ exports.getBill = catchAsync(async (req, res, next) => {
     });
 });
 
-// crée une nouvelle facture depuis le projet concerné
-exports.createBill = catchAsync(async (req, res, next) => {
+// vérifie que le projet concerné par la facture appartient à l'utilisateur et ajoute des infos au body
+exports.checkBeforeCreateBill = catchAsync(async (req, res, next) => {
     // vérifie que le projet dans lequel l'utillisateur essaie d'ajouter une facture lui appartient
     const project = await Project.findById(req.params.projectid);
     if (!project.user._id.equals(req.user._id)) {
@@ -71,24 +71,18 @@ exports.createBill = catchAsync(async (req, res, next) => {
         );
     }
 
-    const newBill = await Bill.create({
-        name: req.body.name,
-        price: req.body.price,
-        endorsement: req.body.endorsement,
-        project: req.params.projectid,
-        user: req.user._id,
-        // détermine le numéro de facture en fonction du nombre de documents lié à l'utilisateur
-        billNumber: (await Bill.countDocuments({ user: req.user._id })) + 1,
-    });
+    // Si on ne précise pas le Projet, on le récupère dans la requête
+    if (!req.body.project) req.body.project = req.params.projectid;
 
-    res.status(201).json({
-        status: 'success',
-        data: {
-            bill: newBill,
-        },
-    });
-    console.log('Nouvelle facture créée');
+    // détermine le numéro de facture en fonction du nombre de documents lié à l'utilisateur
+    req.body.billNumber = (await Bill.countDocuments({ user: req.user._id })) + 1;
+
+    next();
 });
 
+// crée une nouvelle facture depuis le projet concerné
+exports.createBill = factory.createOne(Bill);
 // supprime une facture
 exports.deleteBill = factory.deleteOne(Bill);
+// met à jour une facture
+exports.updateBill = factory.updateOne(Bill);

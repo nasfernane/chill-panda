@@ -8,7 +8,7 @@ const authController = require('../controllers/authController');
 // création d'un routeur grâce au middleware d'express
 const router = express.Router();
 
-// itinéraire création utilisateur
+// itinéraire auto-création utilisateur
 router.post('/signup', authController.signup);
 // itinéraire login utilisateur
 router.post('/login', authController.login);
@@ -24,12 +24,13 @@ router.delete('/deleteme', authController.protect, userController.deleteMe);
 
 // itinéraire général pour récupérer tous les utilisateurs ou en créer un nouveau
 router.route('/').get(userController.getAllUsers).post(userController.createUser);
-// itinéraire général sur l'id, pour récupérer un utilisateur, l'update, ou le supprimer
+
+// itinéraire général sur l'id, pour récupérer un utilisateur, l'update, ou le supprimer (versions admins)
 router
     .route('/:id')
     .get(userController.getUser)
-    .patch(userController.updateUser)
-    .delete(userController.deleteUser);
+    .patch(authController.protect, authController.restrictTo('admin'), userController.updateUser)
+    .delete(authController.protect, authController.restrictTo('admin'), userController.deleteUser);
 
 // exporte le module pour app.js
 module.exports = router;
