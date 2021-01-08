@@ -18,8 +18,12 @@ router.post('/forgotpassword', authController.forgotPassword);
 router.patch('/resetpassword/:token', authController.resetPassword);
 // maj mdp pour utilisateur déjà connecté
 router.patch('/updatepassword', authController.protect, authController.updatePassword);
+
+// récupération par l'utilisateur de ses données
+router.get('/me', authController.protect, userController.getMe, userController.getUser);
 // maj données utilisateur
-router.patch('/updateuserdata', authController.protect, userController.updateUserData);
+router.patch('/updateme', authController.protect, userController.updateUserData);
+// désactivation de son compte
 router.delete('/deleteme', authController.protect, userController.deleteMe);
 
 // itinéraire général pour récupérer tous les utilisateurs ou en créer un nouveau

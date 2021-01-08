@@ -76,10 +76,12 @@ exports.getOne = (Model, popOne, popTwo) =>
         if (!doc) {
             return next(new AppError('Document introuvable'));
         }
+        console.log(String(Model));
 
-        // vérifie que la facture appartient à l'utilisateur
-        if (!doc.user.equals(req.user._id)) {
-            return next(new AppError(`Vous n'avez pas la permission d'accéder à cette facture`));
+        // vérifie si il y a un rôle pour que cette vérification ne soit pas effective lors de la récupération un utilisateur
+        // si c'est pour récupérer un projet ou une facture, vérifie qu'ils appartiennent à l'utilisateur connecté
+        if (!doc.role && !doc.user.equals(req.user._id)) {
+            return next(new AppError(`Vous n'avez pas la permission d'accéder à ce document`));
         }
 
         res.status(200).json({

@@ -15,6 +15,12 @@ const filterObj = (obj, ...allowedFields) => {
     return newObj;
 };
 
+// middleware pour que l'utilisateur récupère ses données. Fait suivre sur un getUser classique mais en récupérant l'id du middleware protect
+exports.getMe = (req, res, next) => {
+    req.params.id = req.user.id;
+    next();
+};
+
 // maj données d'un utilisateur par lui-même
 exports.updateUserData = catchAsync(async (req, res, next) => {
     // 1) Création d'erreur si l'utilisateur essaie de modifier son mdp
