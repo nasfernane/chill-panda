@@ -210,7 +210,15 @@ Amélioration de la query getAllBills. Au filtre déjà existant pour trier les 
 
 ## **Jour 5**<a name="jour5"></a>
 
-Création d'un handlerFactory pour regrouper des middlewares de factorisation pour supprimer, mettre à jour, créer ou lire un document. Transposition dans tous les documents.
+Création d'un handlerFactory pour regrouper des middlewares de factorisation pour supprimer, mettre à jour, créer ou lire un document. Transposition dans tous les documents. 
+
+Ajout d'un endepoint /me pour que l'utilisateur puisse avoir accès à ses propres données.
+
+Toutes les requêtes générales, pour récupérer par exemple toutes les factures ou tous les projets, ont maintenant accès aux features de l'api pour le tri, les filtres ou la pagination. Il est par exemple possible de faire une recherche par prix, de limiter certains champs de résultats, ou de choisir le nombre de résultats par page. 
+
+Amélioration de la sécurité, définition des accès et autorisations pour toutes les requêtes. Chaque utilisateur ne peut accéder qu'à ses propres documents. Les requêtes globales de gestions des utilisateurs ne sont désormais accessibles qu'aux administrateurs.
+
+Travail de nettoyage du code pour augmenter sa lisibilité, et assainissement des commentaires.
 
 
 

@@ -16,25 +16,30 @@ router.post('/login', authController.login);
 router.post('/forgotpassword', authController.forgotPassword);
 // création du nouveau mdp
 router.patch('/resetpassword/:token', authController.resetPassword);
-// maj mdp pour utilisateur déjà connecté
-router.patch('/updatepassword', authController.protect, authController.updatePassword);
 
+// rend obligatoire la connexion pour tous les itinéraires ci-dessous
+router.use(authController.protect);
+
+// maj mdp pour utilisateur déjà connecté
+router.patch('/updatepassword', authController.updatePassword);
 // récupération par l'utilisateur de ses données
-router.get('/me', authController.protect, userController.getMe, userController.getUser);
+router.get('/me', userController.getMe, userController.getUser);
 // maj données utilisateur
-router.patch('/updateme', authController.protect, userController.updateUserData);
+router.patch('/updateme', userController.updateUserData);
 // désactivation de son compte
-router.delete('/deleteme', authController.protect, userController.deleteMe);
+router.delete('/deleteme', userController.deleteMe);
+
+// rend obligatoire la connexion en tant qu'admin pour tous les itinéraires ci-dessous
+router.use(authController.restrictTo('admin'));
 
 // itinéraire général pour récupérer tous les utilisateurs ou en créer un nouveau
 router.route('/').get(userController.getAllUsers).post(userController.createUser);
-
 // itinéraire général sur l'id, pour récupérer un utilisateur, l'update, ou le supprimer (versions admins)
 router
     .route('/:id')
     .get(userController.getUser)
-    .patch(authController.protect, authController.restrictTo('admin'), userController.updateUser)
-    .delete(authController.protect, authController.restrictTo('admin'), userController.deleteUser);
+    .patch(authController.protect, userController.updateUser)
+    .delete(authController.protect, userController.deleteUser);
 
 // exporte le module pour app.js
 module.exports = router;
