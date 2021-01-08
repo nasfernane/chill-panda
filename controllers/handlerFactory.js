@@ -5,6 +5,8 @@
 const catchAsync = require('../utils/catchAsync');
 // constructeur d'erreurs
 const AppError = require('../utils/appError');
+// regroupe les méthodes de tri, filtres et pagination
+const APIFeatures = require('../utils/apiFeatures');
 
 // suppression d'un document
 exports.deleteOne = Model =>
@@ -55,6 +57,61 @@ exports.createOne = Model =>
 
         res.status(201).json({
             status: 'success',
+            data: {
+                data: doc,
+            },
+        });
+    });
+
+// récupérer un document avec options populate()
+exports.getOne = (Model, popOne, popTwo) =>
+    catchAsync(async (req, res, next) => {
+        let query = Model.findById(req.params.id);
+        if (popOne) query = query.populate(popOne);
+        if (popTwo) query = query.populate(popOne).populate(popTwo);
+
+        const doc = await query;
+
+        // vérifie que le document existe
+        if (!doc) {
+            return next(new AppError('Document introuvable'));
+        }
+
+        // vérifie que la facture appartient à l'utilisateur
+        if (!doc.user.equals(req.user._id)) {
+            return next(new AppError(`Vous n'avez pas la permission d'accéder à cette facture`));
+        }
+
+        res.status(200).json({
+            status: 'success',
+            data: {
+                data: doc,
+            },
+        });
+    });
+
+// récupérer tous les documents
+exports.getAll = Model =>
+    catchAsync(async (req, res) => {
+        // filtre pour ne récupérer que les factures de l'utilisateur
+        let filter = { user: `${req.user._id}` };
+        // si l'url possède un paramètre projectid, le rajoute dans le filtre pour récupérer seulement les factures du projet concerné
+        if (req.params.projectid)
+            filter = { user: `${req.user._id}`, project: req.params.projectid };
+
+        // crée une instance d'APIFeatures pour récupérer les méthodes sur API, on choisit quelle fonctions appliquer à cette méthode
+        const features = new APIFeatures(Model.find(filter), req.query)
+            .filter()
+            .sort()
+            .limitFields()
+            .paginate();
+        // on récupère la requête transformée
+        const doc = await features.query;
+
+        // ENVOI DE LA REPONSE
+        res.status(200).json({
+            status: 'success',
+            results: doc.length,
             data: {
                 data: doc,
             },

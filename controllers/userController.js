@@ -15,20 +15,6 @@ const filterObj = (obj, ...allowedFields) => {
     return newObj;
 };
 
-// GET tous les utilisateurs
-exports.getAllUsers = catchAsync(async (req, res, next) => {
-    const users = await User.find();
-
-    // ENVOI DE LA REPONSE
-    res.status(200).json({
-        status: 'success',
-        results: users.length,
-        data: {
-            users,
-        },
-    });
-});
-
 // maj données d'un utilisateur par lui-même
 exports.updateUserData = catchAsync(async (req, res, next) => {
     // 1) Création d'erreur si l'utilisateur essaie de modifier son mdp
@@ -67,18 +53,27 @@ exports.deleteMe = catchAsync(async (req, res, next) => {
 exports.createUser = (req, res) => {
     res.status(500).json({
         status: 'error',
-        message: 'this route is not yet defined',
+        message: `Cette route n'est pas définie, utilisez plutot /signup`,
     });
 };
 
-exports.getUser = (req, res) => {
-    res.status(500).json({
-        status: 'error',
-        messahe: 'this route is not yet defined',
+// GET tous les utilisateurs
+exports.getAllUsers = catchAsync(async (req, res, next) => {
+    const users = await User.find();
+
+    // ENVOI DE LA REPONSE
+    res.status(200).json({
+        status: 'success',
+        results: users.length,
+        data: {
+            users,
+        },
     });
-};
+});
 
 // mise à jour d'un utilisateur (version admin)
 exports.updateUser = factory.updateOne(User);
 // suppression d'un utilisateur (version admin)
 exports.deleteUser = factory.deleteOne(User);
+// récupère un utilisateur sur son ID
+exports.getUser = factory.getOne(User);
