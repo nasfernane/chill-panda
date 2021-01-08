@@ -56,6 +56,7 @@ exports.deleteMe = catchAsync(async (req, res, next) => {
     });
 });
 
+// route inactive, prévient juste en erreur du chemin correct à utiliser
 exports.createUser = (req, res) => {
     res.status(500).json({
         status: 'error',
