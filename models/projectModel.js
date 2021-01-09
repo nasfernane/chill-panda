@@ -52,6 +52,10 @@ const projectSchema = new mongoose.Schema(
     }
 );
 
+// Index
+// Améliore les performances de lecture sur l'API. A régler en fonction des requêtes les plus utilisées
+projectSchema.index({ date: 1, client: 1 });
+
 // virtual populate pour les factures
 projectSchema.virtual('bills', {
     ref: 'Bill',

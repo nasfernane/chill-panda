@@ -32,36 +32,16 @@ const billSchema = new mongoose.Schema({
     },
 });
 
+// Index
+// Améliore les performances de lecture sur l'API. A régler en fonction des requêtes les plus utilisées
+billSchema.index({ price: 1, createdAt: 1 });
+
 // CANCELLED
 // // middleware pre-find : selectionne seulement les utilisateurs actifs
 // billSchema.pre(/^find/, function (next) {
 //     console.log(this.req);
 //     // pointe sur la requête en cours
 //     this.find({ userId: this.userId });
-//     next();
-// });
-
-//CANCELLED
-// populate les factures sur toutes les query find
-// billSchema.pre(/^find/, function (next) {
-//     this.populate({
-//         path: 'project',
-//         select: 'name',
-//     }).populate({
-//         path: 'user',
-//         select: 'name',
-//     });
-
-//     next();
-// });
-
-//CANCELLED
-// // hook post save qui ajoute la facture créee dans le projet concerné
-// billSchema.post('save', async (doc, next) => {
-//     const project = await Project.findOne({ _id: doc.projectId });
-//     project.bills.push(doc._id);
-//     project.save();
-
 //     next();
 // });
 

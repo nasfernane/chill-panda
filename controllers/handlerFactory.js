@@ -123,7 +123,7 @@ exports.getAll = Model =>
             .limitFields()
             .paginate();
         // on récupère la requête transformée
-        const doc = await features.query;
+        const doc = await features.query.explain();
 
         // ENVOI DE LA REPONSE
         res.status(200).json({
