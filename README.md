@@ -226,5 +226,7 @@ Travail de nettoyage du code pour augmenter sa lisibilité, et assainissement de
 
 Ajout des indexes sur le modèle Factures et Projets. Les index améliorent les performances de lecture, de façon proportionnelle au nombre de documents présents dans une collection. Ils établissent une liste ordonnée axé sur un ou des champs de recherches. Ils consomment des ressources et ils peuvent être contre-productifs si utilisés à mauvais escient. Il est donc nécessaire d'étudier selon le contexte et l'application, les requêtes qui seront le plus souvent utilisées pour établir seulement les index rentables pour le bon fonctionnement de l'application.
 
+Ajout du nombre de factures et de leur somme sur le modèle Projet. Chaque valeur est par défaut à 0, mais grâceà l'implémentation d'une méthode statique et de trois hooks, chacune mise à jour à chaque fois qu'une facture est crée, modifiée ou supprimée.
+
 
 

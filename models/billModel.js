@@ -56,17 +56,38 @@ billSchema.statics.calcSumBills = async function (projectId) {
     ]);
     console.log(stats);
 
-    // met à jour les infos du projet
-    await Project.findByIdAndUpdate(projectId, {
-        billsQuantity: stats[0].billsQuantity,
-        billsTotal: stats[0].billsTotal,
-    });
+    if (stats.length > 0) {
+        // si des factures sont trouvées...
+        await Project.findByIdAndUpdate(projectId, {
+            // ...met à jour les infos du projet
+            billsQuantity: stats[0].billsQuantity,
+            billsTotal: stats[0].billsTotal,
+        });
+    } else {
+        // Si aucun résultat (après suppression d'une facture)...
+        await Project.findByIdAndUpdate(projectId, {
+            // ... remet les infos du projet à 0
+            billsQuantity: 0,
+            billsTotal: 0,
+        });
+    }
 };
 
 billSchema.post('save', function (next) {
     // this pointe sur la facture
     // Le modèle n'est pas encore déclaré, on utilise donc this.constructor pour pointer dessus
     this.constructor.calcSumBills(this.project);
+});
+
+// pour executer calcSumBills sur findOneAndDelete ou findOneAndUpdate, on ajoute deux hooks. Le premier en pre hook sur toutes les requêtes findOne, qui crée une variable sur l'objet de la requête  pour pouvoir la faire passer au post middleware. Dans le hook post query, la requête a déjà été exécutée donc on ne peut pas récupérée l'id du projet directement sur la facture, mais on peut utiliser r pour exécuter la méthode calcSumBills sur le constructor, mettant ainsi le projet à chaque fois qu'une facture est modifiée ou supprimée.
+billSchema.pre(/^findOneAnd/, async function (next) {
+    this.r = await this.findOne();
+    console.log(this.r);
+    next();
+});
+
+billSchema.post(/^findOneAnd/, async function (next) {
+    await this.r.constructor.calcSumBills(this.r.project);
 });
 
 // CANCELLED
