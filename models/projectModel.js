@@ -3,7 +3,6 @@ const mongoose = require('mongoose');
 const slugify = require('slugify');
 // librairie pour importer des validators
 const validator = require('validator');
-const Bill = require('./billModel');
 
 // schéma pour construire un nouveau Projet
 const projectSchema = new mongoose.Schema(
@@ -44,6 +43,14 @@ const projectSchema = new mongoose.Schema(
                 values: ['En cours', 'Proposition', 'A régler', 'Terminé'],
                 message: `Le statut d'un projet doit être défini sur: En cours, Proposition, A régler ou Terminé`,
             },
+        },
+        billsQuantity: {
+            type: Number,
+            default: 0,
+        },
+        billsTotal: {
+            type: Number,
+            default: 0,
         },
     },
     {
