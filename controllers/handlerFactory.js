@@ -41,8 +41,6 @@ exports.updateOne = Model =>
             runValidators: true,
         });
 
-        console.log(doc.user._id, req.user);
-
         if (!doc) {
             return next(new AppError('Document introuvable'));
         }

@@ -50,7 +50,6 @@ exports.signup = catchAsync(async (req, res, next) => {
         email: req.body.email,
         password: req.body.password,
         passwordConfirm: req.body.passwordConfirm,
-        passwordChangedAt: req.body.passwordChangedAt,
     });
 
     createSendToken(newUser, 201, res);
@@ -147,7 +146,7 @@ exports.forgotPassword = catchAsync(async (req, res, next) => {
     await user.save({ validateBeforeSave: false });
 
     // 3) envoi à l'utilisateur par mail
-    const resetURL = `${req.protocol}://${req.get('host')}/users/resetPassword/${resetToken}`;
+    const resetURL = `${req.protocol}://${req.get('host')}/users/resetpassword/${resetToken}`;
 
     const message = `Vous avez oublié votre mot de passe ? Mettez le à jour avec un nouveau mot de passe et confirmation à ${resetURL}\nSi vous n'avez pas changé votre mot de passe, veuillez ignorer cet email`;
 
@@ -183,6 +182,8 @@ exports.resetPassword = catchAsync(async (req, res, next) => {
         passwordResetToken: hashedToken,
         passwordResetExpires: { $gt: Date.now() },
     });
+
+    console.log(user);
 
     // 2) Si le token n'est pas expiré et que l'utilisateur existe, définit le nouveau mdp et supprime le token
     if (!user) {

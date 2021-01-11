@@ -75,7 +75,7 @@ projectSchema.virtual('bills', {
 projectSchema.pre(/^find/, function (next) {
     this.populate({
         path: 'user',
-        select: 'name price',
+        select: 'name',
     });
     next();
 });
