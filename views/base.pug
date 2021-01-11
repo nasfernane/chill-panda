@@ -1,10 +1,37 @@
 doctype html
 html
     head
-        title Chill Panda
+        meta(charset='UTF-8')
+        meta(name='viewport' content='width=device-width, initial-scale=1.0') 
         link(rel='stylesheet' href='sass/style.css')
+        link(rel='stylesheet' href='https://fonts.googleapis.com/css?family=Lato:300,300i,700')
         link(rel='shortcut icon' type='image/png' href='img/favicon.png')
+        title Chill Panda 
 
     body 
-        h1 Furimi Project
-        p some text
+        // HEADER
+
+        header.header
+            nav.nav.nav--tours
+                a.nav__el(href='#') Tous les devis
+            .header__logo
+                img(src='img/ico_redpanda_transparent.png' alt='Red Panda')
+            nav.nav.nav--user
+                //- a.nav__el(href='#') Mes projets
+                button.nav__el Log in
+                button.nav__el.nav__el--cta Sign up
+
+        // CONTENT
+        section.overview
+            h1= project
+
+        // FOOTER
+        footer.footer
+            .footer__logo
+                img(src='img/ico_redpanda_transparent.png' alt='Red Panda')
+            ul.footer__nav
+                li: a(href='#') Panda Facts
+                li: a(href='#') Become a panda
+                li: a(href='#') Bamboo Factory
+                li: a(href='#') Contact
+            p.footer__copyright &copy; by Papa Panda. All rights reserved.

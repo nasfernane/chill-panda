@@ -73,7 +73,10 @@ app.use((req, res, next) => {
 
 // projette la vue 'base' à la racine de l'application
 app.get('/', (req, res) => {
-    res.status(200).render('base');
+    res.status(200).render('base', {
+        project: 'Furimi Party',
+        user: 'Gwen',
+    });
 });
 
 app.use('/projects', projectRouter);

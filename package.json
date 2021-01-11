@@ -6,7 +6,7 @@
     "scripts": {
         "start": "nodemon server.js",
         "start:prod": "SET NODE_ENV=production & node server.js",
-        "scss": "node-sass public/sass/main.scss public/sass/style.css",
+        "scss": "node-sass public/sass/main.scss public/sass/style.css -w",
         "debug": "ndb server.js"
     },
     "author": "Nassim",
