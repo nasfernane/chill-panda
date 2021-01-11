@@ -11,6 +11,7 @@
    3. [Jour 3](#jour3)
    4. [Jour 4](#jour4)
    5. [Jour 5](#jour5)
+   6. [Jour 6](#jour6)
 
 # **OBJECTIFS DU PROJET <a name="objectifs"></a>**
 
@@ -228,5 +229,9 @@ Ajout des indexes sur le modèle Factures et Projets. Les index améliorent les 
 
 Ajout du nombre de factures et de leur somme sur le modèle Projet. Chaque valeur est par défaut à 0, mais grâceà l'implémentation d'une méthode statique et de trois hooks, chacune mise à jour à chaque fois qu'une facture est crée, modifiée ou supprimée.
 
+## **Jour 6**<a name="jour6"></a>
 
+Création de la documentation Postman. Ajout des descriptions et fonctionnement de la base de données pour chaque section (Projects, Users, Authentication & Bills) et chacune des requête qui les composent.
+
+Publication à l'URL : <a>https://documenter.getpostman.com/view/13943991/TVzRFdNG</a>
 
