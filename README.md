@@ -239,3 +239,5 @@ Publication à l'URL : <a>https://documenter.getpostman.com/view/13943991/TVzRFd
 
 Installation de pug, et définition du moteur de vue. Création d'un nouveau dossier views pour compléter le modèle MVC et premières expérimentations sur un fichier test. 
 
+Création d'un dossier public pour y entreposer les ressources publiques. J'y déplace le dossier sass (feuilles de style) et y ajoute un dossier img avec un favicon. Création d'une première feuille de style pour expérimenter la relation avec le template pug, paramétrage de sass.
+
