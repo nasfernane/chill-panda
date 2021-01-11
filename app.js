@@ -10,7 +10,7 @@ const morgan = require('morgan');
 const AppError = require('./utils/appError');
 const globalErrorHandler = require('./controllers/errorController');
 
-//routeurs
+// ROUTEURS
 const projectRouter = require('./routes/projectRoutes');
 const userRouter = require('./routes/userRoutes');
 const billRouter = require('./routes/billRoutes');
@@ -24,6 +24,11 @@ app.set('view engine', 'pug');
 app.set('views', path.join(__dirname, 'views'));
 
 // MIDDLEWARES GLOBAUX
+//
+
+// inclusion des fichiers statiques
+// app.use(express.static(`${__dirname}/public/`));
+app.use(express.static(path.join(__dirname, 'public')));
 
 // Utilisation du middleware helmet pour définir les headers http
 app.use(helmet());

@@ -1,5 +1,5 @@
 {
-    "name": "stealth-panda",
+    "name": "chill-panda",
     "version": "1.0.0",
     "description": "Projet stage",
     "main": "index.js",
@@ -13,12 +13,12 @@
     "license": "ISC",
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/nasfernane/stealth-panda.git"
+        "url": "git+https://github.com/nasfernane/chill-panda.git"
     },
     "bugs": {
-        "url": "https://github.com/nasfernane/stealth-panda/issues"
+        "url": "https://github.com/nasfernane/chill-panda/issues"
     },
-    "homepage": "https://github.com/nasfernane/stealth-panda#readme",
+    "homepage": "https://github.com/nasfernane/chill-panda#readme",
     "dependencies": {
         "bcryptjs": "^2.4.3",
         "dotenv": "^8.2.0",
