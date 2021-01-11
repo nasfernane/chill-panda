@@ -235,3 +235,7 @@ Création de la documentation Postman. Ajout des descriptions et fonctionnement 
 
 Publication à l'URL : <a>https://documenter.getpostman.com/view/13943991/TVzRFdNG</a>
 
+### <ins>_Phase Templating_</ins>
+
+Installation de pug, et définition du moteur de vue. Création d'un nouveau dossier views pour compléter le modèle MVC et premières expérimentations sur un fichier test. 
+

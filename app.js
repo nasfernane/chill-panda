@@ -1,4 +1,5 @@
 // modules - Middlewares
+const path = require('path');
 const express = require('express');
 const helmet = require('helmet');
 const mongoSanitize = require('express-mongo-sanitize');
@@ -16,6 +17,11 @@ const billRouter = require('./routes/billRoutes');
 
 // création de l'app express
 const app = express();
+
+// définit pug comme moteur de templating sur Express
+app.set('view engine', 'pug');
+// définit le chemin d'accès des vues avec path.join pour récupérer le bon dossier quel que soit l'endroit d'où est exécuté l'application. Evite également certains bugs liés à la présence ou non des slashs dans l'url.
+app.set('views', path.join(__dirname, 'views'));
 
 // MIDDLEWARES GLOBAUX
 
@@ -59,6 +65,11 @@ app.use((req, res, next) => {
 });
 
 // ITINERAIRES
+
+// projette la vue 'base' à la racine de l'application
+app.get('/', (req, res) => {
+    res.status(200).render('base');
+});
 
 app.use('/projects', projectRouter);
 app.use('/users', userRouter);
