@@ -79,6 +79,20 @@ app.get('/', (req, res) => {
     });
 });
 
+// overview de tous les projets
+app.get('/overview', (req, res) => {
+    res.status(200).render('overview', {
+        title: 'All Projects',
+    });
+});
+
+// page projet individuel
+app.get('/project', (req, res) => {
+    res.status(200).render('project', {
+        title: `Furimi's Project`,
+    });
+});
+
 app.use('/projects', projectRouter);
 app.use('/users', userRouter);
 app.use('/bills', billRouter);

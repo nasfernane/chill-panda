@@ -6,7 +6,7 @@ html
         link(rel='stylesheet' href='sass/style.css')
         link(rel='stylesheet' href='https://fonts.googleapis.com/css?family=Lato:300,300i,700')
         link(rel='shortcut icon' type='image/png' href='img/favicon.png')
-        title Chill Panda 
+        title Chill Panda | #{title}
 
     body 
         // HEADER
@@ -14,8 +14,8 @@ html
         
 
         // CONTENT
-        section.overview
-            h1= project
+        block content
+            h1 Qu'est-ce que je vous ici ?
 
         // FOOTER
         include _footer
