@@ -14,6 +14,7 @@ const globalErrorHandler = require('./controllers/errorController');
 const projectRouter = require('./routes/projectRoutes');
 const userRouter = require('./routes/userRoutes');
 const billRouter = require('./routes/billRoutes');
+const viewRouter = require('./routes/viewRoutes');
 
 // création de l'app express
 const app = express();
@@ -71,31 +72,10 @@ app.use((req, res, next) => {
 
 // ITINERAIRES
 
-// projette la vue 'base' à la racine de l'application
-app.get('/', (req, res) => {
-    res.status(200).render('base', {
-        project: 'Furimi Party',
-        user: 'Gwen',
-    });
-});
-
-// overview de tous les projets
-app.get('/overview', (req, res) => {
-    res.status(200).render('overview', {
-        title: 'All Projects',
-    });
-});
-
-// page projet individuel
-app.get('/project', (req, res) => {
-    res.status(200).render('project', {
-        title: `Furimi's Project`,
-    });
-});
-
-app.use('/projects', projectRouter);
-app.use('/users', userRouter);
-app.use('/bills', billRouter);
+app.use('/', viewRouter);
+app.use('/api/v1/projects', projectRouter);
+app.use('/api/v1/users', userRouter);
+app.use('/api/v1/bills', billRouter);
 
 // gestion des routes qui n'existent pas
 app.all('*', (req, res, next) => {
