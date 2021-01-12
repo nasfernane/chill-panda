@@ -1,3 +1,7 @@
+body {
+    background-color: #cedece;
+}
+
 h1 {
     color: green;
     font-size: 1.4rem;
@@ -22,8 +26,8 @@ h1 {
 
 .header__logo img {
     height: 7rem;
-  }
-  
+}
+
 .footer {
     background-color: #f7f7f7;
     padding: 6rem 4rem 3rem 4rem;
@@ -56,9 +60,9 @@ h1 {
 
 .footer__nav a:hover,
 .footer__nav a:active {
-  color: #55c57a;
+    color: #55c57a;
 }
 .footer__copyright {
-  justify-self: end;
-  color: #999;
+    justify-self: end;
+    color: #999;
 }

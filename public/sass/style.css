@@ -28,6 +28,9 @@ body {
   -ms-flex-direction: column;
   flex-direction: column; }
 
+body {
+  background-color: #cedece; }
+
 h1 {
   color: green;
   font-size: 1.4rem; }
