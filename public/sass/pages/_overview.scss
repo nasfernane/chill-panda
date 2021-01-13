@@ -1,0 +1,115 @@
+.overview {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+
+    .sidebar {
+        height: 100vh;
+        width: 15vw;
+        background-color: $color-green;
+
+        .user {
+            width: 15vw;
+            height: 15vw;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            align-items: center;
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: $color-grey;
+            text-transform: small-caps;
+            background: url('/img/bamboo-forest.jpg') center;
+            background-size: cover;
+            backdrop-filter: blur(5px);
+            z-index: 100;
+            padding: 1rem;
+
+            &__pic {
+                width: 60%;
+                height: 60%;
+                border-radius: 60%;
+                background: url('/img/panda4.jpg') center no-repeat;
+                background-size: 160%;
+            }
+
+            p {
+                backdrop-filter: blur(1px);
+            }
+        }
+
+        &__nav {
+            font-size: 1.8rem;
+            color: $color-grey;
+            padding: 3rem;
+
+            a,
+            a:link,
+            a:visited {
+                color: $color-grey;
+                text-decoration: none;
+            }
+
+            ul {
+                list-style-type: none;
+                
+                li {
+                    margin-left: 3rem;
+                }
+            }
+        }
+    }
+
+    .projects-container {
+    width: 85vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 15vh;
+
+        .card {
+            width: 80%;
+            margin: 1rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+
+            &__header {
+                border-radius: 8px 8px 0 0;
+                padding: 1rem 3rem;
+                width: 100%;
+                color: $color-grey;
+                font-size: 1.6rem;
+                background-color: $color-green;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+            }
+
+            &__details {
+                padding: 1rem 3rem;
+                width: 100%;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                border: 2px solid $color-green;
+                border-radius: 0 0 8px 8px;
+
+                ul {
+                    font-size: 1.6rem;
+                    width: 80%;
+                    list-style-type: none;
+                    display: flex;
+                    flex-wrap: wrap;
+                    justify-content: space-between;
+                    align-items: center;
+
+                    li {
+                        margin-right: 1rem;
+                    }
+                }
+            }
+        }
+    }
+}

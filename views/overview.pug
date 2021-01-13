@@ -8,7 +8,7 @@ block content
 
         .sidebar
             .user
-                img.user__pic(src='img/panda4.jpg')
+                .user__pic
                 p.user__name Léa Candat
             .sidebar__nav
                 p Devis
@@ -28,6 +28,12 @@ block content
             
 
         .projects-container
+
+            .search 
+                p Recher par
+                input
+                input
+                a: button filtres
 
             each project in projects
                 .card
