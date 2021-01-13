@@ -263,6 +263,6 @@ Les défauts qu'on pourrait trouver à Pug sont que le sytème d'indentation peu
 
 Je commence à étoffer mon architecture Sass en ajoutant mon code couleurs dans des variables et en factorisant les premiers éléments de mon layout de base. Je crée ensuite mon premier template, basé sur la page overview afin d'expérimenter toutes ces fonctionnalités et avoir un premier rendu plus tangible. 
 
-
+Création de la sidebar, rectification du conteneur des projets. Factorisation de sass pour améliorer l'organisation du code: en séparant par exemple les boutons dans un composant à part et la sidebar, qui sera commune à plusieurs pages, dans son propre module dans la section layout. 
 
 
