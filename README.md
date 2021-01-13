@@ -241,9 +241,28 @@ Publication à l'URL : <a>https://documenter.getpostman.com/view/13943991/TVzRFd
 
 ## **Jour 8**<a name="jour8"></a>
 
-### <ins>_Phase Templating_</ins>
+### <ins>_Phase Maquettage 1ère partie_</ins>
+
+Ebauches des premières maquettesà partir des demandes et spécifications du client, en se concentrant dans un premier lieu sur la page d'accueil permettant à l'utilisateur de se connecter, et une page de vue d'ensemble sur tous les projets de l'utilisateur connecté.
+
+Après un premier jet envoyé au client, il me fait parvenir un premier retour et on discute ensemble de ce qu'on peut améliorer en terme de visibilité et d'ergonomie. Je modifie donc mes maquettes en fonction pour faire une nouvelle proposition, en enlevant le header et en déplaçant une partie de son contenu dans une sidebar fixe. La partie principale du site, à droite, contiendra un bloc par projet, dont la couleur dépendra du statut actuel du projet concerné. 
+
+En haut de la page je garde l'accessibilité aux options de recherche et filtres, mais les filtres doivent être appelés par un bouton, au gré des envies de l'utilisateur.
+
+Je définis un code couleur adapté au thème et à l'identité du site. Le site doit être clair et sobre, avec des couleurs non agressives.
+
+### <ins>_Phase Templating 1ère partie_</ins>
 
 Installation de pug, et définition du moteur de vue. Création d'un nouveau dossier views pour compléter le modèle MVC et premières expérimentations sur un fichier test. 
 
 Création d'un dossier public pour y entreposer les ressources publiques. J'y déplace le dossier sass (feuilles de style) et y ajoute un dossier img avec un favicon. Création d'une première feuille de style pour expérimenter la relation avec le template pug, paramétrage de sass.
+
+Pug est une bonne surprise. Il propose en premier lieu une syntaxe très allégée du HTML, en remplaçant les balises par un système d'indentation, qui le rend simple d'utilisation et augmente sa lisibilité. Ce moteur de templating permet également beaucoup d'autres fonctionnalités. Il permet par exemple l'utilisation de variables, mais aussi l'injection direct de code Javascript dans ses fichiers, d'utiliser des éléments de code logique intégrés ou encore l'inclusion de code ou un système d'extension pour modifier un fichier layout de base en fonction de la vue sur laquelle on se place. 
+
+Les défauts qu'on pourrait trouver à Pug sont que le sytème d'indentation peut être à double tranchant et pénaliser en cas d'erreur d'intentation, et qu'il est impossible de copier directement du code HTML, un formatage adapté en syntaxe Pug sera indispensable.
+
+Je commence à étoffer mon architecture Sass en ajoutant mon code couleurs dans des variables et en factorisant les premiers éléments de mon layout de base. Je crée ensuite mon premier template, basé sur la page overview afin d'expérimenter toutes ces fonctionnalités et avoir un premier rendu plus tangible. 
+
+
+
 
