@@ -12,6 +12,8 @@
    4. [Jour 4](#jour4)
    5. [Jour 5](#jour5)
    6. [Jour 6](#jour6)
+   7. [Jour 7](#jour7)
+   8. [Jour 8](#jour8)
 
 # **OBJECTIFS DU PROJET <a name="objectifs"></a>**
 
@@ -111,6 +113,8 @@ jalonné d'étapes pour traiter et recouper des données ou encore établir des 
 Import du module Validator pour faciliter certains validateurs dans les schémas mangoose.
 Développement de validateurs personnalisés.
 
+## **Jour 3**<a name="jour3"></a>
+
 
 ### <ins>_Phase Gestion des Erreurs_</ins>
 
@@ -130,7 +134,7 @@ Dans la même optique, création d'un constructor AppError pour avoir un "modèl
 
 En fin de code du serveur, ajout de la gestion des erreurs survenant en dehors d'express : promesses rejetées pour fermer l'application puis le serveur proprement. Dans le controller d'erreurs, ajout d'une erreur générique pour les exceptions et erreurs inconnues.
 
-## **Jour 3**<a name="jour3"></a>
+
 
 ### <ins>_Phase Authentication_</ins>
 
@@ -139,6 +143,8 @@ Création d'un authController pour les middlewares chargés de gérer l'authenti
 Amélioration de la gestion des mots de passe. Mise en place d'un mot de passe de confirmation avec validateur, et ajout d'un hook pre-save (méthodes appliquée au schéma qui se lanceront automatiquement dans la chaîne des middlewares avant chaque sauvegarde des données) pour hasher le mot de passe avec le module bcrypt.
 
 Implémentation des json web token.
+
+## **Jour 4**<a name="jour4"></a>
 
 Une première fonction signToken est chargée de générer un token basé sur les informations secrètes stockées dans le fichier de config.env, et sur l'id de l'utilisateur. Elle crée également une date d'expiration sur ce même token.
 
@@ -161,6 +167,7 @@ Ajout de deux fonctionnalités de changement de mot de passe. La première se ba
 
 Ajout de fonctionnalités pour mettre à jour les informations utilisateur ou le supprimer de la base de données.
 
+## **Jour 5**<a name="jour5"></a>
 
 ### <ins>_Phase Sécurité_</ins>
 
@@ -186,7 +193,7 @@ Il est également conseillé d'utiliser le référencement quand les données so
 
 Dans le cas d'utilisation de données référencées, il est nécessaire d'empêcher un tableau de références de grandir indéfiniment. Selon l'usage, on préfèrera le "parent referencing" au "child referencing" pour que ce soit la sous-donnée qui pointe vers son parent. On utilise le référencement à double sens dans les relations MANY:MANY
 
-## **Jour 4**<a name="jour4"></a>
+## **Jour 6**<a name="jour6"></a>
 
 *Mise en application*
 
@@ -195,8 +202,6 @@ Dans le cas de ce projet, l'utilisateur doit pouvoir avoir accès à ses projets
 Installation de l'extensin Drawio pour pouvoir directement créer des diagrammes sur VS-Code. Je commence à modéliser mes données, en partant sur le postulat de trois bases de données distinctes : Users, Projects et Bills. Le nombre de projets et de factures étant voué à grandir de manière constante, chacun doit renvoyer à l'utilisateur en *parent referencing*. Les projets et les factures sont dans une relation à double sens, car les projets contiennent les quelques factures qui leur sont associées mais chaque facture, si prise à part, doit également pouvoir donner des informations sur le projet auquel elle est rattachée. 
 
 L'utilisateur ne possèdera donc aucun autre ID que lui-même, tandis que les deux modèles Projets et Factures possèderont des références pointant aux deux autres bases de données. 
-
-
 
 Transformation du drawio en PNG pour le rendre facilement accessible sur GitHub. Création d'une troisième base de données pour les factures et du modèle correspondant. Experimentations sur le child referencing avec la requête mongoose populate().
 
@@ -213,7 +218,7 @@ Modification de l'itinéraire pour créer une facture pour qu'il devienne imbriq
 Amélioration de la query getAllBills. Au filtre déjà existant pour trier les factures selon l'utilisateur connecté, ajout d'une option pour ajouter l'id du projet concerné si il est présent dans les paramètres de l'url. On peut donc maintenant query sur toutes les factures, ou bien sur toutes les factures appaertenant à un projet précis.
 
 
-## **Jour 5**<a name="jour5"></a>
+## **Jour 7**<a name="jour7"></a>
 
 Création d'un handlerFactory pour regrouper des middlewares de factorisation pour supprimer, mettre à jour, créer ou lire un document. Transposition dans tous les documents. 
 
@@ -229,11 +234,12 @@ Ajout des indexes sur le modèle Factures et Projets. Les index améliorent les 
 
 Ajout du nombre de factures et de leur somme sur le modèle Projet. Chaque valeur est par défaut à 0, mais grâceà l'implémentation d'une méthode statique et de trois hooks, chacune mise à jour à chaque fois qu'une facture est crée, modifiée ou supprimée.
 
-## **Jour 6**<a name="jour6"></a>
 
 Création de la documentation Postman. Ajout des descriptions et fonctionnement de la base de données pour chaque section (Projects, Users, Authentication & Bills) et chacune des requête qui les composent.
 
 Publication à l'URL : <a>https://documenter.getpostman.com/view/13943991/TVzRFdNG</a>
+
+## **Jour 8**<a name="jour8"></a>
 
 ### <ins>_Phase Templating_</ins>
 
