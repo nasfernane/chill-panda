@@ -1,0 +1,13 @@
+.header {
+    background-color: #f5f5f5;
+    padding: 0 5rem;
+    height: 8rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 8px;
+}
+
+.header__logo img {
+    height: 7rem;
+}

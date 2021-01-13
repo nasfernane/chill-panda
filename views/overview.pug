@@ -1,4 +1,38 @@
 extends base
 
 block content 
-    h1 Voici tous vos projets
+    main.main
+        .projects-container
+
+            each project in projects
+                .card
+                    .card__header
+                        p= `${project.name} `
+                        p= `${project.date.toLocaleString('fr-FR', {day: 'numeric', month: 'long', year: 'numeric'})}`
+                    
+                    .card__details 
+                        ul
+                            div
+                                li 
+                                    strong Type de projet: 
+                                    |  #{project.projectType}
+                                li
+                                    strong Devis: 
+                                    |  #{project.quote}
+                            div
+                                li
+                                    strong Nombre de factures: 
+                                    |  #{project.billsQuantity}
+                                li 
+                                    strong Montant total factures: 
+                                    |  #{project.billsTotal}
+                            div
+                                li  
+                                    strong Statut : 
+                                    #{project.status}
+                                li
+                                    strong Règlement: 
+                                    | 50 €
+                    
+                        a(href=`/project/${project._id}`)
+                            button.btn.btn--details Détails
