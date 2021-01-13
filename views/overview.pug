@@ -1,7 +1,32 @@
 extends base
 
+block header
+    .void
+
 block content 
-    main.main
+    main.overview
+
+        .sidebar
+            .user
+                img.user__pic(src='img/panda4.jpg')
+                p.user__name Léa Candat
+            .sidebar__nav
+                p Devis
+                ul 
+                    li: a(href='#') Liste des devis
+                    li: a(href='#')  Ajouter un devis
+                p Factures
+                ul
+                    li: a(href='#') Liste des factures
+                p Clients
+                    ul
+                        li: a(href='#') Liste clients
+                        li: a(href='#')  Ajouter un client
+                p: a(href='#') Statistiques
+                p: a(href='#') Informations personnelles
+                
+            
+
         .projects-container
 
             each project in projects
