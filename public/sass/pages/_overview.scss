@@ -8,11 +8,20 @@
         display: flex;
         flex-direction: column;
         align-items: center;
-        margin-top: 15vh;
 
         &__header {
+            height: 15vw;
+            width: 70vw;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: flex-start;
+            padding-top: 10rem;
+            padding-bottom: 2rem;
+
             h1 {
-                font-size: 2rem;
+                font-size: 5rem;
+                font-variant: small-caps;
             }
 
             .search {
@@ -36,7 +45,7 @@
         &__container {
             .card {
                 width: 70vw;
-                margin: 1rem;
+                margin-bottom: 1rem;
                 display: flex;
                 flex-direction: column;
                 align-items: center;

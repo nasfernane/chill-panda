@@ -132,24 +132,33 @@ body {
     width: 85vw;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    margin-top: 15vh; }
-    .overview .projects__header h1 {
-      font-size: 2rem; }
-    .overview .projects__header .search {
-      width: 50%;
-      font-size: 1.8rem;
+    align-items: center; }
+    .overview .projects__header {
+      height: 15vw;
+      width: 70vw;
       display: flex;
+      flex-direction: column;
       justify-content: space-between;
-      align-items: center; }
-      .overview .projects__header .search input {
-        height: 2.5rem;
-        color: #444444; }
-      .overview .projects__header .search p {
-        font-weight: bold; }
+      align-items: flex-start;
+      padding-top: 10rem;
+      padding-bottom: 2rem; }
+      .overview .projects__header h1 {
+        font-size: 5rem;
+        font-variant: small-caps; }
+      .overview .projects__header .search {
+        width: 50%;
+        font-size: 1.8rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center; }
+        .overview .projects__header .search input {
+          height: 2.5rem;
+          color: #444444; }
+        .overview .projects__header .search p {
+          font-weight: bold; }
     .overview .projects__container .card {
       width: 70vw;
-      margin: 1rem;
+      margin-bottom: 1rem;
       display: flex;
       flex-direction: column;
       align-items: center;
