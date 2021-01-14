@@ -4,14 +4,16 @@ block header
     .void
 
 block content
-    main.project
+    .projectview
         //- récupère le status du projet, le met en minuscule et enlève les espaces pour l'ajouter en classe
-        - let projectcolor = project.status.toLowerCase().trim().split(' ').join('')
+        - let statuscolor = project.status.toLowerCase().trim().split(' ').join('')
 
         include _sidebar
 
-
         .project
+            .project__header 
+                h1 Project Details
+
             div(class=`card ${statuscolor}`)
                 div(class=`card__header ${statuscolor}`)
                     p= `${project.name} `
@@ -53,10 +55,10 @@ block content
 
                     img(src='/img/edit.png')
 
+            h1 Factures
 
-        .bills_container
             each bill in bills
-                - let billcolor = bill.paid ? 'paid' : 'waiting';
+                - let billcolor = bill.paid ? 'terminé' : 'proposition';
 
                 div(class=`card ${billcolor}`)
                     div(class=`card__header ${billcolor}`)
@@ -72,11 +74,13 @@ block content
                                 strong Montant facture: 
                                 |  #{bill.price}
                             li
-                                strong Payé le 22 novembre 2020
+                                strong #{bill.paid ? 'Réglé' : 'En attente' }
 
-                            
                         img(src='/img/edit.png')
 
+
+
+            
 
             
 

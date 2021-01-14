@@ -201,3 +201,66 @@ body {
       border: 2px solid #d4533d; }
     .overview .projects__container .card.encours {
       border: 2px solid #444444; }
+
+.projectview {
+  width: 100%;
+  display: flex;
+  justify-content: space-between; }
+  .projectview .project {
+    width: 85vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center; }
+    .projectview .project h1 {
+      font-size: 4rem;
+      margin: 2rem; }
+    .projectview .project__header {
+      height: 15vw;
+      display: flex;
+      align-items: center;
+      justify-content: center; }
+    .projectview .project .card {
+      width: 70vw;
+      margin-bottom: 1rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      border-radius: 8px; }
+      .projectview .project .card__header {
+        padding: 1rem 3rem;
+        width: 100%;
+        color: #f5f5f5;
+        font-size: 1.8rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center; }
+      .projectview .project .card__header.terminé {
+        background-color: #4d734d; }
+      .projectview .project .card__header.proposition {
+        background-color: #d4533d; }
+      .projectview .project .card__header.encours {
+        background-color: #444444; }
+      .projectview .project .card__details {
+        padding: 1rem 3rem;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        border-radius: 0 0 8px 8px; }
+        .projectview .project .card__details ul {
+          font-size: 1.6rem;
+          width: 80%;
+          list-style-type: none;
+          display: flex;
+          flex-wrap: wrap;
+          justify-content: space-between;
+          align-items: center; }
+          .projectview .project .card__details ul li {
+            margin-right: 1rem; }
+    .projectview .project .card.terminé {
+      border: 2px solid #4d734d; }
+    .projectview .project .card.proposition {
+      border: 2px solid #d4533d; }
+    .projectview .project .card.encours {
+      border: 2px solid #444444; }
