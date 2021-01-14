@@ -283,6 +283,12 @@ Ajout du numéro de Devis à chaque projet, qui s'incrémente à la création en
 
 Amélioration graphique du template Overview et factorisation de la sidebar dans son propre fichier. Factorisation également sa feuille de style dans un composant à part dans layout, étant donnée qu'elle sera utilisée sur presque toutes les pages de l'application web.
 
+Création d'un deuxième template pour les détails d'un projet. Beaucoup de temps perdu sur la feuille de style qui refusait de s'afficher, il s'agissait en réalité d'un problème de chemin qui n'était pas complètement relatif, et j'ai du y remédier en ajoutant un slash dans les chemins d'accès des fichiers statiques.
+
+Ce template reprend la même base graphique que l'overview, mais récupère un seul project sur son id et toutes les factures associées à ce dernier. On fait donc passer deux objets à la vue.
+
+Ajout des liens fonctionnels pour faire la navette entre les deux pages.
+
 
 
 
