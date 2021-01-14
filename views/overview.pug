@@ -29,53 +29,59 @@ block content
                 
             
 
-        .projects-container
-            .search 
-                p Rechercher par
-                input
-                input
-                a: button filtres
+        .projects
+            .projects__header
+                h1 Projets
+                .search 
+                    p Rechercher par
+                    input
+                    input
+                    a: button filtres
 
-            each project in projects
-                //- récupère le status du projet, le met en minuscule et enlève les espaces pour l'ajouter en classe
-                - let statuscolor = project.status.toLowerCase().trim().split(' ').join('')
+            .projects__container
+                each project in projects
+                    //- récupère le status du projet, le met en minuscule et enlève les espaces pour l'ajouter en classe
+                    - let statuscolor = project.status.toLowerCase().trim().split(' ').join('')
+                            
+                    div(class=`card ${statuscolor}`)
+                        div(class=`card__header ${statuscolor}`)
+                            p= `${project.name} `
+                            p= `${project.date.toLocaleString('fr-FR', {day: 'numeric', month: 'long', year: 'numeric'})}`
                         
-                div(class=`card ${statuscolor}`)
-                    div(class=`card__header ${statuscolor}`)
-                        p= `${project.name} `
-                        p= `${project.date.toLocaleString('fr-FR', {day: 'numeric', month: 'long', year: 'numeric'})}`
-                    
-                    .card__details 
-                        ul
-                            div
-                                li 
-                                    strong N° devis: 
-                                    |  #{project._id }
-                                li
-                                    strong Devis: 
-                                    |  #{project.quote}
-                                li
-                                strong Client 
-                                |  #{project.client}
-                            div
-                                li
-                                    strong Nombre de factures: 
-                                    |  #{project.billsQuantity}
-                                li 
-                                    strong Montant total factures: 
-                                    |  #{project.billsTotal}
-                                li 
-                                    strong Type de projet: 
-                                    |  #{project.projectType}
-                            div
-                                li  
-                                    strong Statut : 
-                                    |  #{project.status}
-                                li
-                                    strong Règlement: 
-                                    | 50 €
-                    
-                        a(href=`/project/${project._id}`)
-                            button.btn.btn--details Détails
+                        .card__details 
+                            ul
+                                div
+                                    li 
+                                        strong N° devis: 
+                                        |  #{project._id }
+                                    li
+                                        strong Devis: 
+                                        |  #{project.quote}
+                                    
+                                div
+                                    li
+                                        strong Client 
+                                        |  #{project.client}
+                                    li 
+                                        strong Type de projet: 
+                                        |  #{project.projectType}
+                                    
+                                div
+                                    li
+                                        strong Nombre de factures: 
+                                        |  #{project.billsQuantity}
+                                    li 
+                                        strong Montant total factures: 
+                                        |  #{project.billsTotal}
+                                div
+                                    li  
+                                        strong Statut : 
+                                        |  #{project.status}
+                                    li
+                                        strong Règlement: 
+                                        | 50 €
+                        
+                            a(href=`/project/${project._id}`)
+                                button.btn.btn--details Détails
 
-                        img(src='/img/edit.png')
+                            img(src='/img/edit.png')
