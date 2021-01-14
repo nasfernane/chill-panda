@@ -13,7 +13,6 @@ const factory = require('./handlerFactory');
 exports.checkBeforeCreateBill = catchAsync(async (req, res, next) => {
     // vérifie que le projet dans lequel l'utillisateur essaie d'ajouter une facture lui appartient
     const project = await Project.findById(req.params.projectid);
-    console.log(req.params);
     if (!project.user._id.equals(req.user._id)) {
         return next(
             new AppError(`Vous n'avez pas la permission de créer une facture dans ce projet`)

@@ -1,3 +1,4 @@
+@charset "UTF-8";
 /* css global reset */
 *,
 *::after,
@@ -133,30 +134,45 @@ body {
     flex-direction: column;
     align-items: center;
     margin-top: 15vh; }
+    .overview .projects-container .search {
+      width: 50%;
+      font-size: 1.8rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center; }
+      .overview .projects-container .search input {
+        height: 2.5rem;
+        color: #444444; }
+      .overview .projects-container .search p {
+        font-weight: bold; }
     .overview .projects-container .card {
       width: 80%;
       margin: 1rem;
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: center; }
+      justify-content: center;
+      border-radius: 8px; }
       .overview .projects-container .card__header {
-        border-radius: 8px 8px 0 0;
         padding: 1rem 3rem;
         width: 100%;
         color: #f5f5f5;
-        font-size: 1.6rem;
-        background-color: #4d734d;
+        font-size: 1.8rem;
         display: flex;
         justify-content: space-between;
         align-items: center; }
+      .overview .projects-container .card__header.terminé {
+        background-color: #4d734d; }
+      .overview .projects-container .card__header.proposition {
+        background-color: #d4533d; }
+      .overview .projects-container .card__header.encours {
+        background-color: #444444; }
       .overview .projects-container .card__details {
         padding: 1rem 3rem;
         width: 100%;
         display: flex;
         align-items: center;
         justify-content: space-between;
-        border: 2px solid #4d734d;
         border-radius: 0 0 8px 8px; }
         .overview .projects-container .card__details ul {
           font-size: 1.6rem;
@@ -168,3 +184,9 @@ body {
           align-items: center; }
           .overview .projects-container .card__details ul li {
             margin-right: 1rem; }
+    .overview .projects-container .card.terminé {
+      border: 2px solid #4d734d; }
+    .overview .projects-container .card.proposition {
+      border: 2px solid #d4533d; }
+    .overview .projects-container .card.encours {
+      border: 2px solid #444444; }
