@@ -14,6 +14,7 @@
    6. [Jour 6](#jour6)
    7. [Jour 7](#jour7)
    8. [Jour 8](#jour8)
+   9. [Jour 9](#jour9)
 
 # **OBJECTIFS DU PROJET <a name="objectifs"></a>**
 
@@ -259,10 +260,27 @@ Création d'un dossier public pour y entreposer les ressources publiques. J'y d�
 
 Pug est une bonne surprise. Il propose en premier lieu une syntaxe très allégée du HTML, en remplaçant les balises par un système d'indentation, qui le rend simple d'utilisation et augmente sa lisibilité. Ce moteur de templating permet également beaucoup d'autres fonctionnalités. Il permet par exemple l'utilisation de variables, mais aussi l'injection direct de code Javascript dans ses fichiers, d'utiliser des éléments de code logique intégrés ou encore l'inclusion de code ou un système d'extension pour modifier un fichier layout de base en fonction de la vue sur laquelle on se place. 
 
-Les défauts qu'on pourrait trouver à Pug sont que le sytème d'indentation peut être à double tranchant et pénaliser en cas d'erreur d'intentation, et qu'il est impossible de copier directement du code HTML, un formatage adapté en syntaxe Pug sera indispensable.
+Les défauts qu'on pourrait trouver à Pug sont que le sytème d'indentation peut être à double tranchant et pénaliser en cas d'erreur d'indentation, et qu'il est impossible de copier directement du code HTML, un formatage adapté en syntaxe Pug sera indispensable.
 
 Je commence à étoffer mon architecture Sass en ajoutant mon code couleurs dans des variables et en factorisant les premiers éléments de mon layout de base. Je crée ensuite mon premier template, basé sur la page overview afin d'expérimenter toutes ces fonctionnalités et avoir un premier rendu plus tangible. 
 
 Création de la sidebar, rectification du conteneur des projets. Factorisation de sass pour améliorer l'organisation du code: en séparant par exemple les boutons dans un composant à part et la sidebar, qui sera commune à plusieurs pages, dans son propre module dans la section layout. 
+
+## **Jour 9**<a name="jour9"></a>
+
+### <ins>_Phase Maquettage 2ème partie_</ins>
+
+Après discussion avec le clients à propos des détails à ajouter ou modifier, création de plusieurs maquettes. Chaque page garde la sidebar de la page de vue d'ensemble des projets, avec un contenu principal personnalisé en fonction de l'url: 
+- Nouveau devis : Encadré simple avec les informations entrées par l'utilisateur qui ne sont pas créées automatiquement par le projectController, à savoir le nom du devis, son montant, le client et le type de projet. L'input client propose un défilement existant pour les clients déjà enregistrés, ou un input classique pour entrer un nouveau client. Le type de projet propose deux inputs "rapides" à cocher pour les deux types de travaux les plus utilisés par le client (print et web), avec encore une fois un input permettant une saisie libre.
+- Edition de devis : L'édition de devis garde toujours la même trame visuelle, mais renvoie la valeur actuelle de chaque champ pour le projet à modifier, et propose un input de saisie libre pour modifier indépendemment chaque valeur au gré de l'utilisateur. 
+- La page facture offre le même champ de recherche que la vue d'ensemble pour les projets, et fonctionne un peu sur le même principe que celle-ci mais en gardant que deux couleurs pour différencier les factures déjà réglées ou en attente.    
+- La page Détail devis propose un encadré du projet choisi par l'utilisateur mais accueille également à l'intérieur les factures associes à ce projet. 
+
+### <ins>_Phase Templating 2ème partie_</ins>
+
+Ajout du numéro de Devis à chaque projet, qui s'incrémente à la création en fonction du nombre de projets déjà présents dans la base de données. Ajout également d'un icone Edit qui sera le lien pour la page d'édition de projet, et amélioration du middleware calcSumBills. Il calcule maintenant, en plus de la quantité de factures et de leur somme globale, la somme des factures déjà réglées et modifie les projets à chaque fois qu'une de leur factures associées est crée, modifiée ou supprimée. 
+
+Amélioration graphique du template Overview et factorisation de la sidebar dans son propre fichier. Factorisation également sa feuille de style dans un composant à part dans layout, étant donnée qu'elle sera utilisée sur presque toutes les pages de l'application web.
+
 
 
