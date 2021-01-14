@@ -15,6 +15,7 @@
    7. [Jour 7](#jour7)
    8. [Jour 8](#jour8)
    9. [Jour 9](#jour9)
+5. [A faire](#todo)
 
 # **OBJECTIFS DU PROJET <a name="objectifs"></a>**
 
@@ -281,6 +282,13 @@ Après discussion avec le clients à propos des détails à ajouter ou modifier,
 Ajout du numéro de Devis à chaque projet, qui s'incrémente à la création en fonction du nombre de projets déjà présents dans la base de données. Ajout également d'un icone Edit qui sera le lien pour la page d'édition de projet, et amélioration du middleware calcSumBills. Il calcule maintenant, en plus de la quantité de factures et de leur somme globale, la somme des factures déjà réglées et modifie les projets à chaque fois qu'une de leur factures associées est crée, modifiée ou supprimée. 
 
 Amélioration graphique du template Overview et factorisation de la sidebar dans son propre fichier. Factorisation également sa feuille de style dans un composant à part dans layout, étant donnée qu'elle sera utilisée sur presque toutes les pages de l'application web.
+
+
+
+
+**TODO LIST <a name="todo"></a>**
+
+ajouter fonction paidAT sur les factures qui met automatiquement à jour la date de paiement 
 
 
 

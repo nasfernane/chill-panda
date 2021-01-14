@@ -5,6 +5,6 @@ const router = express.Router();
 
 router.get('/', viewsController.getOverview);
 
-router.get('/project', viewsController.getProject);
+router.get('/project/:id', viewsController.getProject);
 
 module.exports = router;

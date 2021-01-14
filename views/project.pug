@@ -1,4 +1,82 @@
 extends base
 
+block header
+    .void
+
 block content
-    h1 Voici votre projet
+    main.project
+        //- récupère le status du projet, le met en minuscule et enlève les espaces pour l'ajouter en classe
+        - let projectcolor = project.status.toLowerCase().trim().split(' ').join('')
+
+        include _sidebar
+
+
+        .project
+            div(class=`card ${statuscolor}`)
+                div(class=`card__header ${statuscolor}`)
+                    p= `${project.name} `
+                    p= `${project.date.toLocaleString('fr-FR', {day: 'numeric', month: 'long', year: 'numeric'})}`
+
+                .card__details 
+                    ul
+                        div
+                            li 
+                                strong N° devis: 
+                                |  #{project.quoteNumber }
+                            li
+                                strong Devis: 
+                                |  #{project.quote}
+
+                        div
+                            li
+                                strong Client 
+                                |  #{project.client}
+                            li 
+                                strong Type de projet: 
+                                |  #{project.projectType}
+
+                        div
+                            li
+                                strong Nombre de factures: 
+                                |  #{project.billsQuantity}
+                            li 
+                                strong Montant total factures: 
+                                |  #{project.billsTotal}
+                        div
+                            li  
+                                strong Statut : 
+                                |  #{project.status}
+                            li
+                                strong Règlement: 
+                                |  #{project.alreadyPaid}
+
+
+                    img(src='/img/edit.png')
+
+
+        .bills_container
+            each bill in bills
+                - let billcolor = bill.paid ? 'paid' : 'waiting';
+
+                div(class=`card ${billcolor}`)
+                    div(class=`card__header ${billcolor}`)
+                        p= `${bill.name} `
+                        p= `${bill.createdAt.toLocaleString('fr-FR', {day: 'numeric', month: 'long', year: 'numeric'})}`
+
+                    .card__details 
+                        ul
+                            li 
+                                strong N° facture: 
+                                |  #{bill.billNumber }
+                            li
+                                strong Montant facture: 
+                                |  #{bill.price}
+                            li
+                                strong Payé le 22 novembre 2020
+
+                            
+                        img(src='/img/edit.png')
+
+
+            
+
