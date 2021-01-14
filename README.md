@@ -286,7 +286,7 @@ Amélioration graphique du template Overview et factorisation de la sidebar dans
 
 
 
-### **TODO LIST <a name="todo"></a>**
+### <ins>**TODO LIST <a name="todo"></a>**</ins>
 
 ajouter fonction paidAT sur les factures qui met automatiquement à jour la date de paiement 
 
