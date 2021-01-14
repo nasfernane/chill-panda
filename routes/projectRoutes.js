@@ -12,7 +12,10 @@ router.use('/:projectid/bills', billRouter);
 // rend obligatoire la connexion pour tous les itinéraires ci-dessous
 router.use(authController.protect);
 
-router.route('/').get(projectController.getAllProjects).post(projectController.createProject);
+router
+    .route('/')
+    .get(projectController.getAllProjects)
+    .post(projectController.setQuoteNumber, projectController.createProject);
 router
     .route('/:id')
     .get(projectController.getProject)

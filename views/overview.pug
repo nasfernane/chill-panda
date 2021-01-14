@@ -6,28 +6,7 @@ block header
 block content 
     main.overview
 
-        .sidebar
-            .user
-                .user__pic
-                p.user__name Léa Candat
-            .sidebar__nav
-                p Projets
-                ul 
-                    li: a(href='#') Liste des projets
-                    li: a(href='#')  Ajouter un projet
-                p Factures
-                ul
-                    li: a(href='#') Liste des factures
-                p Clients
-                    ul
-                        li: a(href='#') Liste clients
-                        li: a(href='#')  Ajouter un client
-                p Votre compte
-                    ul
-                        li: a(href='#') Statistiques
-                        li: a(href='#') Infos perso
-                
-            
+        include _sidebar
 
         .projects
             .projects__header
@@ -53,7 +32,7 @@ block content
                                 div
                                     li 
                                         strong N° devis: 
-                                        |  #{project._id }
+                                        |  #{project.quoteNumber }
                                     li
                                         strong Devis: 
                                         |  #{project.quote}
@@ -79,7 +58,7 @@ block content
                                         |  #{project.status}
                                     li
                                         strong Règlement: 
-                                        | 50 €
+                                        |  #{project.alreadyPaid}
                         
                             a(href=`/project/${project._id}`)
                                 button.btn.btn--details Détails

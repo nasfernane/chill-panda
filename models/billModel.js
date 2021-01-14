@@ -30,6 +30,10 @@ const billSchema = new mongoose.Schema({
         type: mongoose.Schema.ObjectId,
         ref: 'User',
     },
+    paid: {
+        type: Boolean,
+        required: [true, `Vous devez renseigner l'état de la facture`],
+    },
 });
 
 // Index
@@ -54,8 +58,22 @@ billSchema.statics.calcSumBills = async function (projectId) {
             },
         },
     ]);
-    console.log(stats);
 
+    const settlementSum = await this.aggregate([
+        {
+            // phase 1 : récupère les factures payées
+            $match: { project: projectId, paid: true },
+        },
+        {
+            $group: {
+                _id: '$project',
+                // calcul de la somme des factures déjà payées
+                paidSum: { $sum: '$price' },
+            },
+        },
+    ]);
+
+    // mise à jour de la quantité de factures et leur montant total
     if (stats.length > 0) {
         // si des factures sont trouvées...
         await Project.findByIdAndUpdate(projectId, {
@@ -69,6 +87,21 @@ billSchema.statics.calcSumBills = async function (projectId) {
             // ... remet les infos du projet à 0
             billsQuantity: 0,
             billsTotal: 0,
+        });
+    }
+
+    // mise à jour du montant déjà réglé
+    if (settlementSum.length > 0) {
+        // si des factures sont trouvées...
+        await Project.findByIdAndUpdate(projectId, {
+            // ...met à jour les infos du projet
+            alreadyPaid: settlementSum[0].paidSum,
+        });
+    } else {
+        // Si aucun résultat
+        await Project.findByIdAndUpdate(projectId, {
+            // ... détermine la somme à 0
+            alreadyPaid: 0,
         });
     }
 };

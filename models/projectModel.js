@@ -52,6 +52,12 @@ const projectSchema = new mongoose.Schema(
             type: Number,
             default: 0,
         },
+        quoteNumber: {
+            type: Number,
+        },
+        alreadyPaid: {
+            type: Number,
+        },
     },
     {
         toJSON: { virtuals: true },
