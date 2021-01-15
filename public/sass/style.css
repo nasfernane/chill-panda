@@ -115,7 +115,8 @@ body {
   .btn:link:focus,
   .btn:visited:focus {
     outline: none;
-    background-color: #4d734d; }
+    background-color: #444444;
+    color: #f5f5f5; }
 
 .btn--header {
   background-color: #d4533d;

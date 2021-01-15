@@ -15,6 +15,7 @@
    7. [Jour 7](#jour7)
    8. [Jour 8](#jour8)
    9. [Jour 9](#jour9)
+   10. [Jour 10](#jour10)
 5. [A faire](#todo)
 
 # **OBJECTIFS DU PROJET <a name="objectifs"></a>**
@@ -288,6 +289,8 @@ Création d'un deuxième template pour les détails d'un projet. Beaucoup de tem
 Ce template reprend la même base graphique que l'overview, mais récupère un seul project sur son id et toutes les factures associées à ce dernier. On fait donc passer deux objets à la vue.
 
 Ajout des liens fonctionnels pour faire la navette entre les deux pages.
+
+## **Jour 10**<a name="jour10"></a>
 
 
 

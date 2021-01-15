@@ -30,7 +30,8 @@
 
     &:focus {
         outline: none;
-        background-color: $color-green;
+        background-color: $color-font;
+        color: $color-grey;
     }
 }
 
