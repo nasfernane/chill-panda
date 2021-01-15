@@ -3,9 +3,10 @@ const Bill = require('../models/billModel');
 const catchAsync = require('../utils/catchAsync');
 
 // overview de tous les projets
-exports.getOverview = catchAsync(async (req, res) => {
+exports.getOverview = catchAsync(async (req, res, next) => {
     // récupération de tous les projets de la collection
-    const projects = await Project.find();
+    console.log(req.user);
+    const projects = await Project.find({ user: req.user._id });
 
     res.status(200).render('overview', {
         title: 'All Projects',
@@ -16,7 +17,7 @@ exports.getOverview = catchAsync(async (req, res) => {
 // page projet individuel
 exports.getProject = catchAsync(async (req, res, next) => {
     // récupère le projet sur son id
-    const project = await Project.findOne({ _id: req.params.id });
+    const project = await Project.findOne({ _id: req.params.id, user: req.user._id });
     const bills = await Bill.find({ project: req.params.id });
 
     res.status(200).render('project', {
