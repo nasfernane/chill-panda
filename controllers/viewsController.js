@@ -14,7 +14,7 @@ exports.getOverview = catchAsync(async (req, res) => {
 });
 
 // page projet individuel
-exports.getProject = catchAsync(async (req, res) => {
+exports.getProject = catchAsync(async (req, res, next) => {
     // récupère le projet sur son id
     const project = await Project.findOne({ _id: req.params.id });
     const bills = await Bill.find({ project: req.params.id });
@@ -25,3 +25,9 @@ exports.getProject = catchAsync(async (req, res) => {
         bills,
     });
 });
+
+exports.getLoginForm = (req, res) => {
+    res.status(200).render('login', {
+        title: 'Connexion',
+    });
+};

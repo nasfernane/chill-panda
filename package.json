@@ -21,6 +21,7 @@
     "homepage": "https://github.com/nasfernane/chill-panda#readme",
     "dependencies": {
         "bcryptjs": "^2.4.3",
+        "cookie-parser": "^1.4.5",
         "dotenv": "^8.2.0",
         "eslint": "^7.16.0",
         "eslint-config-airbnb": "^18.2.1",

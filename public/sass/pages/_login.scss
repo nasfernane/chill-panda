@@ -1,0 +1,81 @@
+.login {
+    height: 100vh;
+    width: 100vw;
+    background: url('/img/panda.jpg') center;
+    background-size: cover;
+    font-size: 1.6rem;
+    font-weight: bold;
+
+    .login-form {
+        padding: 2rem;
+        height: 35vh;
+        width: 20vw;
+        position: relative;
+        top: 30vh;
+        left: 10vw;
+        border-radius: 8px;
+        background: rgba(245, 245, 245, 0.6);
+        box-shadow: 0 2.5rem 8rem 2rem rgba(0, 0, 0, 0.3);
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+
+        h1 {
+            font-variant: small-caps;
+            align-self: center;
+            font-size: 4rem;
+        }
+
+        .form {
+            height: 60%;
+            width: 80%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            align-items: space-between;
+            margin: 0 auto;
+
+            &__group {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+            }
+
+            &__input {
+                font-family: inherit;
+                padding: 1.25rem 1.75rem;
+                border: none;
+                border-top: 3px solid transparent;
+                border-bottom: 3px solid transparent;
+                -webkit-transition: all 0.3s;
+                transition: all 0.3s;
+                border-radius: 4px;
+                -webkit-box-sizing: border-box;
+                box-sizing: border-box;
+
+                &:focus {
+                    outline: none;
+                    border-bottom: 3px solid $color-green;
+                }
+
+                &:focus:invalid {
+                    border-bottom: 3px solid $color-orange;
+                }
+            }
+        }
+
+        a:link,
+        a:visited,
+        a:active {
+            text-decoration: none;
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: $color-font;
+        }
+
+        a:hover {
+            border-bottom: 3px solid $color-font;
+            transform: translateY(1px);
+        }
+    }
+}

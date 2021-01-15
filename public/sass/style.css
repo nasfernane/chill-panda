@@ -265,3 +265,66 @@ body {
       border: 2px solid #d4533d; }
     .projectview .project .card.encours {
       border: 2px solid #444444; }
+
+.login {
+  height: 100vh;
+  width: 100vw;
+  background: url("/img/panda.jpg") center;
+  background-size: cover;
+  font-size: 1.6rem;
+  font-weight: bold; }
+  .login .login-form {
+    padding: 2rem;
+    height: 35vh;
+    width: 20vw;
+    position: relative;
+    top: 30vh;
+    left: 10vw;
+    border-radius: 8px;
+    background: rgba(245, 245, 245, 0.6);
+    box-shadow: 0 2.5rem 8rem 2rem rgba(0, 0, 0, 0.3);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; }
+    .login .login-form h1 {
+      font-variant: small-caps;
+      align-self: center;
+      font-size: 4rem; }
+    .login .login-form .form {
+      height: 60%;
+      width: 80%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+      align-items: space-between;
+      margin: 0 auto; }
+      .login .login-form .form__group {
+        display: flex;
+        justify-content: space-between;
+        align-items: center; }
+      .login .login-form .form__input {
+        font-family: inherit;
+        padding: 1.25rem 1.75rem;
+        border: none;
+        border-top: 3px solid transparent;
+        border-bottom: 3px solid transparent;
+        -webkit-transition: all 0.3s;
+        transition: all 0.3s;
+        border-radius: 4px;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box; }
+        .login .login-form .form__input:focus {
+          outline: none;
+          border-bottom: 3px solid #4d734d; }
+        .login .login-form .form__input:focus:invalid {
+          border-bottom: 3px solid #d4533d; }
+    .login .login-form a:link,
+    .login .login-form a:visited,
+    .login .login-form a:active {
+      text-decoration: none;
+      font-size: 1.8rem;
+      font-weight: bold;
+      color: #444444; }
+    .login .login-form a:hover {
+      border-bottom: 3px solid #444444;
+      transform: translateY(1px); }

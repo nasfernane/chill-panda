@@ -83,8 +83,12 @@ exports.login = catchAsync(async (req, res, next) => {
 exports.protect = catchAsync(async (req, res, next) => {
     // 1) récupération du token, vérification qu'il existe
     let token;
+    // récupère le token des headers
     if (req.headers.authorization && req.headers.authorization.startsWith('Bearer')) {
         token = req.headers.authorization.split(' ')[1];
+        // accepte également le token via cookies
+    } else if (req.cookies.jwt) {
+        token = req.cookies.jwt;
     }
     if (!token) {
         // si le token n'existe pas, on return et transmet l'erreur

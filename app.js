@@ -5,6 +5,7 @@ const helmet = require('helmet');
 const mongoSanitize = require('express-mongo-sanitize');
 const xss = require('xss-clean');
 const hpp = require('hpp');
+const cookieParser = require('cookie-parser');
 const rateLimit = require('express-rate-limit');
 const morgan = require('morgan');
 const AppError = require('./utils/appError');
@@ -32,7 +33,7 @@ app.set('views', path.join(__dirname, 'views'));
 app.use(express.static(path.join(__dirname, '/public')));
 
 // Utilisation du middleware helmet pour définir les headers http
-app.use(helmet());
+app.use(helmet({ contentSecurityPolicy: false }));
 
 // Logs des requêtes en mode développement
 if (process.env.NODE_ENV === 'development') {
@@ -51,6 +52,7 @@ app.use(limiter);
 
 // Parser pour lire les données du body dans les requêtes. Limite le nombre de données pour améliorer la sécurité
 app.use(express.json({ limit: '10kb' }));
+app.use(cookieParser());
 
 // nettoyage des données contre les injections de requêtes NoSQL
 app.use(mongoSanitize());
@@ -65,8 +67,10 @@ app.use(
     })
 );
 
+//test
 app.use((req, res, next) => {
-    req.requestTime = new Date().toLocaleTimeString();
+    req.requestTime = new Date().toISOString();
+    console.log(req.cookies);
     next();
 });
 
