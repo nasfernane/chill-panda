@@ -54,7 +54,7 @@ block content
 
             h1 Factures
 
-            each bill in bills
+            each bill in project.bills
                 - let billcolor = bill.paid ? 'terminé' : 'proposition';
 
                 div(class=`card ${billcolor}`)

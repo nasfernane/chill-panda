@@ -10,15 +10,18 @@
         align-items: center;
 
         h1 {
-            font-size: 4rem;
-            margin: 2rem;
+            font-size: 5rem;
+            margin-bottom: 3rem;
+            width: 70vw;
+            font-weight: 500;
+            font-variant: small-caps;
         }
 
         &__header {
             height: 15vw;
             display: flex;
-            align-items: center;
-            justify-content: center;
+            align-items: flex-end;
+            width: 70vw;
         }
 
         .card {

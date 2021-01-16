@@ -16,14 +16,14 @@ exports.getOverview = catchAsync(async (req, res, next) => {
 
 // page projet individuel
 exports.getProject = catchAsync(async (req, res, next) => {
-    // récupère le projet sur son id
-    const project = await Project.findOne({ _id: req.params.id, user: req.user._id });
-    const bills = await Bill.find({ project: req.params.id });
+    // récupère le projet sur son id et populate ses factures
+    const project = await Project.findOne({ _id: req.params.id, user: req.user._id }).populate({
+        path: 'bills',
+    });
 
     res.status(200).render('project', {
         title: 'coucou',
         project,
-        bills,
     });
 });
 
