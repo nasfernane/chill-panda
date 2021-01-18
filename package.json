@@ -7,9 +7,7 @@
         "start": "nodemon server.js",
         "start:prod": "SET NODE_ENV=production & node server.js",
         "scss": "node-sass public/sass/main.scss public/sass/style.css -w",
-        "debug": "ndb server.js",
-        "watch:js": "parcel watch ./public/javascript/index.js --out-dir ./public/javascript --out-file bundle.js",
-        "build:js": "parcel watch ./public/javascript/index.js --out-dir ./public/javascript --out-file bundle.js"
+        "debug": "ndb server.js"
     },
     "author": "Nassim",
     "license": "ISC",

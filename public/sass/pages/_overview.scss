@@ -4,6 +4,7 @@
     justify-content: space-between;
 
     .projects {
+        margin-left: 15vw;
         width: 85vw;
         display: flex;
         flex-direction: column;
@@ -22,6 +23,7 @@
             h1 {
                 font-size: 5rem;
                 font-variant: small-caps;
+                font-weight: 500;
             }
 
             .search {

@@ -2,6 +2,7 @@
 
 // éléments DOM
 const loginForm = document.querySelector('.form');
+const logOutBtn = document.querySelector('.logout');
 
 // messages d'alerte pour notifier à l'utilisateur si il a réussi à se connecter
 // type is 'success' or 'error'
@@ -43,6 +44,21 @@ const login = async (email, password) => {
     }
 };
 
+// log out de l'utilisateur
+const logout = async () => {
+    try {
+        const res = await axios({
+            methode: 'GET',
+            url: 'http://127.0.0.1:8000/api/v1/users/logout',
+        });
+
+        // renvoie à la page d'accueil
+        if (res.data.status === 'success') document.location.replace('/');
+    } catch (err) {
+        // affiche une erreur en cas d'échec
+        showAlert('error', 'Echec de connexion !');
+    }
+};
 
 // ajoute l'écouteur sur le formulaire de connexion seulement sur la page où il existe
 if (loginForm) {
@@ -53,3 +69,5 @@ if (loginForm) {
         login(email, password);
     });
 }
+
+if (logOutBtn) logOutBtn.addEventListener('click', logout);

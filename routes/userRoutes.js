@@ -12,6 +12,8 @@ const router = express.Router();
 router.post('/signup', authController.signup);
 // itinéraire login utilisateur
 router.post('/login', authController.login);
+// log out utilisateur, renvoi d'un cookie vide
+router.get('/logout', authController.logout);
 // suppression ancien mdp et envoi token aléatoire temporaire par mail
 router.post('/forgotpassword', authController.forgotPassword);
 // création du nouveau mdp

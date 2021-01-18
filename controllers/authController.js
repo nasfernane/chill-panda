@@ -80,6 +80,17 @@ exports.login = catchAsync(async (req, res, next) => {
     createSendToken(user, 200, res);
 });
 
+// pour log out l'utilisateur, renvoie un nouveau token vide pour override le cookie
+exports.logout = (req, res) => {
+    res.cookie('jwt', 'loggedout', {
+        // expire au bout de 10 secondes
+        expires: new Date(Date.now() + 10 * 1000),
+        httpOnly: true,
+    });
+
+    res.status(200).json({ status: 'success' });
+};
+
 exports.protect = catchAsync(async (req, res, next) => {
     // 1) récupération du token, vérification qu'il existe
     let token;
@@ -125,28 +136,31 @@ exports.protect = catchAsync(async (req, res, next) => {
 });
 
 // fonction pour faire passer l'utilisateur aux templates pugs et varier les rendus en fonction si il a une connexion en cours
-exports.isLoggedIn = catchAsync(async (req, res, next) => {
+exports.isLoggedIn = async (req, res, next) => {
     if (req.cookies.jwt) {
-        // 1) vérification du token
-        const decoded = await promisify(jwt.verify)(req.cookies.jwt, process.env.JWT_SECRET);
+        try {
+            // 1) vérification du token
+            const decoded = await promisify(jwt.verify)(req.cookies.jwt, process.env.JWT_SECRET);
 
-        // 2) vérification si l'utilisateur existe encore
-        const currentUser = await User.findById(decoded.id);
-        if (!currentUser) {
+            // 2) vérification si l'utilisateur existe encore
+            const currentUser = await User.findById(decoded.id);
+            if (!currentUser) {
+                return next();
+            }
+
+            // 3) vérification si l'utilisateur a changé son mdp après que le token ait été fourni
+            if (currentUser.changedPasswordAfter(decoded.iat)) {
+                return next();
+            }
+
+            // Il y a un utilisateur connecté
+            res.locals.user = currentUser;
+        } catch (err) {
             return next();
         }
-
-        // 3) vérification si l'utilisateur a changé son mdp après que le token ait été fourni
-        if (currentUser.changedPasswordAfter(decoded.iat)) {
-            return next();
-        }
-
-        // Il y a un utilisateur connecté
-        res.locals.user = currentUser;
-        return next();
     }
     next();
-});
+};
 
 // création d'une fonction enveloppant le middleware pour lui faire passer des arguments multiples sous la forme d'un spread operator
 exports.restrictTo = (...roles) => (req, res, next) => {

@@ -43,7 +43,8 @@ body {
 .sidebar {
   height: 100vh;
   width: 15vw;
-  background-color: #4d734d; }
+  background-color: #4d734d;
+  position: fixed; }
   .sidebar .user {
     width: 15vw;
     height: 15vw;
@@ -76,18 +77,47 @@ body {
     .sidebar__nav a:link,
     .sidebar__nav a:visited {
       color: #f5f5f5;
-      text-decoration: none; }
+      text-decoration: none;
+      line-height: 2.2rem; }
+      .sidebar__nav a:hover,
+      .sidebar__nav a:link:hover,
+      .sidebar__nav a:visited:hover {
+        color: #d4533d; }
     .sidebar__nav ul {
       list-style-type: none; }
       .sidebar__nav ul li {
         margin-left: 3rem; }
       .sidebar__nav ul .logout {
-        padding-right: 2rem;
-        transition-duration: 1s; }
+        width: 100%; }
         .sidebar__nav ul .logout img {
-          transform: translateY(25%); }
-        .sidebar__nav ul .logout:hover {
-          padding-right: 1rem; }
+          transform: translateY(25%);
+          padding-left: 1rem;
+          transition-duration: 0.3s; }
+        .sidebar__nav ul .logout:hover img {
+          padding-left: 0; }
+
+.error {
+  display: flex; }
+  .error__container {
+    margin-left: 15vw;
+    height: 100vh;
+    width: 85vw; }
+    .error__container header {
+      padding-left: 3rem;
+      height: 15vw;
+      display: flex;
+      flex-direction: column;
+      justify-content: center; }
+      .error__container header h1 {
+        font-variant: small-caps;
+        font-size: 3rem; }
+      .error__container header h2 {
+        font-size: 2.5rem; }
+    .error__container .error_img {
+      height: calc(100% - 15vw);
+      width: 85vw;
+      background: url("/img/sleepingpanda.jpg") center;
+      background-size: cover; }
 
 .btn,
 .btn:link,
@@ -159,6 +189,7 @@ body {
   display: flex;
   justify-content: space-between; }
   .overview .projects {
+    margin-left: 15vw;
     width: 85vw;
     display: flex;
     flex-direction: column;
@@ -174,7 +205,8 @@ body {
       padding-bottom: 2rem; }
       .overview .projects__header h1 {
         font-size: 5rem;
-        font-variant: small-caps; }
+        font-variant: small-caps;
+        font-weight: 500; }
       .overview .projects__header .search {
         width: 50%;
         font-size: 1.8rem;
@@ -237,6 +269,7 @@ body {
   display: flex;
   justify-content: space-between; }
   .projectview .project {
+    margin-left: 15vw;
     width: 85vw;
     display: flex;
     flex-direction: column;
