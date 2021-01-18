@@ -1,63 +1,69 @@
 .sidebar {
-        height: 100vh;
+    height: 100vh;
+    width: 15vw;
+    background-color: $color-green;
+
+    .user {
         width: 15vw;
-        background-color: $color-green;
+        height: 15vw;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        align-items: center;
+        font-size: 2.5rem;
+        font-weight: 800;
+        color: $color-grey;
+        text-transform: small-caps;
+        background: url('/img/bamboo-forest.jpg') center;
+        background-size: cover;
+        backdrop-filter: blur(5px);
+        z-index: 100;
+        padding: 1rem;
 
-        .user {
-            width: 15vw;
-            height: 15vw;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-around;
-            align-items: center;
-            font-size: 2.5rem;
-            font-weight: 800;
-            color: $color-grey;
-            text-transform: small-caps;
-            background: url('/img/bamboo-forest.jpg') center;
-            background-size: cover;
-            backdrop-filter: blur(5px);
-            z-index: 100;
-            padding: 1rem;
-
-            &__pic {
-                width: 60%;
-                height: 60%;
-                border-radius: 60%;
-                background: url('/img/panda4.jpg') center no-repeat;
-                background-size: 160%;
-            }
-
-            p {
-                backdrop-filter: blur(1px);
-            }
+        &__pic {
+            width: 60%;
+            height: 60%;
+            border-radius: 60%;
+            background: url('/img/panda4.jpg') center no-repeat;
+            background-size: 160%;
         }
 
-        &__nav {
-            font-size: 1.8rem;
-            color: $color-grey;
-            padding: 3rem;
+        p {
+            backdrop-filter: blur(1px);
+        }
+    }
 
-            a,
-            a:link,
-            a:visited {
-                color: $color-grey;
-                text-decoration: none;
+    &__nav {
+        font-size: 1.8rem;
+        color: $color-grey;
+        padding: 3rem;
+
+        a,
+        a:link,
+        a:visited {
+            color: $color-grey;
+            text-decoration: none;
+        }
+
+        ul {
+            list-style-type: none;
+
+            li {
+                margin-left: 3rem;
             }
 
-            ul {
-                list-style-type: none;
-                
-                li {
-                    margin-left: 3rem;
-                    
-                    .logout {
-                        padding-left: .5rem;
-                        transform: translateY(25%);
-                    }
+            .logout {
+                padding-right: 2rem;
+                transition-duration: 1s;
+
+                img {
+                    transform: translateY(25%);
+                }
+
+                &:hover {
+                    padding-right: 1rem;
                 }
             }
         }
     }
-
-    
+}

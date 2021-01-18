@@ -81,9 +81,13 @@ body {
       list-style-type: none; }
       .sidebar__nav ul li {
         margin-left: 3rem; }
-        .sidebar__nav ul li .logout {
-          padding-left: .5rem;
+      .sidebar__nav ul .logout {
+        padding-right: 2rem;
+        transition-duration: 1s; }
+        .sidebar__nav ul .logout img {
           transform: translateY(25%); }
+        .sidebar__nav ul .logout:hover {
+          padding-right: 1rem; }
 
 .btn,
 .btn:link,
