@@ -50,7 +50,14 @@
                 
                 li {
                     margin-left: 3rem;
+                    
+                    .logout {
+                        padding-left: .5rem;
+                        transform: translateY(25%);
+                    }
                 }
             }
         }
     }
+
+    

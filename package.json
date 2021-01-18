@@ -7,7 +7,9 @@
         "start": "nodemon server.js",
         "start:prod": "SET NODE_ENV=production & node server.js",
         "scss": "node-sass public/sass/main.scss public/sass/style.css -w",
-        "debug": "ndb server.js"
+        "debug": "ndb server.js",
+        "watch:js": "parcel watch ./public/javascript/index.js --out-dir ./public/javascript --out-file bundle.js",
+        "build:js": "parcel watch ./public/javascript/index.js --out-dir ./public/javascript --out-file bundle.js"
     },
     "author": "Nassim",
     "license": "ISC",
@@ -20,6 +22,8 @@
     },
     "homepage": "https://github.com/nasfernane/chill-panda#readme",
     "dependencies": {
+        "@babel/polyfill": "^7.12.1",
+        "axios": "^0.21.1",
         "bcryptjs": "^2.4.3",
         "cookie-parser": "^1.4.5",
         "dotenv": "^8.2.0",
