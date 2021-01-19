@@ -48,13 +48,13 @@ const logout = async () => {
 };
 
 // ajoute l'écouteur sur le formulaire de connexion seulement sur la page où il existe
-if (loginForm) {
+if (loginForm)
     loginForm.addEventListener('submit', e => {
         e.preventDefault();
         const email = document.getElementById('email').value;
         const password = document.getElementById('password').value;
         login(email, password);
     });
-}
+
 
 if (logOutBtn) logOutBtn.addEventListener('click', logout);
