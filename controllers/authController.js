@@ -44,6 +44,7 @@ const createSendToken = (user, statusCode, res) => {
 
 // fonction asynchrone pour la création d'un nouvel utilisateur
 exports.signup = catchAsync(async (req, res, next) => {
+    console.log('test micro')
     const newUser = await User.create({
         // autorise seulement les données nécessaires pour la création de l'utilisateur pour éviter des failles de sécurité
         name: req.body.name,

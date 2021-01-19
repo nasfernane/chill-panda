@@ -1,23 +1,10 @@
 /* eslint-disable */
+import {showAlert, hideAlert} from './alert.js';
 
 // éléments DOM
-const loginForm = document.querySelector('.form');
+const loginForm = document.querySelector('.loginForm');
 const logOutBtn = document.querySelector('.logout');
 
-// messages d'alerte pour notifier à l'utilisateur si il a réussi à se connecter
-// type is 'success' or 'error'
-const showAlert = (type, msg) => {
-    hideAlert();
-    const markup = `<div class="alert alert--${type}">${msg}</div>`;
-    document.querySelector('body').insertAdjacentHTML('afterbegin', markup);
-    window.setTimeout(hideAlert, 5000);
-};
-
-// cache l'alerte
-const hideAlert = () => {
-    const el = document.querySelector('.alert');
-    if (el) el.parentElement.removeChild(el);
-};
 
 // utilise le client HTTP Axios pour envoyer les identifiants de connexion à l'API
 const login = async (email, password) => {

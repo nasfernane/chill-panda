@@ -1,4 +1,4 @@
-.login {
+.signup {
     height: 100vh;
     width: 100vw;
     background: url('/img/panda.jpg') center;
@@ -6,7 +6,7 @@
     font-size: 1.6rem;
     font-weight: bold;
 
-    .login-form {
+    .signup-form {
         padding: 2rem;
         width: 20vw;
         position: relative;
@@ -42,6 +42,12 @@
                 margin-bottom: 1rem;
             }
 
+            &__group.alignRight {
+                margin-top: .5rem;
+                display: flex;
+                justify-content: flex-end;
+            }
+
             &__input {
                 font-family: inherit;
                 padding: 1.25rem 1.75rem;
@@ -65,18 +71,5 @@
             }
         }
 
-        a:link,
-        a:visited,
-        a:active {
-            text-decoration: none;
-            font-size: 1.8rem;
-            font-weight: bold;
-            color: $color-font;
-        }
-
-        a:hover {
-            border-bottom: 3px solid $color-font;
-            transform: translateY(1px);
-        }
     }
 }

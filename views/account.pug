@@ -1,0 +1,37 @@
+extends base
+
+block content
+    main.accountView
+        include _sidebar
+
+        .user-view
+            header
+                h1 Votre compte
+            .user-view__form-container
+                form.form
+                .form__group
+                    label.form__label(for='name') Name
+                    input#name.form__input(name='name', type='text', value=user.name, required)
+
+                .form__group
+                    label.form__label(for='email') Adresse e-mail
+                    input#email.form__input(type='email', value= user.mail, required)
+
+                .form__group.right
+                    button.btn Sauvegarder
+                    
+            h2 Nouveau mot de passe
+            .user-view__form-container
+                
+                form.form
+                .form__group
+                    label.form__label(for='password-current') Mot de passe actuel
+                    input#password-current.form__input(type='password', placeholder='••••••••', required, minlength='8')
+                .form__group
+                    label.form__label(for='password') Nouveau mot de passe
+                    input#password.form__input(type='password', placeholder='••••••••', required, minlength='8')
+                .form__group
+                    label.form__label(for='password-confirm') Confirmer le mot de passe
+                    input#password-confirm.form__input(type='password', placeholder='••••••••', required, minlength='8')
+                .form__group.right
+                    button.btn Sauvegarder

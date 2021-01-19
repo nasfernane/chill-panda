@@ -1,4 +1,5 @@
 const Project = require('../models/projectModel');
+const User = require('../models/userModel');
 const Bill = require('../models/billModel');
 const catchAsync = require('../utils/catchAsync');
 const AppError = require('../utils/appError');
@@ -24,11 +25,16 @@ exports.getProject = catchAsync(async (req, res, next) => {
 
     // renvoie une erreur personnalisée si le projet n'est pas trouvé
     if (!project) {
-        return next(new AppError(`Chill panda est trop fatigué pour aller chercher des projets qui n'existent pas.`, 404));
+        return next(
+            new AppError(
+                `Chill panda est trop fatigué pour aller chercher des projets qui n'existent pas.`,
+                404
+            )
+        );
     }
 
     res.status(200).render('project', {
-        title: 'coucou',
+        title: 'Projet',
         project,
     });
 });
@@ -38,3 +44,30 @@ exports.getLoginForm = (req, res) => {
         title: 'Connexion',
     });
 };
+
+exports.getSignupForm = (req, res) => {
+    res.status(200).render('signup', {
+        title: 'Inscription',
+    });
+};
+
+// page informations personnelles
+exports.getAccount = catchAsync(async (req, res, next) => {
+    // récupère l'utilisateur sur son id récupérée du middleware protect
+    const user = await User.findOne({ _id: res.locals.user._id })
+
+    // renvoie une erreur personnalisée si l'utilisateur' n'est pas trouvé
+    if (!user) {
+        return next(
+            new AppError(
+                `Utilisateur introuvable : Chill panda est convaincu que vous n'existez pas.`,
+                404
+            )
+        );
+    }
+
+    res.status(200).render('account', {
+        title: 'Mon Compte',
+        user,
+    });
+});

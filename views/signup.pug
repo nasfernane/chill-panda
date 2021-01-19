@@ -1,0 +1,21 @@
+extends base
+
+block content
+    main.signup
+        .signup-form
+            h1 Chill Panda
+            form.signupForm
+                .form__group
+                    label.form__label(for='name') Nom
+                    input#name.form__input(type='name', placeholder='ex: Pô le panda', required)
+                .form__group
+                    label.form__label(for='email') Adresse mail
+                    input#email.form__input(type='email', placeholder='mail@exemple.com', required)
+                .form__group
+                    label.form__label(for='password') Mot de passe
+                    input#password.form__input(type='password', placeholder='••••••••', required, minlength='8')
+                .form__group
+                    label.form__label(for='password') Confirmation
+                    input#passwordConfirm.form__input(type='password', placeholder='••••••••', required, minlength='8') 
+                .form__group.alignRight
+                    button.btn Inscription

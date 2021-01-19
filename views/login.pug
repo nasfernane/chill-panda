@@ -4,7 +4,7 @@ block content
     main.login
         .login-form
             h1 Chill Panda
-            form.form
+            form.loginForm
                 .form__group
                     label.form__label(for='email') Adresse mail
                     input#email.form__input(type='email', placeholder='mail@exemple.com', required)
@@ -12,5 +12,5 @@ block content
                     label.form__label(for='password') Mot de passe
                     input#password.form__input(type='password', placeholder='••••••••', required, minlength='8')
                 .form__group
-                    a(href='#') Inscription
+                    a(href='/signup') Inscription
                     button.btn.btn--login Connexion

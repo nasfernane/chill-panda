@@ -340,7 +340,6 @@ body {
   font-weight: bold; }
   .login .login-form {
     padding: 2rem;
-    height: 35vh;
     width: 20vw;
     position: relative;
     top: 30vh;
@@ -354,7 +353,8 @@ body {
     .login .login-form h1 {
       font-variant: small-caps;
       align-self: center;
-      font-size: 4rem; }
+      font-size: 4rem;
+      margin-bottom: 2rem; }
     .login .login-form .form {
       height: 60%;
       width: 80%;
@@ -366,7 +366,8 @@ body {
       .login .login-form .form__group {
         display: flex;
         justify-content: space-between;
-        align-items: center; }
+        align-items: center;
+        margin-bottom: 1rem; }
       .login .login-form .form__input {
         font-family: inherit;
         padding: 1.25rem 1.75rem;
@@ -393,3 +394,120 @@ body {
     .login .login-form a:hover {
       border-bottom: 3px solid #444444;
       transform: translateY(1px); }
+
+.signup {
+  height: 100vh;
+  width: 100vw;
+  background: url("/img/panda.jpg") center;
+  background-size: cover;
+  font-size: 1.6rem;
+  font-weight: bold; }
+  .signup .signup-form {
+    padding: 2rem;
+    width: 20vw;
+    position: relative;
+    top: 30vh;
+    left: 10vw;
+    border-radius: 8px;
+    background: rgba(245, 245, 245, 0.6);
+    box-shadow: 0 2.5rem 8rem 2rem rgba(0, 0, 0, 0.3);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; }
+    .signup .signup-form h1 {
+      font-variant: small-caps;
+      align-self: center;
+      font-size: 4rem;
+      margin-bottom: 2rem; }
+    .signup .signup-form .form {
+      height: 60%;
+      width: 80%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+      align-items: space-between;
+      margin: 0 auto; }
+      .signup .signup-form .form__group {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 1rem; }
+      .signup .signup-form .form__group.alignRight {
+        margin-top: .5rem;
+        display: flex;
+        justify-content: flex-end; }
+      .signup .signup-form .form__input {
+        font-family: inherit;
+        padding: 1.25rem 1.75rem;
+        border: none;
+        border-top: 3px solid transparent;
+        border-bottom: 3px solid transparent;
+        -webkit-transition: all 0.3s;
+        transition: all 0.3s;
+        border-radius: 4px;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box; }
+        .signup .signup-form .form__input:focus {
+          outline: none;
+          border-bottom: 3px solid #4d734d; }
+        .signup .signup-form .form__input:focus:invalid {
+          border-bottom: 3px solid #d4533d; }
+
+.accountView {
+  height: 100%;
+  display: flex;
+  font-size: 1.8rem; }
+  .accountView .user-view {
+    height: 100%;
+    width: 85vw;
+    margin-left: 15vw;
+    padding-left: 3rem; }
+    .accountView .user-view header {
+      height: 15vw;
+      display: flex;
+      align-items: flex-end; }
+      .accountView .user-view header h1 {
+        font-size: 4rem;
+        font-variant: small-caps;
+        font-weight: 500; }
+    .accountView .user-view h2 {
+      font-size: 3.5rem;
+      font-variant: small-caps;
+      font-weight: 500;
+      margin-bottom: 2rem;
+      margin-top: 2rem; }
+    .accountView .user-view__form-container {
+      width: 40%;
+      padding-top: 2rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background: rgba(245, 245, 245, 0.6);
+      box-shadow: 1rem 1rem 2rem rgba(0, 0, 0, 0.1);
+      padding: 3rem 6rem;
+      border-radius: 8px; }
+      .accountView .user-view__form-container .form__group {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 2rem; }
+        .accountView .user-view__form-container .form__group .form__input {
+          width: 20rem;
+          font-family: inherit;
+          padding: 1.25rem 1.75rem;
+          border: none;
+          border-top: 3px solid transparent;
+          border-bottom: 3px solid transparent;
+          -webkit-transition: all 0.3s;
+          transition: all 0.3s;
+          border-radius: 4px;
+          -webkit-box-sizing: border-box;
+          box-sizing: border-box; }
+          .accountView .user-view__form-container .form__group .form__input:focus {
+            outline: none;
+            border-bottom: 3px solid #4d734d; }
+          .accountView .user-view__form-container .form__group .form__input:focus:invalid {
+            border-bottom: 3px solid #d4533d; }
+      .accountView .user-view__form-container .form__group.right {
+        justify-content: flex-end; }
