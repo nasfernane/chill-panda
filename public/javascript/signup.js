@@ -5,7 +5,6 @@ import {showAlert, hideAlert} from './alert.js';
 const signUpForm = document.querySelector('.signupForm')
 
 const signUp = async (name, email, password, passwordConfirm) => {
-    console.log('test')
     try {
         const res = await axios({
             method: 'POST',
@@ -21,7 +20,6 @@ const signUp = async (name, email, password, passwordConfirm) => {
         // si l'inscription est réussie, affiche une alerte et bascule sur overview
         if (res.data.status === 'Success') {
             showAlert('success', 'Inscription réussie');
-            // alert('Vous êtes à présent connecté(e)');
             window.setTimeout(() => {
                 location.assign('/overview');
             }, 1500);
@@ -34,7 +32,6 @@ const signUp = async (name, email, password, passwordConfirm) => {
 
 // ajoute l'écouteur sur le formulaire d'inscription seulement sur la page où il existe
 if (signUpForm) {
-    console.log('coucou');
 
     signUpForm.addEventListener('submit', e => {
         e.preventDefault();

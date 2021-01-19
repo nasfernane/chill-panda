@@ -54,7 +54,7 @@ exports.getSignupForm = (req, res) => {
 // page informations personnelles
 exports.getAccount = catchAsync(async (req, res, next) => {
     // récupère l'utilisateur sur son id récupérée du middleware protect
-    const user = await User.findOne({ _id: res.locals.user._id })
+    const user = await User.findOne({ _id: req.user._id })
 
     // renvoie une erreur personnalisée si l'utilisateur' n'est pas trouvé
     if (!user) {

@@ -133,35 +133,11 @@ exports.protect = catchAsync(async (req, res, next) => {
 
     // procure accès à l'tinéraire protégé
     req.user = currentUser;
+    res.locals.user = currentUser;
     next();
 });
 
-// fonction pour faire passer l'utilisateur aux templates pugs et varier les rendus en fonction si il a une connexion en cours
-exports.isLoggedIn = async (req, res, next) => {
-    if (req.cookies.jwt) {
-        try {
-            // 1) vérification du token
-            const decoded = await promisify(jwt.verify)(req.cookies.jwt, process.env.JWT_SECRET);
 
-            // 2) vérification si l'utilisateur existe encore
-            const currentUser = await User.findById(decoded.id);
-            if (!currentUser) {
-                return next();
-            }
-
-            // 3) vérification si l'utilisateur a changé son mdp après que le token ait été fourni
-            if (currentUser.changedPasswordAfter(decoded.iat)) {
-                return next();
-            }
-
-            // Il y a un utilisateur connecté
-            res.locals.user = currentUser;
-        } catch (err) {
-            return next();
-        }
-    }
-    next();
-};
 
 // création d'une fonction enveloppant le middleware pour lui faire passer des arguments multiples sous la forme d'un spread operator
 exports.restrictTo = (...roles) => (req, res, next) => {
