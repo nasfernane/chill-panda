@@ -53,21 +53,9 @@ exports.getSignupForm = (req, res) => {
 
 // page informations personnelles
 exports.getAccount = catchAsync(async (req, res, next) => {
-    // récupère l'utilisateur sur son id récupérée du middleware protect
-    const user = await User.findOne({ _id: req.user._id })
-
-    // renvoie une erreur personnalisée si l'utilisateur' n'est pas trouvé
-    if (!user) {
-        return next(
-            new AppError(
-                `Utilisateur introuvable : Chill panda est convaincu que vous n'existez pas.`,
-                404
-            )
-        );
-    }
+    // l'utilisateur est déjà récupéré par le middleware protect, on render donc juste la page
 
     res.status(200).render('account', {
-        title: 'Mon Compte',
-        user,
+        title: 'Mon Compte'
     });
 });

@@ -39,6 +39,12 @@
         color: $color-grey;
         padding: 3rem;
 
+        p {
+            font-variant: small-caps;
+            font-size: 2rem;
+            letter-spacing: 0.1rem;
+        }
+
         a,
         a:link,
         a:visited {
@@ -53,6 +59,7 @@
 
         ul {
             list-style-type: none;
+            padding-bottom: 1rem;
 
             li {
                 margin-left: 3rem;
