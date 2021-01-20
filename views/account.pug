@@ -23,7 +23,7 @@ block content
             h2 Nouveau mot de passe
             .user-view__form-container
                 
-                form.form
+                form.form.form-user-password
                     .form__group
                         label.form__label(for='password-current') Mot de passe actuel
                         input#password-current.form__input(type='password', placeholder='••••••••', required, minlength='8')
@@ -34,4 +34,4 @@ block content
                         label.form__label(for='password-confirm') Confirmer le mot de passe
                         input#password-confirm.form__input(type='password', placeholder='••••••••', required, minlength='8')
                     .form__group.right
-                        button.btn Sauvegarder
+                        button.btn.btn--save-password Sauvegarder

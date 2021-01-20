@@ -6,17 +6,17 @@ const authController = require('../controllers/authController');
 const router = express.Router({ mergeParams: true });
 
 // rend obligatoire la connexion pour tous les itinéraires
-router.use(authController.protect);
+// router.use(authController.protect);
 
 router
     .route('/')
-    .get(billController.getAllBills)
-    .post(billController.checkBeforeCreateBill, billController.createBill);
+    .get(authController.protect, billController.getAllBills)
+    .post(authController.protect, billController.checkBeforeCreateBill, billController.createBill);
 
 router
     .route('/:id')
-    .patch(billController.updateBill)
-    .get(billController.getBill)
-    .delete(billController.deleteBill);
+    .patch(authController.protect, billController.updateBill)
+    .get(authController.protect, billController.getBill)
+    .delete(authController.protect, billController.deleteBill);
 
 module.exports = router;

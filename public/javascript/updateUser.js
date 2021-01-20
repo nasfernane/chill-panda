@@ -1,34 +1,60 @@
-import {showAlert, hideAlert} from './alert.js';
+import { showAlert } from './alert.js';
 
-const userDataForm = document.querySelector('.form-user-data')
+const userDataForm = document.querySelector('.form-user-data');
+const userPwForm = document.querySelector('.form-user-password');
 
-const updateData = async (name, email) => {
+// fonction pour mettre à jour les infos user || son mdp
+// le type est soit 'password' ou 'data'
+const updateSettings = async (data, type) => {
     try {
+        // en fonction du type entré en paramètre, on change l'url pour maj les data ou le mot de passe
+        const url =
+            type === 'password'
+                ? 'http://127.0.0.1:8000/api/v1/users/updatepassword'
+                : 'http://127.0.0.1:8000/api/v1/users/updateme';
+        // définit le type d'alerte pour l'utilisateur
+        const alertType = type === 'password' ? 'mot de passe' : 'compte';
+
         const res = await axios({
             method: 'PATCH',
-            url: 'http://127.0.0.1:8000/api/v1/users/updateme',
-            data: {
-                name,
-                email
-            }
-        })
+            url: url,
+            data,
+        });
 
         if (res.data.status === 'success') {
-            showAlert('success', 'Vos données ont été correctement mises à jour');
-            window.setTimeout(() => {
-                location.assign('/account');
-            }, 1000);
+            showAlert('success', `Votre ${alertType} a été correctement mis à jour`);
         }
     } catch (err) {
-        showAlert('error', err.response.data.message)
+        showAlert('error', err.response.data.message);
     }
-}
+};
 
-if(userDataForm) 
+// ajoute écouteur pour maj données user
+if (userDataForm)
     userDataForm.addEventListener('submit', e => {
         e.preventDefault();
         const name = document.getElementById('name').value;
         const email = document.getElementById('email').value;
 
-        updateData(name, email)
-    })
+        updateSettings({ name, email }, 'data');
+    });
+
+// écouteur pour maj password user
+// if (userPwForm)
+//     userPwForm.addEventListener('submit', async e => {
+//         e.preventDefault();
+//         document.querySelector('.btn--save-password').textContent = 'Mise à jour...';
+
+//         const currentPassword = document.getElementById('password-current').value;
+//         const password = document.getElementById('password').value;
+//         const passwordConfirm = document.getElementById('password-confirm').value;
+
+//         // await l'update pour pouvoir clear les saisies après
+//         await updateSettings({ currentPassword, password, passwordConfirm }, 'password');
+
+//         document.querySelector('.btn--save-password').textContent = 'Sauvegarder';
+//         // supprime les saisies utilisateurs après modification
+//         document.getElementById('password-current').value = '';
+//         document.getElementById('password').value = '';
+//         document.getElementById('password-confirm').value = '';
+//     });

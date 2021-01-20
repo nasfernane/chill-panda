@@ -34,7 +34,7 @@ const createSendToken = (user, statusCode, res) => {
     user.password = undefined;
 
     res.status(statusCode).json({
-        status: 'Success',
+        status: 'success',
         token,
         data: {
             user,
@@ -44,7 +44,6 @@ const createSendToken = (user, statusCode, res) => {
 
 // fonction asynchrone pour la création d'un nouvel utilisateur
 exports.signup = catchAsync(async (req, res, next) => {
-    console.log('test micro')
     const newUser = await User.create({
         // autorise seulement les données nécessaires pour la création de l'utilisateur pour éviter des failles de sécurité
         name: req.body.name,
@@ -84,11 +83,9 @@ exports.login = catchAsync(async (req, res, next) => {
 // pour log out l'utilisateur, renvoie un nouveau token vide pour override le cookie
 exports.logout = (req, res) => {
     res.cookie('jwt', 'loggedout', {
-        // expire au bout de 10 secondes
-        expires: new Date(Date.now() + 10 * 1000),
+        expires: new Date(Date.now() + 1 * 1000),
         httpOnly: true,
     });
-
     res.status(200).json({ status: 'success' });
 };
 
@@ -136,8 +133,6 @@ exports.protect = catchAsync(async (req, res, next) => {
     res.locals.user = currentUser;
     next();
 });
-
-
 
 // création d'une fonction enveloppant le middleware pour lui faire passer des arguments multiples sous la forme d'un spread operator
 exports.restrictTo = (...roles) => (req, res, next) => {
@@ -202,8 +197,6 @@ exports.resetPassword = catchAsync(async (req, res, next) => {
         passwordResetExpires: { $gt: Date.now() },
     });
 
-    console.log(user);
-
     // 2) Si le token n'est pas expiré et que l'utilisateur existe, définit le nouveau mdp et supprime le token
     if (!user) {
         return next(new AppError(`Le token est invalide ou expiré`, 400));
@@ -224,7 +217,6 @@ exports.resetPassword = catchAsync(async (req, res, next) => {
 exports.updatePassword = catchAsync(async (req, res, next) => {
     // 1) récupérer l'utilisateur
     const user = await User.findById(req.user.id).select('+password');
-    console.log(user);
     // 2) Si le mdp est incorrect...
     if (!(await user.correctPassword(req.body.currentPassword, user.password))) {
         // ... return et faire suivre erreur (unauthorised)
@@ -234,6 +226,7 @@ exports.updatePassword = catchAsync(async (req, res, next) => {
     user.password = req.body.password;
     user.passwordConfirm = req.body.passwordConfirm;
     await user.save();
+
     // 4) connecter l'utilisateur, envoyer le json web token
     createSendToken(user, 200, res);
 });

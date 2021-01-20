@@ -1,8 +1,8 @@
 /* eslint-disable */
-import {showAlert, hideAlert} from './alert.js';
+import { showAlert, hideAlert } from './alert.js';
 
 // éléments DOM
-const signUpForm = document.querySelector('.signupForm')
+const signUpForm = document.querySelector('.signupForm');
 
 const signUp = async (name, email, password, passwordConfirm) => {
     try {
@@ -13,26 +13,24 @@ const signUp = async (name, email, password, passwordConfirm) => {
                 name,
                 email,
                 password,
-                passwordConfirm
-            }
-        })
+                passwordConfirm,
+            },
+        });
 
         // si l'inscription est réussie, affiche une alerte et bascule sur overview
-        if (res.data.status === 'Success') {
+        if (res.data.status === 'success') {
             showAlert('success', 'Inscription réussie');
             window.setTimeout(() => {
                 location.assign('/overview');
             }, 1500);
         }
-
     } catch (err) {
         showAlert('error', err.response.data.message);
     }
-}
+};
 
 // ajoute l'écouteur sur le formulaire d'inscription seulement sur la page où il existe
 if (signUpForm) {
-
     signUpForm.addEventListener('submit', e => {
         e.preventDefault();
         const name = document.getElementById('name').value;

@@ -1,10 +1,9 @@
 /* eslint-disable */
-import {showAlert, hideAlert} from './alert.js';
+import { showAlert, hideAlert } from './alert.js';
 
 // éléments DOM
 const loginForm = document.querySelector('.loginForm');
 const logOutBtn = document.querySelector('.logout');
-
 
 // utilise le client HTTP Axios pour envoyer les identifiants de connexion à l'API
 const login = async (email, password) => {
@@ -19,7 +18,7 @@ const login = async (email, password) => {
         });
 
         // si les identifiants sont corrects, bascule sur la page overview
-        if (res.data.status === 'Success') {
+        if (res.data.status === 'success') {
             showAlert('success', 'Connexion réussie');
             // alert('Vous êtes à présent connecté(e)');
             window.setTimeout(() => {
@@ -55,6 +54,5 @@ if (loginForm)
         const password = document.getElementById('password').value;
         login(email, password);
     });
-
 
 if (logOutBtn) logOutBtn.addEventListener('click', logout);

@@ -40,8 +40,8 @@ router.route('/').get(userController.getAllUsers).post(userController.createUser
 router
     .route('/:id')
     .get(userController.getUser)
-    .patch(authController.protect, userController.updateUser)
-    .delete(authController.protect, userController.deleteUser);
+    .patch(userController.updateUser)
+    .delete(userController.deleteUser);
 
 // exporte le module pour app.js
 module.exports = router;
