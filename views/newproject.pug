@@ -1,0 +1,43 @@
+extends base
+
+block content
+    main.newproject
+        include _sidebar
+
+        .newProjectView
+            - let date = new Date(Date.now()).toLocaleString('fr-FR', {day: 'numeric', month: 'long', year: 'numeric'});
+
+            header
+                h1 Nouveau projet
+
+            .newProjectView__form-container 
+                .newProjectView__form-container--header
+                    p= 'Nouveau projet'
+                    p= `${date}`
+                
+                .newProjectView__form-container--form
+                    form.form-newProject
+
+                        .form__group
+                            label.form__label(for='projectName') Nom du projet
+                            input#projectName.form__input(type='text', required)
+
+                        .form__group
+                            label.form__label(for='client') Client
+                            input#client.form__input(type='text', required)
+
+                        .form__group
+                            label.form__label(for='projectType') Type de projet
+                            input#projectType.form__input(type='text', required)
+
+                        .form__group
+                            label.form__label(for='quote') Devis
+                            input#quote.form__input(type='text', required)
+
+                        .form__group
+                            label.form__label(for='status') Statut
+                            input#status.form__input(type='text', required)
+
+                        .form__group.right
+                            button.btn Créer nouveau projet
+                

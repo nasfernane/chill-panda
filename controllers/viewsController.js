@@ -39,6 +39,13 @@ exports.getProject = catchAsync(async (req, res, next) => {
     });
 });
 
+// création d'un nouveau projet
+exports.newProject = (req, res) => {
+    res.status(200).render('newproject', {
+        title: 'Nouveau projet',
+    });
+};
+
 exports.getLoginForm = (req, res) => {
     res.status(200).render('login', {
         title: 'Connexion',
@@ -56,6 +63,6 @@ exports.getAccount = catchAsync(async (req, res, next) => {
     // l'utilisateur est déjà récupéré par le middleware protect, on render donc juste la page
 
     res.status(200).render('account', {
-        title: 'Mon Compte'
+        title: 'Mon Compte',
     });
 });

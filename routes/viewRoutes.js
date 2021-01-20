@@ -9,6 +9,7 @@ router.get('/signup', viewsController.getSignupForm);
 
 router.get('/overview', authController.protect, viewsController.getOverview);
 router.get('/project/:id', authController.protect, viewsController.getProject);
+router.get('/newproject', authController.protect, viewsController.newProject);
 router.get('/account', authController.protect, viewsController.getAccount);
 
 module.exports = router;

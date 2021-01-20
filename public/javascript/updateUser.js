@@ -40,21 +40,21 @@ if (userDataForm)
     });
 
 // écouteur pour maj password user
-// if (userPwForm)
-//     userPwForm.addEventListener('submit', async e => {
-//         e.preventDefault();
-//         document.querySelector('.btn--save-password').textContent = 'Mise à jour...';
+if (userPwForm)
+    userPwForm.addEventListener('submit', async e => {
+        e.preventDefault();
+        document.querySelector('.btn--save-password').textContent = 'Mise à jour...';
 
-//         const currentPassword = document.getElementById('password-current').value;
-//         const password = document.getElementById('password').value;
-//         const passwordConfirm = document.getElementById('password-confirm').value;
+        const currentPassword = document.getElementById('password-current').value;
+        const password = document.getElementById('password').value;
+        const passwordConfirm = document.getElementById('password-confirm').value;
 
-//         // await l'update pour pouvoir clear les saisies après
-//         await updateSettings({ currentPassword, password, passwordConfirm }, 'password');
+        // await l'update pour pouvoir clear les saisies après
+        await updateSettings({ currentPassword, password, passwordConfirm }, 'password');
 
-//         document.querySelector('.btn--save-password').textContent = 'Sauvegarder';
-//         // supprime les saisies utilisateurs après modification
-//         document.getElementById('password-current').value = '';
-//         document.getElementById('password').value = '';
-//         document.getElementById('password-confirm').value = '';
-//     });
+        document.querySelector('.btn--save-password').textContent = 'Sauvegarder';
+        // supprime les saisies utilisateurs après modification
+        document.getElementById('password-current').value = '';
+        document.getElementById('password').value = '';
+        document.getElementById('password-confirm').value = '';
+    });
