@@ -4,8 +4,19 @@ block content
     .projectview
         //- récupère le status du projet, le met en minuscule et enlève les espaces pour l'ajouter en classe
         - let statuscolor = project.status.toLowerCase().trim().split(' ').join('')
+        //- récupère la date du jour pour l'encadré des nouvelles factures
+        - let date = new Date(Date.now()).toLocaleString('fr-FR', {day: 'numeric', month: 'long', year: 'numeric'});
 
         include _sidebar
+        
+
+        //- fenêtre modale pour ajouter une facture
+        div.newBill-modal
+            //-contenu de la modale
+            div.newBill-modal__content
+                span.close &times;
+                p Some text in the Modal..
+
 
         .project
             .project__header 
@@ -50,7 +61,8 @@ block content
                                 |  #{project.alreadyPaid}
 
 
-                    img(src='/img/edit.png')
+                    a(href=`/project/${project._id}/edit`)
+                                img(src='/img/edit.png')
 
             .billsHeader
                 h1 Factures
