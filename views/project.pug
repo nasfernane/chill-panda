@@ -9,47 +9,8 @@ block content
 
         include _sidebar
         
-
-        //- fenêtre modale pour ajouter une facture
-        div.newBill-modal
-            //-contenu de la modale
-            div.newBill-modal__content
-                span.close &times;
-
-                header 
-                    p Nouvelle facture 
-                    p= `${date}`
-
-                form.newBill-form
-                    .form__group
-                        label.form__label(for='bill-name')
-                            p Nom de la facture
-                        input#bill-name.form__input(type='text', required)
-                    .form__group
-                        label.form__label(for='bill-price')
-                            p Montant
-                        input#bill-price.form__input(type='text', required)
-                    .form__group.form__group--radios
-                        p Catégorie
-                        .radio-container
-                            div 
-                                input#category-bill.form__input(type='radio', name='category', value='Facture' checked)
-                                label(for='category-bill') Facture
-                            div 
-                                input#category-deposit.form__input(type='radio', name='category', value='Acompte')
-                                label(for='category-deposit') Acompte
-                            div 
-                                input#category-amendment.form__input(type='radio', name='category', value='Avenant')
-                                label(for='category-amendment') Avenant
-                    .form__group.form__group--radios
-                        p Etat
-                        .radio-container
-                            div 
-                                input#state-waiting.form__input(type='radio', name='state', value='En attente' checked)
-                                label(for='state-waiting') En attente
-                            div 
-                                input#state-paid.form__input(type='radio', name='state', value='Réglé')
-                                label(for='state-paid') Réglé
+        //- fenêtre modale pour créer une nouvelle facture
+        include _newBill
 
         .project
             .project__header 
@@ -99,27 +60,26 @@ block content
 
             .billsHeader
                 h1 Factures
-                a(href='#')
-                    img(src='/img/add.png')
+                img#newBillButton(src='/img/add.png')
 
             each bill in project.bills
-                - let billcolor = bill.paid ? 'terminé' : 'proposition';
+                - let billcolor = bill.state === 'Réglé' ? 'terminé' : 'proposition';
 
                 div(class=`card ${billcolor}`)
                     div(class=`card__header ${billcolor}`)
-                        p= `${bill.name} `
+                        p= `${bill.billName} `
                         p= `${bill.createdAt.toLocaleString('fr-FR', {day: 'numeric', month: 'long', year: 'numeric'})}`
 
                     .card__details 
                         ul
-                            li 
+                            li.billPolish 
                                 strong N° facture: 
                                 |  #{bill.billNumber }
-                            li
+                            li.billPolish 
                                 strong Montant facture: 
                                 |  #{bill.price}
-                            li
-                                strong #{bill.paid ? 'Réglé' : 'En attente' }
+                            li.billPolish 
+                                strong #{bill.state}
 
                         img(src='/img/edit.png')
 

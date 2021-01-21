@@ -279,6 +279,7 @@ body {
   display: flex;
   justify-content: space-between; }
   .projectview .newBill-modal {
+    display: none;
     position: fixed;
     z-index: 99;
     left: 0;
@@ -287,16 +288,30 @@ body {
     height: 100%;
     background-color: rgba(0, 0, 0, 0.5); }
     .projectview .newBill-modal__content {
+      position: relative;
       font-size: 1.8rem;
       display: flex;
       flex-direction: column;
       align-items: center;
       background: whitesmoke;
       box-shadow: 1rem 1rem 2rem rgba(0, 0, 0, 0.1);
-      padding: 3rem 6rem;
+      padding: 5rem 6rem;
       border-radius: 8px;
       margin: 15% auto;
       width: 40%; }
+      .projectview .newBill-modal__content .close {
+        position: absolute;
+        top: 1rem;
+        right: 2rem;
+        font-size: 3rem;
+        font-weight: bold;
+        transition: 0.3s ease-in all;
+        color: #444444;
+        padding: 0 1.5rem; }
+        .projectview .newBill-modal__content .close:hover {
+          cursor: pointer;
+          transform: rotate(360deg);
+          color: #d4533d; }
       .projectview .newBill-modal__content header {
         display: flex;
         width: 100%;
@@ -315,6 +330,8 @@ body {
           margin-bottom: 2rem; }
           .projectview .newBill-modal__content form .form__group p {
             font-weight: bold; }
+          .projectview .newBill-modal__content form .form__group.right {
+            justify-content: flex-end; }
           .projectview .newBill-modal__content form .form__group .form__input {
             width: 20rem;
             font-family: inherit;

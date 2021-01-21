@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const Project = require('./projectModel');
 
 const billSchema = new mongoose.Schema({
-    name: {
+    billName: {
         type: String,
         required: [true, `Vous devez renseigner un nom de facture`],
     },
@@ -15,7 +15,7 @@ const billSchema = new mongoose.Schema({
         required: true,
         min: 1,
     },
-    billType: {
+    category: {
         type: String,
         required: [true, 'La facture doit avoir un type'],
         enum: ['Facture', 'Acompte', 'Avenant'],
@@ -32,9 +32,11 @@ const billSchema = new mongoose.Schema({
         type: mongoose.Schema.ObjectId,
         ref: 'User',
     },
-    paid: {
-        type: Boolean,
+    state: {
+        type: String,
         required: [true, `Vous devez renseigner l'état de la facture`],
+        enum: ['En attente', 'Réglé'],
+        message: `L'état de la facture doit être défini sur En attente ou Réglé`,
     },
 });
 
@@ -64,7 +66,7 @@ billSchema.statics.calcSumBills = async function (projectId) {
     const settlementSum = await this.aggregate([
         {
             // phase 1 : récupère les factures payées
-            $match: { project: projectId, paid: true },
+            $match: { project: projectId, state: 'Réglé' },
         },
         {
             $group: {

@@ -4,7 +4,7 @@
     justify-content: space-between;
 
     .newBill-modal {
-        // display: none;
+        display: none;
         position: fixed;
         z-index: 99;
         left: 0;
@@ -12,14 +12,33 @@
         width: 100vw;
         height: 100%;
         background-color: rgba(0, 0, 0, 0.5);
+
         &__content {
+            .close {
+                position: absolute;
+                top: 1rem;
+                right: 2rem;
+                font-size: 3rem;
+                font-weight: bold;
+                transition: 0.3s ease-in all;
+                color: $color-font;
+                padding: 0 1.5rem;
+
+                &:hover {
+                    cursor: pointer;
+                    transform: rotate(360deg);
+                    color: $color-orange;
+                }
+            }
+
+            position: relative;
             font-size: 1.8rem;
             display: flex;
             flex-direction: column;
             align-items: center;
             background: rgba(245, 245, 245, 1);
             box-shadow: 1rem 1rem 2rem rgba(0, 0, 0, 0.1);
-            padding: 3rem 6rem;
+            padding: 5rem 6rem;
             border-radius: 8px;
             margin: 15% auto;
             width: 40%;
@@ -46,6 +65,10 @@
 
                     p {
                         font-weight: bold;
+                    }
+
+                    &.right {
+                        justify-content: flex-end;
                     }
 
                     .form__input {
