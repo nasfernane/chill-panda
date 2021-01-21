@@ -1,0 +1,74 @@
+extends base
+
+block content
+    main.editproject
+        - projectType = project.projectType
+
+        include _sidebar
+
+        .newProjectView
+            - let date = project.date.toLocaleString('fr-FR', {day: 'numeric', month: 'long', year: 'numeric'});
+
+            header
+                h1 Modification du projet 
+
+            .newProjectView__form-container 
+                .newProjectView__form-container--header
+                    p= `Projet n° ${project.quoteNumber}`
+                    p= `Créé le ${date}`
+                
+                .newProjectView__form-container--form
+                    form.form-editProject
+
+                        .form__group
+                            label.form__label(for='projectName')
+                                p Nom du projet
+                            input#projectName.form__input(type='text', value=`${project.name}` required)
+
+                        .form__group
+                            label.form__label(for='client')
+                                p Client
+                            input#client.form__input(type='text', value=`${project.client}` required)
+
+
+                        .form__group
+                            label.form__label(for='quote')
+                                p Devis
+                            input#quote.form__input(type='text', value=`${project.quote}` required)
+
+                        .form__group.form__group--radios
+                            p Type de projet
+                            .radio-container
+                                div
+                                    input#type-web.form__input--type(type='radio' name='projectType', value='Web' tocheck=`${project.projectType === 'Web' ? 'checked' : ''}`)
+                                    label(for='type-web') Web
+                                
+                                div
+                                    input#type-print.form__input--type(type='radio' name='projectType', value='Print' tocheck=`${project.projectType === 'Print' ? 'checked' : ''}`)
+                                    label(for='status-current') Print
+                                div
+                                    input#type-network.form__input--type(type='radio' name='projectType', value='Réseau social' tocheck=`${project.projectType === 'Réseau social' ? 'checked' : ''}`)
+                                    label(for='status-current') Réseau social
+                                
+
+
+                        .form__group.form__group--radios
+                            p Statut
+                            .radio-container
+                                div
+                                    input#status-proposal.form__input--status(type='radio' name='status', value='Proposition' tocheck=`${project.status === 'Proposition' ? 'checked' : ''}`)
+                                    label(for='status-proposal') Proposition
+                                div
+                                    input#status-current.form__input--status(type='radio' name='status', value='En cours' tocheck=`${project.status === 'En cours' ? 'checked' : ''}`)
+                                    label(for='status-current') En cours
+                                div
+                                    input#status-toSettle.form__input-status(type='radio' name='status', value='A régler' tocheck=`${project.status === 'A régler' ? 'checked' : ''}`)
+                                    label(for='status-toSettle') A régler
+                                div
+                                    input#status-finished.form__input--status(type='radio' name='status', value='Terminé' tocheck=`${project.status === 'Terminé' ? 'checked' : ''}`)
+                                    label(for='status-finished') Terminé
+
+
+                        .form__group.right
+                            button.btn Mise à jour
+                

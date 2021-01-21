@@ -522,7 +522,8 @@ body {
           justify-content: flex-end;
           margin-bottom: 0; }
 
-main.newproject {
+main.newproject,
+main.editproject {
   display: flex;
   font-size: 1.8rem; }
 

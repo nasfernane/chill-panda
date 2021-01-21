@@ -39,6 +39,27 @@ exports.getProject = catchAsync(async (req, res, next) => {
     });
 });
 
+// page projet individuel
+exports.editProject = catchAsync(async (req, res, next) => {
+    // récupère le projet sur son id
+    const project = await Project.findOne({ _id: req.params.id, user: req.user._id });
+
+    // renvoie une erreur personnalisée si le projet n'est pas trouvé
+    if (!project) {
+        return next(
+            new AppError(
+                `Chill panda est trop fatigué pour aller chercher des projets qui n'existent pas.`,
+                404
+            )
+        );
+    }
+
+    res.status(200).render('editproject', {
+        title: 'Update Project',
+        project,
+    });
+});
+
 // création d'un nouveau projet
 exports.newProject = (req, res) => {
     res.status(200).render('newproject', {

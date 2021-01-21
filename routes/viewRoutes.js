@@ -9,6 +9,7 @@ router.get('/signup', viewsController.getSignupForm);
 
 router.get('/overview', authController.protect, viewsController.getOverview);
 router.get('/project/:id', authController.protect, viewsController.getProject);
+router.get('/project/:id/edit', authController.protect, viewsController.editProject);
 router.get('/newproject', authController.protect, viewsController.newProject);
 router.get('/account', authController.protect, viewsController.getAccount);
 
