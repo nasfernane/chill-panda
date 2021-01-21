@@ -19,7 +19,7 @@ const signUp = async (name, email, password, passwordConfirm) => {
 
         // si l'inscription est réussie, affiche une alerte et bascule sur overview
         if (res.data.status === 'success') {
-            showAlert('success', 'Inscription réussie');
+            await showAlert('success', 'Inscription réussie');
             window.setTimeout(() => {
                 location.assign('/overview');
             }, 1500);

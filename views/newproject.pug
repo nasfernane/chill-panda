@@ -12,31 +12,61 @@ block content
 
             .newProjectView__form-container 
                 .newProjectView__form-container--header
-                    p= 'Nouveau projet'
                     p= `${date}`
                 
                 .newProjectView__form-container--form
                     form.form-newProject
 
                         .form__group
-                            label.form__label(for='projectName') Nom du projet
+                            label.form__label(for='projectName')
+                                p Nom du projet
                             input#projectName.form__input(type='text', required)
 
                         .form__group
-                            label.form__label(for='client') Client
+                            label.form__label(for='client')
+                                p Client
                             input#client.form__input(type='text', required)
 
-                        .form__group
-                            label.form__label(for='projectType') Type de projet
-                            input#projectType.form__input(type='text', required)
 
                         .form__group
-                            label.form__label(for='quote') Devis
+                            label.form__label(for='quote')
+                                p Devis
                             input#quote.form__input(type='text', required)
 
-                        .form__group
-                            label.form__label(for='status') Statut
-                            input#status.form__input(type='text', required)
+                        .form__group.form__group--radios
+                            p Type de projet
+                            .radio-container
+                                div
+                                    input#type-web.form__input--type(type='radio' name='projectType', value='Web' checked)
+                                    label(for='type-web') Web
+                                div
+                                    input#type-print.form__input--type(type='radio' name='projectType', value='Print')
+                                    label(for='status-current') Print
+                                div
+                                    input#type-network.form__input--type(type='radio' name='projectType', value='Réseau social')
+                                    label(for='status-current') Réseau social
+
+
+                        .form__group.form__group--radios
+                            p Statut
+                            .radio-container
+                                div
+                                    input#status-proposal.form__input--status(type='radio' name='status', value='Proposition' checked)
+                                    label(for='status-proposal') Proposition
+                                div
+                                    input#status-current.form__input--status(type='radio' name='status', value='En cours')
+                                    label(for='status-current') En cours
+                                div
+                                    input#status-toSettle.form__input-status(type='radio' name='status', value='A régler')
+                                    label(for='status-toSettle') A régler
+                                div
+                                    input#status-finished.form__input--status(type='radio' name='status', value='Terminé')
+                                    label(for='status-finished') Terminé
+
+
+                            //- input#status.form__input(type='text', required)
+                            //- input#status.form__input(type='text', required)
+                            //- input#status.form__input(type='text', required)
 
                         .form__group.right
                             button.btn Créer nouveau projet

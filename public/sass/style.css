@@ -529,7 +529,7 @@ main.newproject {
   flex-direction: column; }
   .newProjectView header {
     height: 15vw;
-    background: #FFF;
+    background: #fff;
     display: flex;
     align-items: flex-end;
     padding-bottom: 2rem; }
@@ -538,7 +538,7 @@ main.newproject {
       font-variant: small-caps;
       font-weight: 500; }
   .newProjectView__form-container {
-    width: 40%;
+    width: 50%;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -562,6 +562,8 @@ main.newproject {
         justify-content: space-between;
         align-items: center;
         margin-bottom: 2rem; }
+        .newProjectView__form-container--form .form__group p {
+          font-weight: bold; }
         .newProjectView__form-container--form .form__group.right {
           justify-content: flex-end; }
         .newProjectView__form-container--form .form__group .form__input {
@@ -581,3 +583,9 @@ main.newproject {
             border-bottom: 3px solid #4d734d; }
           .newProjectView__form-container--form .form__group .form__input:focus:invalid {
             border-bottom: 3px solid #d4533d; }
+        .newProjectView__form-container--form .form__group--radios {
+          display: flex; }
+          .newProjectView__form-container--form .form__group--radios .radio-container {
+            display: flex; }
+            .newProjectView__form-container--form .form__group--radios .radio-container div input {
+              margin: 1rem; }
