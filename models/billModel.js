@@ -15,9 +15,11 @@ const billSchema = new mongoose.Schema({
         required: true,
         min: 1,
     },
-    endorsement: {
-        type: Boolean,
-        default: false,
+    billType: {
+        type: String,
+        required: [true, 'La facture doit avoir un type'],
+        enum: ['Facture', 'Acompte', 'Avenant'],
+        message: 'Le type de facture doit être défini sur Facture, Acompte ou Avenant',
     },
     billNumber: {
         type: Number,

@@ -3,16 +3,15 @@
     display: flex;
     justify-content: space-between;
 
-    .modal-window {
-        // display: none; /* Hidden by default */
-        position: fixed; /* Stay in place */
-        z-index: 99; /* Sit on top */
+    .newBill-modal {
+        // display: none;
+        position: fixed;
+        z-index: 99;
         left: 0;
         top: 0;
-        width: 100vw; /* Full width */
-        height: 100%; /* Full height */
-        background-color: rgb(0, 0, 0); /* Fallback color */
-        background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+        width: 100vw;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
         &__content {
             font-size: 1.8rem;
             display: flex;
@@ -22,9 +21,75 @@
             box-shadow: 1rem 1rem 2rem rgba(0, 0, 0, 0.1);
             padding: 3rem 6rem;
             border-radius: 8px;
-            margin: 15% auto; /* 15% from the top and centered */
-            padding: 20px;
-            width: 60%;
+            margin: 15% auto;
+            width: 40%;
+
+            header {
+                display: flex;
+                width: 100%;
+                border-bottom: 0.1rem solid $color-font;
+                justify-content: space-between;
+                padding-bottom: 1rem;
+                margin-bottom: 1rem;
+            }
+
+            form {
+                padding-top: 2rem;
+                width: 100%;
+
+                .form__group {
+                    width: 100%;
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    margin-bottom: 2rem;
+
+                    p {
+                        font-weight: bold;
+                    }
+
+                    .form__input {
+                        width: 20rem;
+                        font-family: inherit;
+                        padding: 1.25rem 1.75rem;
+                        border: none;
+                        border-top: 3px solid transparent;
+                        border-bottom: 3px solid transparent;
+                        -webkit-transition: all 0.3s;
+                        transition: all 0.3s;
+                        border-radius: 4px;
+                        -webkit-box-sizing: border-box;
+                        box-sizing: border-box;
+
+                        &:focus {
+                            outline: none;
+                            border-bottom: 3px solid $color-green;
+                        }
+
+                        &:focus:invalid {
+                            border-bottom: 3px solid $color-orange;
+                        }
+                    }
+
+                    &--radios {
+                        .radio-container {
+                            display: flex;
+
+                            div {
+                                min-width: 14rem;
+                                display: flex;
+                                align-items: center;
+                                justify-content: flex-start;
+
+                                input {
+                                    margin: 1rem;
+                                    width: auto;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
     }
 

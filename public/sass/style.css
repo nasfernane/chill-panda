@@ -278,22 +278,15 @@ body {
   width: 100%;
   display: flex;
   justify-content: space-between; }
-  .projectview .modal-window {
+  .projectview .newBill-modal {
     position: fixed;
-    /* Stay in place */
     z-index: 99;
-    /* Sit on top */
     left: 0;
     top: 0;
     width: 100vw;
-    /* Full width */
     height: 100%;
-    /* Full height */
-    background-color: black;
-    /* Fallback color */
-    background-color: rgba(0, 0, 0, 0.4);
-    /* Black w/ opacity */ }
-    .projectview .modal-window__content {
+    background-color: rgba(0, 0, 0, 0.5); }
+    .projectview .newBill-modal__content {
       font-size: 1.8rem;
       display: flex;
       flex-direction: column;
@@ -303,9 +296,52 @@ body {
       padding: 3rem 6rem;
       border-radius: 8px;
       margin: 15% auto;
-      /* 15% from the top and centered */
-      padding: 20px;
-      width: 60%; }
+      width: 40%; }
+      .projectview .newBill-modal__content header {
+        display: flex;
+        width: 100%;
+        border-bottom: 0.1rem solid #444444;
+        justify-content: space-between;
+        padding-bottom: 1rem;
+        margin-bottom: 1rem; }
+      .projectview .newBill-modal__content form {
+        padding-top: 2rem;
+        width: 100%; }
+        .projectview .newBill-modal__content form .form__group {
+          width: 100%;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          margin-bottom: 2rem; }
+          .projectview .newBill-modal__content form .form__group p {
+            font-weight: bold; }
+          .projectview .newBill-modal__content form .form__group .form__input {
+            width: 20rem;
+            font-family: inherit;
+            padding: 1.25rem 1.75rem;
+            border: none;
+            border-top: 3px solid transparent;
+            border-bottom: 3px solid transparent;
+            -webkit-transition: all 0.3s;
+            transition: all 0.3s;
+            border-radius: 4px;
+            -webkit-box-sizing: border-box;
+            box-sizing: border-box; }
+            .projectview .newBill-modal__content form .form__group .form__input:focus {
+              outline: none;
+              border-bottom: 3px solid #4d734d; }
+            .projectview .newBill-modal__content form .form__group .form__input:focus:invalid {
+              border-bottom: 3px solid #d4533d; }
+          .projectview .newBill-modal__content form .form__group--radios .radio-container {
+            display: flex; }
+            .projectview .newBill-modal__content form .form__group--radios .radio-container div {
+              min-width: 14rem;
+              display: flex;
+              align-items: center;
+              justify-content: flex-start; }
+              .projectview .newBill-modal__content form .form__group--radios .radio-container div input {
+                margin: 1rem;
+                width: auto; }
   .projectview .project {
     margin-left: 15vw;
     width: 85vw;
