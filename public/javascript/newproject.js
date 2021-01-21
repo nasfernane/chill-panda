@@ -28,16 +28,27 @@ const createNewProject = async (name, client, projectType, quote, status) => {
 };
 
 if (newProjectForm) {
+    // récupère les boutons radio pour le statut du projet
     const statusArray = document.getElementsByName('status');
+    // récupère les boutons radio pour le type de projet
+    const typeArray = document.getElementsByName('projectType');
 
     newProjectForm.addEventListener('submit', e => {
         e.preventDefault();
         const name = document.getElementById('projectName').value;
         const client = document.getElementById('client').value;
-        const projectType = document.getElementById('projectType').value;
         const quote = document.getElementById('quote').value;
+        let projectType;
         let status;
 
+        // boucle sur le type de projet pour récupérer le choix utilisateur
+        for (let i = 0; i < typeArray.length; i++) {
+            if (typeArray[i].checked) {
+                projectType = typeArray[i].value;
+            }
+        }
+
+        // boucle sur le status du projet pour récupérer le choix utilisateur
         for (let i = 0; i < statusArray.length; i++) {
             if (statusArray[i].checked) {
                 status = statusArray[i].value;
