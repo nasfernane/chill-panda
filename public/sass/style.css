@@ -340,6 +340,17 @@ body {
       border: 2px solid #d4533d; }
     .projectview .project .card.encours {
       border: 2px solid #444444; }
+    .projectview .project .billsHeader {
+      align-self: flex-start;
+      margin-left: 15rem; }
+      .projectview .project .billsHeader h1 {
+        padding-right: 3rem;
+        display: inline; }
+      .projectview .project .billsHeader img {
+        transform: translateY(0.5rem);
+        transition: all 0.1s ease-in; }
+        .projectview .project .billsHeader img:hover {
+          transform: scale(1.2); }
 
 .login {
   height: 100vh;

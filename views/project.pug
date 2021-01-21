@@ -52,7 +52,10 @@ block content
 
                     img(src='/img/edit.png')
 
-            h1 Factures
+            .billsHeader
+                h1 Factures
+                a(href='#')
+                    img(src='/img/add.png')
 
             each bill in project.bills
                 - let billcolor = bill.paid ? 'terminé' : 'proposition';

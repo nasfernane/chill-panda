@@ -90,5 +90,24 @@
         .card.encours {
             border: 2px solid $color-font;
         }
+
+        .billsHeader {
+            align-self: flex-start;
+            margin-left: 15rem;
+
+            h1 {
+                padding-right: 3rem;
+                display: inline;
+            }
+
+            img {
+                transform: translateY(0.5rem);
+                transition: all 0.1s ease-in;
+
+                &:hover {
+                    transform: scale(1.2);
+                }
+            }
+        }
     }
 }
