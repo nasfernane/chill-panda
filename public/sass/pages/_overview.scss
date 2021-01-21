@@ -69,11 +69,15 @@
                 }
 
                 &__header.proposition {
-                    background-color: $color-orange;
+                    background-color: $color-yellow;
                 }
 
                 &__header.encours {
                     background-color: $color-font;
+                }
+
+                &__header.arégler {
+                    background-color: $color-orange;
                 }
 
                 &__details {
@@ -105,11 +109,15 @@
             }
 
             .card.proposition {
-                border: 2px solid $color-orange;
+                border: 2px solid $color-yellow;
             }
 
             .card.encours {
                 border: 2px solid $color-font;
+            }
+
+            .card.arégler {
+                border: 2px solid $color-orange;
             }
         }
     }

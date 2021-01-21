@@ -243,9 +243,11 @@ body {
       .overview .projects__container .card__header.terminé {
         background-color: #4d734d; }
       .overview .projects__container .card__header.proposition {
-        background-color: #d4533d; }
+        background-color: #ffbf00; }
       .overview .projects__container .card__header.encours {
         background-color: #444444; }
+      .overview .projects__container .card__header.arégler {
+        background-color: #d4533d; }
       .overview .projects__container .card__details {
         padding: 1rem 3rem;
         width: 100%;
@@ -266,9 +268,11 @@ body {
     .overview .projects__container .card.terminé {
       border: 2px solid #4d734d; }
     .overview .projects__container .card.proposition {
-      border: 2px solid #d4533d; }
+      border: 2px solid #ffbf00; }
     .overview .projects__container .card.encours {
       border: 2px solid #444444; }
+    .overview .projects__container .card.arégler {
+      border: 2px solid #d4533d; }
 
 .projectview {
   width: 100%;
