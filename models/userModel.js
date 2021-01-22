@@ -105,8 +105,6 @@ userSchema.methods.changedPasswordAfter = function (JWTTimestamp) {
     if (this.passwordChangedAt) {
         // récupère la date du changement de mdp en timestamp, puis transforme en secondes sous forme d'entier
         const changedTimestamp = parseInt(this.passwordChangedAt.getTime() / 1000, 10);
-
-        console.log(changedTimestamp, JWTTimestamp);
         return JWTTimestamp < changedTimestamp;
     }
 

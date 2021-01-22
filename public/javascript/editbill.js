@@ -81,7 +81,6 @@ editBillButtons.forEach(el => {
             document.querySelector('#edit-state-paid').setAttribute('checked', true);
         }
 
-        console.log(billCard.children[1].firstChild.children[2].innerText.split(' '));
         document.querySelector('.editBill-modal').style.display = 'block';
     });
 });

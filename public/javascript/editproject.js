@@ -37,12 +37,10 @@ if (editProjectForm) {
     const typeArray = document.getElementsByName('projectType');
     // récupère tous les inputs avec l'attribut to check
     const inputsArray = document.querySelectorAll('input[tocheck]');
-    console.log(inputsArray);
 
     // boucle sur tous les inputs radio pour leur rajouter l'attribut checked selon le projet
     for (let i = 0; i < inputsArray.length; i++) {
         const attr = inputsArray[i].attributes[5].nodeValue;
-        console.log(attr);
         if (attr == 'checked') {
             inputsArray[i].setAttribute('checked', true);
         }

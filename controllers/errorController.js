@@ -9,11 +9,9 @@ const handleCastErrorDB = err => {
 // gestion d'erreur mongoose : duplicate field
 const handleDuplicateFieldDB = err => {
     const value = err.errmsg.match(/(["'])(\\?.)*?\1/)[0];
-    console.log(value);
 
     const message = `Ces données existent déjà: ${value} `;
     return new AppError(message, 400);
-
 };
 
 // gestion d'erreur mongoose : validation errors
@@ -45,7 +43,7 @@ const sendErrorDev = (err, req, res) => {
     }
 
     // B) erreur sur rendu du site réel
-    console.error('ERROR 💥', err)
+    console.error('ERROR 💥', err);
     return res.status(err.statusCode).render('error', {
         title: 'Erreur',
         msg: err.message,
@@ -56,11 +54,11 @@ const sendErrorDev = (err, req, res) => {
 const sendErrorProd = (err, req, res) => {
     // A) API
     if (req.originalUrl.startsWith('/api')) {
-    // séparation des erreurs opérationnelles "côté client"...
+        // séparation des erreurs opérationnelles "côté client"...
         if (err.isOperational) {
             return res.status(err.statusCode).json({
                 status: err.status,
-                message: err.message
+                message: err.message,
             });
         }
 
@@ -78,8 +76,8 @@ const sendErrorProd = (err, req, res) => {
         return res.status(err.statusCode).render('error', {
             title: 'Erreur',
             msg: err.message,
-    });
-    } 
+        });
+    }
 
     // ... des erreurs de code ou inconnues
     console.error('Erreur rencontrée 💥', err);
@@ -87,7 +85,7 @@ const sendErrorProd = (err, req, res) => {
         title: 'Erreur',
         msg: err.message,
     });
-}
+};
 
 module.exports = (err, req, res, next) => {
     // définit le statusCode de l'erreur sur elle même si elle est définie || 500 (internal server error)
@@ -99,7 +97,7 @@ module.exports = (err, req, res, next) => {
     } else if (process.env.NODE_ENV === 'production') {
         // hard copy l'erreur pour ne pas ré-assigner la valeur du middleware
         let error = { ...err };
-        error.message = err.message
+        error.message = err.message;
         // délègue les erreurs mongoose dans des fonctions séparées pour les transformer en erreurs opérationnelles et renvoyer une erreur 'human friendly'
         // si c'est une erreur de champ
         if (error.kind === 'ObjectId') error = handleCastErrorDB(error);

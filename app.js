@@ -6,6 +6,8 @@ const mongoSanitize = require('express-mongo-sanitize');
 const xss = require('xss-clean');
 const hpp = require('hpp');
 const cookieParser = require('cookie-parser');
+// compresse les réponses aux clients (json ou html)
+const compression = require('compression');
 const rateLimit = require('express-rate-limit');
 const morgan = require('morgan');
 const AppError = require('./utils/appError');
@@ -65,6 +67,9 @@ app.use(
         whitelist: ['client', 'quote', 'bill', 'status', 'projectType', 'name'],
     })
 );
+
+// renvoie un middleware qui compresse les réponses aux clients (HTML ou JSON)
+app.use(compression());
 
 //test
 app.use((req, res, next) => {

@@ -12,7 +12,6 @@ const factory = require('./handlerFactory');
 // vérifie que le projet concerné par la facture appartient à l'utilisateur et ajoute des infos au body
 exports.checkBeforeCreateBill = catchAsync(async (req, res, next) => {
     // vérifie que le projet dans lequel l'utillisateur essaie d'ajouter une facture lui appartient
-    console.log(req.params, 'coucou');
     const project = await Project.findById(req.params.projectid);
     if (!project.user._id.equals(req.user._id)) {
         return next(
