@@ -8,10 +8,7 @@ const userPwForm = document.querySelector('.form-user-password');
 const updateSettings = async (data, type) => {
     try {
         // en fonction du type entré en paramètre, on change l'url pour maj les data ou le mot de passe
-        const url =
-            type === 'password'
-                ? 'http://127.0.0.1:8000/api/v1/users/updatepassword'
-                : 'http://127.0.0.1:8000/api/v1/users/updateme';
+        const url = type === 'password' ? '/api/v1/users/updatepassword' : '/api/v1/users/updateme';
         // définit le type d'alerte pour l'utilisateur
         const alertType = type === 'password' ? 'mot de passe' : 'compte';
 

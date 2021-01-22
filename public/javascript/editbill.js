@@ -19,7 +19,7 @@ const editBill = async (billName, price, category, state) => {
     try {
         const res = await axios({
             method: 'PATCH',
-            url: `http://127.0.0.1:8000/api/v1/bills/${billId}`,
+            url: `/api/v1/bills/${billId}`,
             data: {
                 billName,
                 price,

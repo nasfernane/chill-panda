@@ -6,7 +6,7 @@ const createNewProject = async (name, client, projectType, quote, status) => {
     try {
         const res = await axios({
             method: 'POST',
-            url: 'http://127.0.0.1:8000/api/v1/projects',
+            url: '/api/v1/projects',
             data: {
                 name,
                 client,

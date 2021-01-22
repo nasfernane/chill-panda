@@ -12,7 +12,7 @@ const createNewBill = async (billName, price, category, state) => {
     try {
         const res = await axios({
             method: 'POST',
-            url: `http://127.0.0.1:8000/api/v1/projects/${projectId}/bills`,
+            url: `/api/v1/projects/${projectId}/bills`,
             data: {
                 billName,
                 price,
