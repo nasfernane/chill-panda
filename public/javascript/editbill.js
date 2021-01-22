@@ -43,9 +43,11 @@ const editBill = async (billName, price, category, state) => {
 //
 
 // faire disparaitre la fenêtre modèle édition facture
-editCloseButton.addEventListener('click', () => {
-    editBillModal.style.display = 'none';
-});
+if (editCloseButton) {
+    editCloseButton.addEventListener('click', () => {
+        editBillModal.style.display = 'none';
+    });
+}
 
 // A chaque clic sur un bouton d'édition de facture, récupère le parent pour pré-remplir les valeurs de la facture initiale
 editBillButtons.forEach(el => {

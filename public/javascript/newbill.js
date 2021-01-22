@@ -33,14 +33,18 @@ const createNewBill = async (billName, price, category, state) => {
 };
 
 // faire apparaitre la fenêtre modèle nouvelle facture
-newBillButton.addEventListener('click', () => {
-    newBillModal.style.display = 'block';
-});
+if (newBillButton) {
+    newBillButton.addEventListener('click', () => {
+        newBillModal.style.display = 'block';
+    });
+}
 
 // faire disparaitre la fenêtre modèle nouvelle facture
-closeButton.addEventListener('click', () => {
-    newBillModal.style.display = 'none';
-});
+if (closeButton) {
+    closeButton.addEventListener('click', () => {
+        newBillModal.style.display = 'none';
+    });
+}
 
 if (newBillForm) {
     // récupère les boutons radio pour la catégorie de la facture

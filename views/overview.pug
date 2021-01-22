@@ -13,6 +13,7 @@ block content
                     a: button filtres
 
             .projects__container
+                
                 each project in projects
                     //- récupère le status du projet, le met en minuscule et enlève les espaces pour l'ajouter en classe
                     - let statuscolor = project.status.toLowerCase().trim().split(' ').join('')

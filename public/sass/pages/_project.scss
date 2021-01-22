@@ -192,6 +192,10 @@
                     }
                 }
 
+                img:hover {
+                    cursor: pointer;
+                }
+
                 &--bill {
                     ul {
                         position: relative;

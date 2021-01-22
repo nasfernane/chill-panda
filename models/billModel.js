@@ -35,8 +35,8 @@ const billSchema = new mongoose.Schema({
     state: {
         type: String,
         required: [true, `Vous devez renseigner l'état de la facture`],
-        enum: ['En attente', 'Réglé'],
-        message: `L'état de la facture doit être défini sur En attente ou Réglé`,
+        enum: ['En attente', 'Effectué'],
+        message: `L'état de la facture doit être défini sur En attente ou Effectué`,
     },
 });
 

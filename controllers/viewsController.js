@@ -7,7 +7,6 @@ const AppError = require('../utils/appError');
 // overview de tous les projets
 exports.getOverview = catchAsync(async (req, res, next) => {
     // récupération de tous les projets de la collection
-    console.log(req.user);
     const projects = await Project.find({ user: req.user._id });
 
     res.status(200).render('overview', {

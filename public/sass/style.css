@@ -430,6 +430,8 @@ body {
           align-items: center; }
           .projectview .project .card__details ul li {
             margin-right: 1rem; }
+        .projectview .project .card__details img:hover {
+          cursor: pointer; }
         .projectview .project .card__details--bill ul {
           position: relative; }
           .projectview .project .card__details--bill ul li {
