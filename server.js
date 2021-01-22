@@ -33,7 +33,7 @@ mongoose
     })
     .then(console.log('DB connection success'));
 
-// définit le port en local
+// définit le port pour heroku ou en local
 const port = process.env.PORT || 8000;
 // on ajoute un écouteur pour log le port sur lequel on évolue
 const server = app.listen(port, () => {
