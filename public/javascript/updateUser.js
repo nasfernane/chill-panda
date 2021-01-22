@@ -22,7 +22,10 @@ const updateSettings = async (data, type) => {
         });
 
         if (res.data.status === 'success') {
-            showAlert('success', `Votre ${alertType} a été correctement mis à jour`);
+            await showAlert('success', `Votre ${alertType} a été correctement mis à jour`);
+            window.setTimeout(() => {
+                location.reload();
+            }, 1500);
         }
     } catch (err) {
         showAlert('error', err.response.data.message);

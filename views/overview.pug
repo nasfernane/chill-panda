@@ -26,34 +26,34 @@ block content
                             ul
                                 div
                                     li 
-                                        strong N° devis: 
+                                        strong N° devis : 
                                         |  #{project.quoteNumber }
                                     li
-                                        strong Devis: 
-                                        |  #{project.quote}
+                                        strong Devis : 
+                                        |  #{project.quote} €
                                     
                                 div
                                     li
                                         strong Client 
                                         |  #{project.client}
                                     li 
-                                        strong Type de projet: 
+                                        strong Type de projet : 
                                         |  #{project.projectType}
                                     
                                 div
                                     li
-                                        strong Nombre de factures: 
+                                        strong Nombre de factures : 
                                         |  #{project.billsQuantity}
                                     li 
-                                        strong Montant total factures: 
-                                        |  #{project.billsTotal}
+                                        strong Montant total factures : 
+                                        |  #{project.billsTotal} €
                                 div
                                     li  
                                         strong Statut : 
                                         |  #{project.status}
                                     li
-                                        strong Règlement: 
-                                        |  #{project.alreadyPaid}
+                                        strong= 'Règlement :' 
+                                        |   #{`${project.alreadyPaid > 0 ? `${project.alreadyPaid} €` : 'En attente'}`}
                         
                             a(href=`/project/${project._id}`)
                                 button.btn.btn--details Détails

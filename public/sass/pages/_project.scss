@@ -3,7 +3,8 @@
     display: flex;
     justify-content: space-between;
 
-    .newBill-modal {
+    .newBill-modal,
+    .editBill-modal {
         display: none;
         position: fixed;
         z-index: 99;
@@ -188,6 +189,32 @@
 
                     li {
                         margin-right: 1rem;
+                    }
+                }
+
+                &--bill {
+                    ul {
+                        position: relative;
+
+                        li {
+                            position: absolute;
+                            min-width: 20%;
+
+                            &:nth-child(2) {
+                                top: auto;
+                                left: 30%;
+                            }
+
+                            &:nth-child(3) {
+                                top: auto;
+                                left: 60%;
+                            }
+
+                            &:nth-child(4) {
+                                top: auto;
+                                left: 90%;
+                            }
+                        }
                     }
                 }
             }

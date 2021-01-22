@@ -8,7 +8,6 @@ const closeButton = document.querySelector('.newBill-modal__content span.close')
 const createNewBill = async (billName, price, category, state) => {
     // récupère l'id du projet sur lequel créer une nouvelle facture
     const projectId = window.location.href.split('/')[4];
-    console.log(projectId);
 
     try {
         const res = await axios({
@@ -46,7 +45,7 @@ closeButton.addEventListener('click', () => {
 if (newBillForm) {
     // récupère les boutons radio pour la catégorie de la facture
     const categoryArray = document.getElementsByName('category');
-    // récupère les boutons radio pour le type de projet
+    // récupère les boutons radio pour le règlement de la facture
     const stateArray = document.getElementsByName('state');
 
     newBillForm.addEventListener('submit', e => {

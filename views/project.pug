@@ -12,6 +12,8 @@ block content
         //- fenêtre modale pour créer une nouvelle facture
         include _newBill
 
+        include _editBill
+
         .project
             .project__header 
                 h1 Project Details
@@ -26,10 +28,10 @@ block content
                         div
                             li 
                                 strong N° devis : 
-                                |  #{project.quoteNumber }
+                                    span #{project.quoteNumber }
                             li
                                 strong Devis : 
-                                |  #{project.quote} €
+                                    span  #{project.quote} €
 
                         div
                             li
@@ -70,18 +72,23 @@ block content
                         p= `${bill.billName} `
                         p= `${bill.createdAt.toLocaleString('fr-FR', {day: 'numeric', month: 'long', year: 'numeric'})}`
 
-                    .card__details 
+                    .card__details.card__details--bill
                         ul
-                            li.billPolish 
-                                strong N° facture: 
+                            li
+                                strong N° facture : 
                                 |  #{bill.billNumber }
-                            li.billPolish 
-                                strong Montant facture: 
+                            li
+                                strong Montant facture : 
                                 |  #{bill.price} €
-                            li.billPolish 
-                                strong #{bill.state}
+                            li
+                                strong Catégorie :
+                                |   #{bill.category}
+                            li
+                                strong Règlement :
+                                |   #{bill.state === 'Réglé' ? 'Effectué' : 'En attente'}
+                            
 
-                        img(src='/img/edit.png')
+                        img.editBillButton(src='/img/edit.png' data-id=`${bill._id}`)
 
 
 

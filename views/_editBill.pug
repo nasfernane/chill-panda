@@ -1,0 +1,44 @@
+//- fenêtre modale pour ajouter une facture
+div.editBill-modal
+    //-contenu de la modale
+    div.editBill-modal__content
+        span.close &times;
+
+        header 
+            p#edit-bill-number
+            p créée le 
+                span#edit-bill-date= `${date}`
+
+        form.editBill-form
+            .form__group
+                label.form__label(for='bill-name')
+                    p Nom de la facture
+                input#edit-bill-name.form__input(type='text', required)
+            .form__group
+                label.form__label(for='bill-price')
+                    p Montant
+                input#edit-bill-price.form__input(type='number', required)
+            .form__group.form__group--radios
+                p Catégorie
+                .radio-container
+                    div 
+                        input#edit-category-bill.form__input(type='radio', name='edit-category', value='Facture' checked)
+                        label(for='edit-category-bill') Facture
+                    div 
+                        input#edit-category-deposit.form__input(type='radio', name='edit-category', value='Acompte')
+                        label(for='edit-category-deposit') Acompte
+                    div 
+                        input#edit-category-amendment.form__input(type='radio', name='edit-category', value='Avenant')
+                        label(for='edit-category-amendment') Avenant
+            .form__group.form__group--radios
+                p Règlement
+                .radio-container
+                    div 
+                        input#edit-state-waiting.form__input(type='radio', name='edit-state', value='En attente' checked)
+                        label(for='edit-state-waiting') En attente
+                    div 
+                        input#edit-state-paid.form__input(type='radio', name='edit-state', value='Réglé')
+                        label(for='edit-state-paid') Effectué
+                        
+            .form__group.right
+                    button.btn Modifier facture
