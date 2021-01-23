@@ -14,10 +14,13 @@ const createNewProject = async (name, client, projectType, quote, status) => {
                 quote,
                 status,
             },
+            validateStatus: status => {
+                return true; // test pour bug intern error
+            },
         });
 
         if (res.data.status === 'success') {
-            await showAlert('success', 'Projet créé');
+            showAlert('success', 'Projet créé');
             window.setTimeout(() => {
                 location.assign('/overview');
             }, 1500);
