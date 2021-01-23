@@ -1,4 +1,5 @@
 import { showAlert } from './alert.js';
+import axios from 'axios';
 
 const newProjectForm = document.querySelector('.form-newProject');
 
@@ -14,8 +15,8 @@ const createNewProject = async (name, client, projectType, quote, status) => {
                 quote,
                 status,
             },
-            validateStatus: fonction (status) {
-                return : status < 600 // test pour bug intern error
+            validateStatus: status => {
+                return true; // test bug pour intern error
             },
         });
 
@@ -27,6 +28,7 @@ const createNewProject = async (name, client, projectType, quote, status) => {
         }
     } catch (err) {
         showAlert('error', err.response.data.message);
+        console.log(err);
     }
 };
 
