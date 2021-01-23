@@ -14,8 +14,8 @@ const createNewProject = async (name, client, projectType, quote, status) => {
                 quote,
                 status,
             },
-            validateStatus: status => {
-                return true; // test pour bug intern error
+            validateStatus: fonction (status) {
+                return : status < 600 // test pour bug intern error
             },
         });
 
