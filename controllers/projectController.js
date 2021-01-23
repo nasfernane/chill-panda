@@ -2,11 +2,11 @@
 const Project = require('../models/projectModel');
 const Bill = require('../models/billModel');
 // import des méthodes API
-const APIFeatures = require('../utils/apiFeatures');
+// const APIFeatures = require('../utils/apiFeatures');
 // import module pour remplacer les blocs try/catch
 const catchAsync = require('../utils/catchAsync');
 // constructeur d'erreur
-const AppError = require('../utils/appError');
+// const AppError = require('../utils/appError');
 const factory = require('./handlerFactory');
 
 // définit le numéro de devis en fonction du nombre de projets existants
