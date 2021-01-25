@@ -14,37 +14,49 @@
             height: 15vw;
             width: 70vw;
             display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            align-items: flex-start;
+            justify-content: flex-start;
+            align-items: flex-end;
             padding-top: 10rem;
-            padding-bottom: 2rem;
+            padding-bottom: 3rem;
 
             h1 {
                 font-size: 5rem;
                 font-variant: small-caps;
                 font-weight: 500;
+                padding-right: 3rem;
             }
 
-            .search {
-                width: 50%;
-                font-size: 1.8rem;
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
+            .filters {
+                transform: translateY(-20%);
+                img {
+                    height: 4.5rem;
+                    width: 4.5rem;
+                    transition: 3s linear;
 
-                input {
-                    height: 2.5rem;
-                    color: $color-font;
-                }
-
-                p {
-                    font-weight: bold;
+                    &:hover {
+                        transform: rotate(360deg);
+                        cursor: pointer;
+                    }
                 }
             }
         }
 
         &__container {
+            .filtersCard {
+                width: 70vw;
+                margin-bottom: 1rem;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                border: 1px solid $color-font;
+                border-radius: 0.8rem;
+                height: 60px;
+                &--hide {
+                    display: none;
+                }
+            }
+
             .card {
                 width: 70vw;
                 margin-bottom: 1rem;

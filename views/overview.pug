@@ -5,14 +5,13 @@ block content
         include _sidebar
         .projects
             .projects__header
-                h1 Projets
-                .search 
-                    p Rechercher par
-                    input
-                    input
-                    a: button filtres
+                h1 Tous vos projets
+                .filters
+                    img#filtersButton(src='/img/settings.png')
 
             .projects__container
+                div(class='filtersCard filtersCard--hide')
+                    h2 Filtres
                 
                 each project in projects
                     //- récupère le status du projet, le met en minuscule et enlève les espaces pour l'ajouter en classe

@@ -65,7 +65,7 @@ block content
                 img#newBillButton(src='/img/add.png')
 
             each bill in project.bills
-                - let billcolor = bill.state === 'Réglé' ? 'terminé' : 'proposition';
+                - let billcolor = bill.state === 'Effectué' ? 'terminé' : 'proposition';
 
                 div(class=`card ${billcolor}`)
                     div(class=`card__header ${billcolor}`)
@@ -85,7 +85,7 @@ block content
                                 |   #{bill.category}
                             li
                                 strong Règlement :
-                                |   #{bill.state === 'Réglé' ? 'Effectué' : 'En attente'}
+                                |   #{bill.state === 'Effectué' ? 'Effectué' : 'En attente'}
                             
 
                         img.editBillButton(src='/img/edit.png' data-id=`${bill._id}`)
