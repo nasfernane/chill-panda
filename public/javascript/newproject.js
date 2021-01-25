@@ -27,7 +27,7 @@ const createNewProject = async (name, client, projectType, quote, status) => {
             }, 1500);
         }
     } catch (err) {
-        showAlert('error', err.response.data.message);
+        showAlert('error', err);
         console.log(err);
     }
 };
