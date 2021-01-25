@@ -1,0 +1,33 @@
+div(class='filtersCard filtersCard--hide')
+    h2 Filtres
+    .filtersOptions 
+        form.filters-form
+            .filters-form__sortBy
+                label(for='sort-by') Ranger par :
+                select#sort-by(name='sort-by')
+                    option(value='') Sélectionner
+                    option(value='quote') Montant devis (croissant)
+                    option(value='-quote') Montant devis (décroissant)
+                    option(value='alreadyPaid') Règlement (croissant)
+                    option(value='-alreadyPaid') Règlement (décroissant)
+                    option(value='client') Client
+                    option(value='status') Statut
+            .filters-form__status
+
+                p Statut
+                div 
+                    input#filter-state-current(type='radio', value='En cours', name='filter-state')
+                    label(for='flter-state-current') En cours
+                div 
+                    input#filter-state-proposition(type='radio', value='Proposition', name='filter-state')
+                    label(for='flter-state-proposition') Proposition
+                div 
+                    input#filter-state-toSettle(type='radio', value='A régler', name='filter-state')
+                    label(for='flter-state-toSettle') A régler
+                div 
+                    input#filter-state-finished(type='radio', value='Terminé', name='filter-state')
+                    label(for='flter-state-finished') Terminé
+                
+            
+            .filters-form__button
+                button.btn Lancer la recherche

@@ -10,8 +10,7 @@ block content
                     img#filtersButton(src='/img/settings.png')
 
             .projects__container
-                div(class='filtersCard filtersCard--hide')
-                    h2 Filtres
+                include _filters
                 
                 each project in projects
                     //- récupère le status du projet, le met en minuscule et enlève les espaces pour l'ajouter en classe

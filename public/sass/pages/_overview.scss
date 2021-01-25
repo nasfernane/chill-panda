@@ -49,11 +49,63 @@
                 flex-direction: column;
                 align-items: center;
                 justify-content: center;
-                border: 1px solid $color-font;
+                border: 3px solid $color-font;
                 border-radius: 0.8rem;
-                height: 60px;
-                &--hide {
-                    display: none;
+                padding: 2rem 0rem;
+                font-size: 1.8rem;
+
+                h2 {
+                    font-size: 2.5rem;
+                }
+
+                // &--hide {
+                //     display: none;
+                // }
+
+                .filtersOptions {
+                    width: 100%;
+
+                    .filters-form {
+                        display: flex;
+                        flex-direction: column;
+                        width: 90%;
+                        justify-content: space-around;
+                        align-items: flex-start;
+                        padding-left: 6rem;
+
+                        &__sortBy {
+                            width: 90%;
+
+                            select {
+                                margin-left: 2rem;
+                                padding: 0.5rem 0.5rem;
+                                font: inherit;
+                            }
+                        }
+
+                        &__filters {
+                            width: 90%;
+                            display: flex;
+                            flex-direction: row;
+                            justify-content: space-between;
+                            align-items: center;
+
+                            div {
+                                display: flex;
+                                justify-content: space-between;
+                                align-items: center;
+
+                                label {
+                                    margin-left: 1rem;
+                                }
+                            }
+                        }
+
+                        &__button {
+                            margin-top: 3rem;
+                            align-self: center;
+                        }
+                    }
                 }
             }
 
