@@ -66,7 +66,7 @@ billSchema.statics.calcSumBills = async function (projectId) {
     const settlementSum = await this.aggregate([
         {
             // phase 1 : récupère les factures payées
-            $match: { project: projectId, state: 'Réglé' },
+            $match: { project: projectId, state: 'Effectué' },
         },
         {
             $group: {
