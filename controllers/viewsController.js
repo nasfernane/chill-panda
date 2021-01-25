@@ -3,11 +3,31 @@ const User = require('../models/userModel');
 const Bill = require('../models/billModel');
 const catchAsync = require('../utils/catchAsync');
 const AppError = require('../utils/appError');
+// regroupe les méthodes de tri, filtres et pagination
+const APIFeatures = require('../utils/apiFeatures');
 
 // overview de tous les projets
+// exports.getOverview = catchAsync(async (req, res, next) => {
+//     // récupération de tous les projets de la collection
+//     const projects = await Project.find({ user: req.user._id });
+
+//     res.status(200).render('overview', {
+//         title: 'All Projects',
+//         projects,
+//     });
+// });
+
 exports.getOverview = catchAsync(async (req, res, next) => {
-    // récupération de tous les projets de la collection
-    const projects = await Project.find({ user: req.user._id });
+    // filtre pour ne récupérer que les documents de l'utilisateur
+    let filter = { user: `${req.user._id}` };
+    // crée une instance d'APIFeatures pour récupérer les méthodes sur API, on choisit quelle fonctions appliquer à cette méthode
+    const docs = new APIFeatures(Project.find(filter), req.query)
+        .filter()
+        .sort()
+        .limitFields()
+        .paginate();
+    // on récupère la requête transformée
+    const projects = await docs.query;
 
     res.status(200).render('overview', {
         title: 'All Projects',
