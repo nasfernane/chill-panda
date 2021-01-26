@@ -1,5 +1,4 @@
 div(class='filtersCard filtersCard--hide')
-    h2 Filtres
     .filtersOptions 
         form.filters-form
             .filters-form__container
@@ -16,48 +15,31 @@ div(class='filtersCard filtersCard--hide')
 
                 .filters-form__container--date 
                     - let maxDate = new Date(Date.now());
-                    p Sélectionner par date :
-                    label(for='date-start') Entre le
+                    span Sélectionner par date :
+                    label(for='date-start') entre
                     input#date-start(type='date' name='date-between' min=`2018-01-01`)
-                    label(for='date-finish') et le
+                    label(for='date-finish') et
                     input#date-finish(type='date' name='date-between' max=`${maxDate}`)
 
             .filters-form__container
-                .filters-form__container--quoteAmount
-                    p Filtrer par devis  :
-                    div 
-                        input#filter-quote-lte.filter-quotes(type='radio', value='[lte]=', name='filter-quote')
-                        label(for='#filter-quote-lte') inférieur ou égal 
-                    div 
-                        input#filter-quote-equals.filter-quotes(type='radio', value='=', name='filter-quote')
-                        label(for='#filter-quote-equals') égal
-                    div 
-                        input#filter-quote-gte.filter-quotes(type='radio', value='[gte]=', name='filter-quote')
-                        label(for='#filter-quote-gte') supérieur ou égal
-                    div
-                        span à 
-                        input#filter-quote-amount(type='number')
-                        span €
-
-
-
-            .filters-form__container
-
                 .filters-form__container--status
-                    p Filtrer par statut : 
-                    div 
-                        input#filter-state-current(type='radio', value='En cours', name='filter-state')
-                        label(for='flter-state-current') En cours
-                    div 
-                        input#filter-state-proposition(type='radio', value='Proposition', name='filter-state')
-                        label(for='flter-state-proposition') Proposition
-                    div 
-                        input#filter-state-toSettle(type='radio', value='A régler', name='filter-state')
-                        label(for='flter-state-toSettle') A régler
-                    div 
-                        input#filter-state-finished(type='radio', value='Terminé', name='filter-state')
-                        label(for='flter-state-finished') Terminé
-                
+                    span Filtrer par statut : 
+                    select#filterByStatus(name='filter-state')
+                        option(value='') Sélectionner
+                        option(value='En cours') En cours
+                        option(value='Proposition') Proposition
+                        option(value='A régler') A régler
+                        option(value='Terminé') Terminé
+                        
+                .filters-form__container--quoteAmount
+                    span Filtrer par devis  :
+                    label(for='filter-quote-gte') entre
+                    input#filter-quote-gte(type='number' name='quote-between')
+                    label(for='filter-quote-lte') et
+                    input#filter-quote-lte(type='number' name='quote-between')
+                    span €
+
+
             
             .filters-form__button
                 button.btn Lancer la recherche
