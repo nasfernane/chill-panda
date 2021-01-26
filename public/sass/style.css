@@ -235,6 +235,8 @@ body {
       font-size: 1.8rem; }
       .overview .projects__container .filtersCard h2 {
         font-size: 2.5rem; }
+      .overview .projects__container .filtersCard--hide {
+        display: none; }
       .overview .projects__container .filtersCard .filtersOptions {
         width: 100%; }
         .overview .projects__container .filtersCard .filtersOptions .filters-form {
