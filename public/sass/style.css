@@ -243,6 +243,9 @@ body {
           width: 100%;
           justify-content: space-around;
           align-items: flex-start; }
+          .overview .projects__container .filtersCard .filtersOptions .filters-form p,
+          .overview .projects__container .filtersCard .filtersOptions .filters-form span {
+            font-weight: bold; }
           .overview .projects__container .filtersCard .filtersOptions .filters-form__container {
             width: 100%;
             display: flex;
@@ -254,28 +257,35 @@ body {
               .overview .projects__container .filtersCard .filtersOptions .filters-form__container--sortBy select {
                 margin-left: 2rem;
                 padding: 0.5rem 0.5rem;
-                font: inherit; }
+                font-family: inherit; }
             .overview .projects__container .filtersCard .filtersOptions .filters-form__container--date {
               display: flex;
+              align-items: center;
               width: 45%;
               flex: 2; }
               .overview .projects__container .filtersCard .filtersOptions .filters-form__container--date p {
                 margin-right: 1rem; }
               .overview .projects__container .filtersCard .filtersOptions .filters-form__container--date input {
-                padding: 0rem 1rem;
+                padding: 0.5rem 0.5rem;
+                font-family: inherit;
                 margin: 0rem 1rem; }
-          .overview .projects__container .filtersCard .filtersOptions .filters-form__status {
-            width: 90%;
-            display: flex;
-            flex-direction: row;
-            justify-content: space-between;
-            align-items: center; }
-            .overview .projects__container .filtersCard .filtersOptions .filters-form__status div {
+            .overview .projects__container .filtersCard .filtersOptions .filters-form__container--status, .overview .projects__container .filtersCard .filtersOptions .filters-form__container--quoteAmount {
               display: flex;
-              justify-content: space-between;
+              width: 100%;
+              flex-direction: row;
+              justify-content: flex-start;
               align-items: center; }
-              .overview .projects__container .filtersCard .filtersOptions .filters-form__status div label {
-                margin-left: 1rem; }
+              .overview .projects__container .filtersCard .filtersOptions .filters-form__container--status div, .overview .projects__container .filtersCard .filtersOptions .filters-form__container--quoteAmount div {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding: 0 1rem; }
+                .overview .projects__container .filtersCard .filtersOptions .filters-form__container--status div input, .overview .projects__container .filtersCard .filtersOptions .filters-form__container--quoteAmount div input {
+                  padding: 0.5rem 0.5rem; }
+                .overview .projects__container .filtersCard .filtersOptions .filters-form__container--status div label, .overview .projects__container .filtersCard .filtersOptions .filters-form__container--quoteAmount div label {
+                  margin-left: 0.5rem; }
+              .overview .projects__container .filtersCard .filtersOptions .filters-form__container--status span, .overview .projects__container .filtersCard .filtersOptions .filters-form__container--quoteAmount span {
+                margin: 1rem; }
           .overview .projects__container .filtersCard .filtersOptions .filters-form__button {
             margin-top: 3rem;
             align-self: center; }

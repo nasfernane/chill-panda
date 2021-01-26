@@ -72,6 +72,11 @@
                         justify-content: space-around;
                         align-items: flex-start;
 
+                        p,
+                        span {
+                            font-weight: bold;
+                        }
+
                         &__container {
                             width: 100%;
                             display: flex;
@@ -85,12 +90,13 @@
                                 select {
                                     margin-left: 2rem;
                                     padding: 0.5rem 0.5rem;
-                                    font: inherit;
+                                    font-family: inherit;
                                 }
                             }
 
                             &--date {
                                 display: flex;
+                                align-items: center;
                                 width: 45%;
                                 flex: 2;
                                 p {
@@ -98,26 +104,37 @@
                                 }
 
                                 input {
-                                    padding: 0rem 1rem;
+                                    padding: 0.5rem 0.5rem;
+                                    font-family: inherit;
                                     margin: 0rem 1rem;
                                 }
                             }
-                        }
 
-                        &__status {
-                            width: 90%;
-                            display: flex;
-                            flex-direction: row;
-                            justify-content: space-between;
-                            align-items: center;
-
-                            div {
+                            &--status,
+                            &--quoteAmount {
                                 display: flex;
-                                justify-content: space-between;
+                                width: 100%;
+                                flex-direction: row;
+                                justify-content: flex-start;
                                 align-items: center;
 
-                                label {
-                                    margin-left: 1rem;
+                                div {
+                                    display: flex;
+                                    justify-content: space-between;
+                                    align-items: center;
+                                    padding: 0 1rem;
+
+                                    input {
+                                        padding: 0.5rem 0.5rem;
+                                    }
+
+                                    label {
+                                        margin-left: 0.5rem;
+                                    }
+                                }
+
+                                span {
+                                    margin: 1rem;
                                 }
                             }
                         }

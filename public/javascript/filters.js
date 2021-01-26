@@ -7,7 +7,7 @@ const filtersForm = document.querySelector('.filters-form');
 // fonction qui crée une url en fonction des filtres sélectionnés et envoie sur la nouvelle page au submit du formulaire
 const newSearch = function () {
     const sortBy = document.querySelector('#sort-by').value;
-    const statusInputs = document.querySelectorAll('.filters-form__status input');
+    const statusInputs = document.querySelectorAll('.filters-form__container--status input');
     const dateInputs = document.querySelectorAll('.filters-form__container--date input');
 
     let url = '/overview?';
@@ -17,12 +17,6 @@ const newSearch = function () {
         url = url + `sort=${sortBy}&`;
     }
 
-    // boucle sur les inputs status pour vérifier si il y a une saisie et le cas échéant ajouter à l'url
-    for (let i = 0; i < statusInputs.length; i++) {
-        console.log(statusInputs[i]);
-        if (statusInputs[i].checked) url = url + `status=${statusInputs[i].value}`;
-    }
-
     // date min
     if (dateInputs[0].value) url = url + `&date[gte]=${dateInputs[0].value}`;
     // date max avec +1 sur le jour pour récupérer correctement LTE
@@ -30,6 +24,12 @@ const newSearch = function () {
         const date = new Date(dateInputs[1].value);
         const maxDate = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate() + 1}`;
         url = url + `&date[lte]=${maxDate}`;
+    }
+
+    // boucle sur les inputs status pour vérifier si il y a une saisie et le cas échéant ajouter à l'url
+    for (let i = 0; i < statusInputs.length; i++) {
+        console.log(statusInputs[i]);
+        if (statusInputs[i].checked) url = url + `status=${statusInputs[i].value}`;
     }
 
     console.log(url);
