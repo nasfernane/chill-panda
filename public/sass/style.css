@@ -395,14 +395,16 @@ body {
             font-weight: bold; }
           .projectview .newBill-modal__content form .form__group.right,
           .projectview .editBill-modal__content form .form__group.right {
-            justify-content: flex-end; }
+            justify-content: flex-end;
+            margin-top: 2rem;
+            margin-bottom: 0;
+            padding-bottom: 0; }
           .projectview .newBill-modal__content form .form__group .form__input,
           .projectview .editBill-modal__content form .form__group .form__input {
             width: 20rem;
             font-family: inherit;
             padding: 1.25rem 1.75rem;
             border: none;
-            border-top: 3px solid transparent;
             border-bottom: 3px solid transparent;
             -webkit-transition: all 0.3s;
             transition: all 0.3s;
@@ -429,6 +431,30 @@ body {
               .projectview .editBill-modal__content form .form__group--radios .radio-container div input {
                 margin: 1rem;
                 width: auto; }
+          .projectview .newBill-modal__content form .form__group--settlementDate,
+          .projectview .editBill-modal__content form .form__group--settlementDate {
+            display: flex;
+            justify-content: space-between; }
+            .projectview .newBill-modal__content form .form__group--settlementDate p,
+            .projectview .editBill-modal__content form .form__group--settlementDate p {
+              font-weight: bold; }
+            .projectview .newBill-modal__content form .form__group--settlementDate input,
+            .projectview .editBill-modal__content form .form__group--settlementDate input {
+              width: 20rem;
+              font-family: inherit;
+              padding: 1.25rem 1.75rem;
+              border: none;
+              border-bottom: 3px solid transparent;
+              transition: all 0.3s;
+              border-radius: 4px;
+              box-sizing: border-box; }
+              .projectview .newBill-modal__content form .form__group--settlementDate input:focus,
+              .projectview .editBill-modal__content form .form__group--settlementDate input:focus {
+                outline: none;
+                border-bottom: 3px solid #4d734d; }
+            .projectview .newBill-modal__content form .form__group--settlementDate--hide,
+            .projectview .editBill-modal__content form .form__group--settlementDate--hide {
+              display: none; }
   .projectview .project {
     margin-left: 15vw;
     width: 85vw;

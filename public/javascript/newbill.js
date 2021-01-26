@@ -47,6 +47,11 @@ if (closeButton) {
 }
 
 if (newBillForm) {
+    // si le règlement est marqué comme 'Effectué", affiche l'input date pour définir la date du règlement
+    if (document.querySelector('#state-paid').checked) {
+        document.querySelector('#settlementDate').style.display = block;
+    }
+    document.querySelector('#state-waiting').addEventListener('click');
     // récupère les boutons radio pour la catégorie de la facture
     const categoryArray = document.getElementsByName('category');
     // récupère les boutons radio pour le règlement de la facture

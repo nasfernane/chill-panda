@@ -38,6 +38,15 @@ div.newBill-modal
                     div 
                         input#state-paid.form__input(type='radio', name='state', value='Effectué')
                         label(for='state-paid') Effectué
+
+                    - let today = new Date();
+                    - let dd = today.getDate() < 10 ? '0' + today.getDate() : today.getDate();
+                    - let mm = today.getMonth() < 10 ? `0${today.getMonth() + 1}` : today.getMonth() + 1;
+                    - let yyyy = today.getFullYear();
+
+            .form_group.form__group--settlementDate.form_group.form__group--settlementDate--hide
+                p Date du règlement de la facture
+                input#settlementDate(type="date", value=`${yyyy}-${mm}-${dd}`)
                         
             .form__group.right
                     button.btn Ajouter facture

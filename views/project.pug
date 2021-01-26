@@ -54,7 +54,7 @@ block content
                                 |  #{project.status}
                             li
                                 strong Règlement: 
-                                |  #{project.alreadyPaid} €
+                                |  #{`${project.alreadyPaid > 0 ? `${project.alreadyPaid} €` : 'En attente'}`}
 
 
                     a(href=`/project/${project._id}/edit`)
