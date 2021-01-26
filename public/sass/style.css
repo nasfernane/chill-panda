@@ -240,27 +240,41 @@ body {
         .overview .projects__container .filtersCard .filtersOptions .filters-form {
           display: flex;
           flex-direction: column;
-          width: 90%;
+          width: 100%;
           justify-content: space-around;
-          align-items: flex-start;
-          padding-left: 6rem; }
-          .overview .projects__container .filtersCard .filtersOptions .filters-form__sortBy {
-            width: 90%; }
-            .overview .projects__container .filtersCard .filtersOptions .filters-form__sortBy select {
-              margin-left: 2rem;
-              padding: 0.5rem 0.5rem;
-              font: inherit; }
-          .overview .projects__container .filtersCard .filtersOptions .filters-form__filters {
+          align-items: flex-start; }
+          .overview .projects__container .filtersCard .filtersOptions .filters-form__container {
+            width: 100%;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            padding: 0rem 5rem; }
+            .overview .projects__container .filtersCard .filtersOptions .filters-form__container--sortBy {
+              width: 45%; }
+              .overview .projects__container .filtersCard .filtersOptions .filters-form__container--sortBy select {
+                margin-left: 2rem;
+                padding: 0.5rem 0.5rem;
+                font: inherit; }
+            .overview .projects__container .filtersCard .filtersOptions .filters-form__container--date {
+              display: flex;
+              width: 45%;
+              flex: 2; }
+              .overview .projects__container .filtersCard .filtersOptions .filters-form__container--date p {
+                margin-right: 1rem; }
+              .overview .projects__container .filtersCard .filtersOptions .filters-form__container--date input {
+                padding: 0rem 1rem;
+                margin: 0rem 1rem; }
+          .overview .projects__container .filtersCard .filtersOptions .filters-form__status {
             width: 90%;
             display: flex;
             flex-direction: row;
             justify-content: space-between;
             align-items: center; }
-            .overview .projects__container .filtersCard .filtersOptions .filters-form__filters div {
+            .overview .projects__container .filtersCard .filtersOptions .filters-form__status div {
               display: flex;
               justify-content: space-between;
               align-items: center; }
-              .overview .projects__container .filtersCard .filtersOptions .filters-form__filters div label {
+              .overview .projects__container .filtersCard .filtersOptions .filters-form__status div label {
                 margin-left: 1rem; }
           .overview .projects__container .filtersCard .filtersOptions .filters-form__button {
             margin-top: 3rem;

@@ -68,22 +68,43 @@
                     .filters-form {
                         display: flex;
                         flex-direction: column;
-                        width: 90%;
+                        width: 100%;
                         justify-content: space-around;
                         align-items: flex-start;
-                        padding-left: 6rem;
 
-                        &__sortBy {
-                            width: 90%;
+                        &__container {
+                            width: 100%;
+                            display: flex;
+                            justify-content: space-around;
+                            align-items: center;
+                            padding: 0rem 5rem;
 
-                            select {
-                                margin-left: 2rem;
-                                padding: 0.5rem 0.5rem;
-                                font: inherit;
+                            &--sortBy {
+                                width: 45%;
+
+                                select {
+                                    margin-left: 2rem;
+                                    padding: 0.5rem 0.5rem;
+                                    font: inherit;
+                                }
+                            }
+
+                            &--date {
+                                display: flex;
+                                width: 45%;
+                                flex: 2;
+                                p {
+                                    margin-right: 1rem;
+                                }
+
+                                input {
+                                    padding: 0rem 1rem;
+                                    margin: 0rem 1rem;
+                                }
                             }
                         }
 
-                        &__filters {
+                        &__status {
                             width: 90%;
                             display: flex;
                             flex-direction: row;
