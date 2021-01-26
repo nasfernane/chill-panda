@@ -6,10 +6,14 @@ const filtersForm = document.querySelector('.filters-form');
 
 // fonction qui crée une url en fonction des filtres sélectionnés et envoie sur la nouvelle page au submit du formulaire
 const newSearch = function () {
+    // récupération des éléments
     const sortBy = document.querySelector('#sort-by').value;
     const statusInputs = document.querySelectorAll('.filters-form__container--status input');
     const dateInputs = document.querySelectorAll('.filters-form__container--date input');
+    const quoteInputs = document.querySelectorAll('.filter-quotes');
+    const quoteAmountInput = document.querySelector('#filter-quote-amount');
 
+    // création d'une url de base
     let url = '/overview?';
 
     // si l'utilisateur a choisi un tri, ajoute à l'url
@@ -26,13 +30,20 @@ const newSearch = function () {
         url = url + `&date[lte]=${maxDate}`;
     }
 
+    // filtrer par montant devis
+    for (let i = 0; i < quoteInputs.length; i++) {
+        if (quoteInputs[i].checked && quoteAmountInput) {
+            url = url + `&quote${quoteInputs[i].value}${quoteAmountInput.value}`;
+        }
+    }
+
     // boucle sur les inputs status pour vérifier si il y a une saisie et le cas échéant ajouter à l'url
     for (let i = 0; i < statusInputs.length; i++) {
-        console.log(statusInputs[i]);
-        if (statusInputs[i].checked) url = url + `status=${statusInputs[i].value}`;
+        if (statusInputs[i].checked) url = url + `&status=${statusInputs[i].value}`;
     }
 
     console.log(url);
+    // refresh la page avec l'url modifiée selon la saisie utilisateur
     window.location.replace(url);
 };
 
