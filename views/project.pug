@@ -84,7 +84,7 @@ block content
                                 strong Catégorie :
                                 |   #{bill.category}
                             li
-                                - const setDate = `${bill.paidAt.toLocaleString('fr-FR', {day: 'numeric', month: 'short', year: 'numeric'})}`
+                                - const setDate = bill.state === 'Effectué' ? `${bill.paidAt.toLocaleString('fr-FR', {day: 'numeric', month: 'short', year: 'numeric'})}` : '';
                                 strong Règlement :
                                 |   #{bill.state === 'Effectué' ? `${setDate}` : 'En attente'}
                             

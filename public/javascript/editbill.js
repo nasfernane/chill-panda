@@ -52,6 +52,13 @@ if (editCloseButton) {
 // A chaque clic sur un bouton d'édition de facture, récupère le parent pour pré-remplir les valeurs de la facture initiale
 editBillButtons.forEach(el => {
     el.addEventListener('click', e => {
+        // reset attributs d'autres factures regardées auparavent
+        document.querySelector('#edit-category-deposit').removeAttribute('checked');
+        document.querySelector('#edit-category-amendment').removeAttribute('checked');
+        document.querySelector('#edit-state-paid').removeAttribute('checked');
+        document.querySelector('#edit-state-waiting').removeAttribute('checked');
+        document.querySelector('#edit-category-bill').removeAttribute('checked');
+
         // remplit la modale d'édition
         billId = e.target.getAttribute('data-id');
         let billCard = e.target.parentNode.parentNode;
@@ -75,10 +82,24 @@ editBillButtons.forEach(el => {
             billCard.children[1].firstChild.children[2].innerText.split(' ')[2] === 'Avenant'
         ) {
             document.querySelector('#edit-category-amendment').setAttribute('checked', true);
+        } else {
+            document.querySelector('#edit-category-bill').setAttribute('checked', true);
         }
         // Etat. Facture est checked par défault donc on vérifie seulement pour les acomptes et avenants
-        if (billCard.children[1].firstChild.children[3].innerText.split(' ')[2] === 'Effectué') {
+        if (
+            Number.isInteger(
+                parseInt(billCard.children[1].firstChild.children[3].innerText.split(' : ')[1])
+            )
+        ) {
             document.querySelector('#edit-state-paid').setAttribute('checked', true);
+            document
+                .querySelector('#edit-settlement-date')
+                .classList.remove('form__group--settlementDate--hide');
+        } else {
+            document
+                .querySelector('#edit-settlement-date')
+                .classList.add('form__group--settlementDate--hide');
+            document.querySelector('#edit-state-waiting').setAttribute('checked', true);
         }
 
         document.querySelector('.editBill-modal').style.display = 'block';

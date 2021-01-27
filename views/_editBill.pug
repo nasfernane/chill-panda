@@ -39,6 +39,10 @@ div.editBill-modal
                     div 
                         input#edit-state-paid.form__input(type='radio', name='edit-state', value='Effectué')
                         label(for='edit-state-paid') Effectué
+
+            #edit-settlement-date.form_group.form__group--settlementDate.form__group--settlementDate--hide
+                p Date du règlement de la facture
+                input#edit-settlementDate(type="date")
                         
             .form__group.right
                     button.btn Modifier facture
