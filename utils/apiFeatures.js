@@ -32,7 +32,7 @@ class APIFeatures {
             this.query = this.query.sort(sortBy);
         } else {
             // filtre par défaut par date de création
-            this.query = this.query.sort('-createdAt');
+            this.query = this.query.sort('-date');
         }
 
         return this;
