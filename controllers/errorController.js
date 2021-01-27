@@ -45,6 +45,7 @@ const sendErrorDev = (err, req, res) => {
     // B) erreur sur rendu du site réel
 
     console.error('ERROR 💥', err);
+
     return res.status(err.statusCode).render('error', {
         title: 'Erreur',
         msg: err.message,
@@ -74,10 +75,6 @@ const sendErrorProd = (err, req, res) => {
 
     // B) rendu site réel
     // séparation des erreurs opérationnelles "côté client"...
-
-    // if (err.isOperational && err.statusCode === 401) {
-    //     window.location.replace('/');
-    // }
 
     if (err.isOperational) {
         return res.status(err.statusCode).render('error', {

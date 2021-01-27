@@ -4,6 +4,8 @@ import { showAlert, hideAlert } from './alert.js';
 // éléments DOM
 const loginForm = document.querySelector('.loginForm');
 const logOutBtn = document.querySelector('.logout');
+// récupération du message d'erreur pour les visiteurs non identifiés qui essaient d'accéder à une page
+const error = document.querySelector('.error__container header h2');
 
 // utilise le client HTTP Axios pour envoyer les identifiants de connexion à l'API
 const login = async (email, password) => {
@@ -56,3 +58,11 @@ if (loginForm)
     });
 
 if (logOutBtn) logOutBtn.addEventListener('click', logout);
+
+// gestion erreur pour redirection vers login
+
+if (error && error.innerText.includes(`Vous n'êtes pas identifié.`)) {
+    window.setTimeout(function () {
+        window.location.replace('/');
+    }, 3000);
+}

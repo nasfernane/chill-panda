@@ -105,7 +105,7 @@ exports.protect = catchAsync(async (req, res, next) => {
 
         return next(
             new AppError(
-                `Vous n'êtes pas identifié. Veuillez vous connecter pour obtenir l'accès`,
+                `Vous n'êtes pas identifié. Veuillez vous connecter pour obtenir l'accès. Redirection dans trois secondes...`,
                 401
             )
         );
