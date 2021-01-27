@@ -8,7 +8,7 @@
 
     .login-form {
         padding: 2rem;
-        width: 20vw;
+        width: 30vw;
         position: relative;
         top: 30vh;
         left: 10vw;
@@ -43,6 +43,7 @@
             }
 
             &__input {
+                width: 50%;
                 font-family: inherit;
                 padding: 1.25rem 1.75rem;
                 border: none;

@@ -13,9 +13,9 @@ block content
                     input#email.form__input(type='email', placeholder='mail@exemple.com', required)
                 .form__group
                     label.form__label(for='password') Mot de passe
-                    input#password.form__input(type='password', placeholder='••••••••', required, minlength='8')
+                    input#password.form__input(type='password', placeholder='••••••••', required, minlength='8' autocomplete='false')
                 .form__group
                     label.form__label(for='password') Confirmation
-                    input#passwordConfirm.form__input(type='password', placeholder='••••••••', required, minlength='8') 
+                    input#passwordConfirm.form__input(type='password', placeholder='••••••••', required, minlength='8' autocomplete='false') 
                 .form__group.alignRight
                     button.btn Inscription

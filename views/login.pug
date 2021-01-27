@@ -8,9 +8,9 @@ block content
                 .form__group
                     label.form__label(for='email') Adresse mail
                     input#email.form__input(type='email', placeholder='mail@exemple.com', required)
-                .form__group.ma-bt-md
+                .form__group
                     label.form__label(for='password') Mot de passe
-                    input#password.form__input(type='password', placeholder='••••••••', required, minlength='8')
+                    input#password.form__input(type='password', placeholder='••••••••', required, minlength='8' autocomplete='false')
                 .form__group
                     a(href='/signup') Inscription
                     button.btn.btn--login Connexion

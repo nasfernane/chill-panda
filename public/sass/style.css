@@ -554,7 +554,7 @@ body {
   font-weight: bold; }
   .login .login-form {
     padding: 2rem;
-    width: 20vw;
+    width: 30vw;
     position: relative;
     top: 30vh;
     left: 10vw;
@@ -583,6 +583,7 @@ body {
         align-items: center;
         margin-bottom: 1rem; }
       .login .login-form .form__input {
+        width: 50%;
         font-family: inherit;
         padding: 1.25rem 1.75rem;
         border: none;
