@@ -12,7 +12,7 @@ let billId;
 // FONCTIONS
 //
 
-const editBill = async (billName, price, category, state) => {
+const editBill = async (billName, price, category, state, paidAt) => {
     // récupère l'id du projet sur lequel créer une nouvelle facture
     const projectId = window.location.href.split('/')[4];
 
@@ -25,6 +25,7 @@ const editBill = async (billName, price, category, state) => {
                 price,
                 category,
                 state,
+                paidAt,
             },
         });
 
@@ -139,6 +140,7 @@ if (editBillForm) {
         const price = document.getElementById('edit-bill-price').value;
         let category;
         let state;
+        let paidAt;
 
         // boucle sur la catégorie de facture pour récupérer le choix utilisateur
         for (let i = 0; i < editCategoryArray.length; i++) {
@@ -154,6 +156,14 @@ if (editBillForm) {
             }
         }
 
-        editBill(billName, price, category, state);
+        // si règlement est sur 'effectué', récupère la date
+        if (document.querySelector('#edit-state-paid').checked) {
+            paidAt = document.querySelector('#edit-settlementDate').value;
+        } else {
+            // sinon date vide
+            paidAt = '';
+        }
+
+        editBill(billName, price, category, state, paidAt);
     });
 }
