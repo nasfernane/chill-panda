@@ -99,8 +99,10 @@ exports.protect = catchAsync(async (req, res, next) => {
     } else if (req.cookies.jwt) {
         token = req.cookies.jwt;
     }
+
     if (!token) {
         // si le token n'existe pas, on return et transmet l'erreur
+
         return next(
             new AppError(
                 `Vous n'êtes pas identifié. Veuillez vous connecter pour obtenir l'accès`,

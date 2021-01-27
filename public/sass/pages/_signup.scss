@@ -1,14 +1,14 @@
 .signup {
     height: 100vh;
     width: 100vw;
-    background: url('/img/panda.jpg') center;
+    background: url('/img/highpanda.jpg') center;
     background-size: cover;
     font-size: 1.6rem;
     font-weight: bold;
 
     .signup-form {
         padding: 2rem;
-        width: 20vw;
+        width: 30vw;
         position: relative;
         top: 30vh;
         left: 10vw;
@@ -43,12 +43,13 @@
             }
 
             &__group.alignRight {
-                margin-top: .5rem;
+                margin-top: 0.5rem;
                 display: flex;
                 justify-content: flex-end;
             }
 
             &__input {
+                width: 50%;
                 font-family: inherit;
                 padding: 1.25rem 1.75rem;
                 border: none;
@@ -70,6 +71,5 @@
                 }
             }
         }
-
     }
 }
