@@ -44,6 +44,18 @@ const createSendToken = (user, statusCode, res) => {
 
 // fonction asynchrone pour la création d'un nouvel utilisateur
 exports.signup = catchAsync(async (req, res, next) => {
+    // alerte d'erreur si les mots de passe ne correspondent pas
+    if (req.body.password !== req.body.passwordConfirm) {
+        return next(new AppError('Vos mots de passe ne correspondent pas', 400));
+    }
+
+    // alerte d'erreur si l'adresse mail est déjà utilisée
+    const [existingUser] = await User.find({ email: req.body.email });
+    if (existingUser.email) {
+        return next(new AppError('Cette adresse email est déjà utilisée', 400));
+    }
+
+    // création de l'utilisateur
     const newUser = await User.create({
         // autorise seulement les données nécessaires pour la création de l'utilisateur pour éviter des failles de sécurité
         name: req.body.name,
