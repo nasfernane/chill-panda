@@ -85,7 +85,7 @@ editBillButtons.forEach(el => {
         } else {
             document.querySelector('#edit-category-bill').setAttribute('checked', true);
         }
-        // Etat. Facture est checked par défault donc on vérifie seulement pour les acomptes et avenants
+        // Etat. Facture est checked par défault donc on vérifie seulement pour les acomptes et avenants. Affiche également la date de règlement en fonction de l'état
         if (
             Number.isInteger(
                 parseInt(billCard.children[1].firstChild.children[3].innerText.split(' : ')[1])
@@ -95,6 +95,13 @@ editBillButtons.forEach(el => {
             document
                 .querySelector('#edit-settlement-date')
                 .classList.remove('form__group--settlementDate--hide');
+
+            // déconstruit la date de règlement pour la rendre reconnaissable par l'input
+            const tempDate = billCard.children[1].firstChild.children[3].innerText
+                .split(' : ')[1]
+                .split('/');
+            const newDate = `${tempDate[2]}-${tempDate[1]}-${tempDate[0]}`;
+            document.querySelector('#edit-settlementDate').value = newDate;
         } else {
             document
                 .querySelector('#edit-settlement-date')
@@ -111,6 +118,20 @@ if (editBillForm) {
     const editCategoryArray = document.getElementsByName('edit-category');
     // récupère les boutons radio pour l'état de la facture
     const editStateArray = document.getElementsByName('edit-state');
+
+    // fait apparaitre la div date règlement au clic sur Effectué
+    document.querySelector('#edit-state-waiting').addEventListener('click', () => {
+        document
+            .querySelector('#edit-settlement-date')
+            .classList.add('form__group--settlementDate--hide');
+    });
+
+    // fait disparaitre la div date règlement au clic sur En attente
+    document.querySelector('#edit-state-paid').addEventListener('click', () => {
+        document
+            .querySelector('#edit-settlement-date')
+            .classList.remove('form__group--settlementDate--hide');
+    });
 
     editBillForm.addEventListener('submit', e => {
         e.preventDefault();

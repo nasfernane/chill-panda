@@ -84,9 +84,13 @@ block content
                                 strong Catégorie :
                                 |   #{bill.category}
                             li
-                                - const setDate = bill.state === 'Effectué' ? `${bill.paidAt.toLocaleString('fr-FR', {day: 'numeric', month: 'short', year: 'numeric'})}` : '';
-                                strong Règlement :
-                                |   #{bill.state === 'Effectué' ? `${setDate}` : 'En attente'}
+                                - const setDate = bill.paidAt ? new Date(bill.paidAt) : new Date;
+                                - const yyyy = setDate.getFullYear();
+                                - const mm = setDate.getMonth() < 10 ? `0${setDate.getMonth() + 1}` : setDate.getMonth() + 1;
+                                - const dd = setDate.getDate()
+
+                                strong Règlement : 
+                                |   #{bill.state === 'Effectué' ? `${dd}/${mm}/${yyyy}` : 'En attente'}
                             
 
                         img.editBillButton(src='/img/edit.png' data-id=`${bill._id}`)
