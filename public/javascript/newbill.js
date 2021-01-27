@@ -5,7 +5,7 @@ const newBillForm = document.querySelector('.newBill-form');
 const newBillButton = document.querySelector('#newBillButton');
 const closeButton = document.querySelector('.newBill-modal__content span.close');
 
-const createNewBill = async (billName, price, category, state) => {
+const createNewBill = async (billName, price, category, state, paidAt) => {
     // récupère l'id du projet sur lequel créer une nouvelle facture
     const projectId = window.location.href.split('/')[4];
 
@@ -18,6 +18,7 @@ const createNewBill = async (billName, price, category, state) => {
                 price,
                 category,
                 state,
+                paidAt,
             },
         });
 
@@ -51,7 +52,19 @@ if (newBillForm) {
     if (document.querySelector('#state-paid').checked) {
         document.querySelector('#settlementDate').style.display = block;
     }
-    document.querySelector('#state-waiting').addEventListener('click');
+
+    document.querySelector('#state-waiting').addEventListener('click', () => {
+        document
+            .querySelector('.form_group.form__group--settlementDate')
+            .classList.add('form__group--settlementDate--hide');
+    });
+
+    document.querySelector('#state-paid').addEventListener('click', () => {
+        document
+            .querySelector('.form_group.form__group--settlementDate')
+            .classList.remove('form__group--settlementDate--hide');
+    });
+
     // récupère les boutons radio pour la catégorie de la facture
     const categoryArray = document.getElementsByName('category');
     // récupère les boutons radio pour le règlement de la facture
@@ -63,6 +76,7 @@ if (newBillForm) {
         const price = document.getElementById('bill-price').value;
         let category;
         let state;
+        let paidAt;
 
         // boucle sur la catégorie de facture pour récupérer le choix utilisateur
         for (let i = 0; i < categoryArray.length; i++) {
@@ -75,9 +89,23 @@ if (newBillForm) {
         for (let i = 0; i < stateArray.length; i++) {
             if (stateArray[i].checked) {
                 state = stateArray[i].value;
+
+                // si le paiement est effectué, récupère sa date de règlement
+                if (stateArray[i].value === 'Effectué') {
+                    const tempDate = new Date(document.querySelector('#settlementDate').value);
+
+                    const yyyy = tempDate.getFullYear();
+                    const mm =
+                        tempDate.getMonth() < 10
+                            ? `0${tempDate.getMonth() + 1}`
+                            : tempDate.getMonth() + 1;
+                    const dd = tempDate.getDate();
+
+                    paidAt = `${yyyy}-${mm}-${dd}`;
+                }
             }
         }
 
-        createNewBill(billName, price, category, state);
+        createNewBill(billName, price, category, state, paidAt);
     });
 }

@@ -38,6 +38,9 @@ const billSchema = new mongoose.Schema({
         enum: ['En attente', 'Effectué'],
         message: `L'état de la facture doit être défini sur En attente ou Effectué`,
     },
+    paidAt: {
+        type: Date,
+    },
 });
 
 // Index

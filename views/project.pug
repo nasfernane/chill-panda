@@ -84,8 +84,9 @@ block content
                                 strong Catégorie :
                                 |   #{bill.category}
                             li
+                                - const setDate = `${bill.paidAt.toLocaleString('fr-FR', {day: 'numeric', month: 'short', year: 'numeric'})}`
                                 strong Règlement :
-                                |   #{bill.state === 'Effectué' ? 'Effectué' : 'En attente'}
+                                |   #{bill.state === 'Effectué' ? `${setDate}` : 'En attente'}
                             
 
                         img.editBillButton(src='/img/edit.png' data-id=`${bill._id}`)
