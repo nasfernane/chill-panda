@@ -1,5 +1,6 @@
 const Project = require('../models/projectModel');
 const Bill = require('../models/billModel');
+const Stat = require('../models/statModel');
 const catchAsync = require('../utils/catchAsync');
 const AppError = require('../utils/appError');
 // regroupe les méthodes de tri, filtres et pagination
@@ -78,9 +79,9 @@ exports.editProject = catchAsync(async (req, res, next) => {
     });
 });
 
-// WATCH récupère les stats par mois pour la page de facturations
-exports.getBillingStats = catchAsync(async (req, res, next) => {
-    // données mensuelles des projets créés
+// WATCH crée les stats par mois pour la page de facturations
+exports.createStats = catchAsync(async (req, res, next) => {
+    // crée données mensuelles des projets créés
     const projectStats = await Project.aggregate([
         {
             // phase 1 : récupère tous les projets sauf ceux qui sont avortés ou en proposition
@@ -101,13 +102,21 @@ exports.getBillingStats = catchAsync(async (req, res, next) => {
         {
             $group: {
                 _id: { year: { $year: '$date' }, month: { $month: '$date' } },
-                monthSum: { $sum: '$quote' },
-                // count: { $sum: 1 },
+                projectsSum: { $sum: '$quote' },
+                user: { $first: '$user' },
+            },
+        },
+        {
+            $merge: {
+                into: 'stats',
+                on: '_id',
+                whenMatched: 'merge',
+                whenNotMatched: 'insert',
             },
         },
     ]);
 
-    // données mensuelles des factures crées
+    // crée données mensuelles des factures crées
     const billStats = await Bill.aggregate([
         {
             // phase 1 : récupère tous les projets sauf ceux qui sont avortés ou en proposition
@@ -116,12 +125,20 @@ exports.getBillingStats = catchAsync(async (req, res, next) => {
         {
             $group: {
                 _id: { year: { $year: '$createdAt' }, month: { $month: '$createdAt' } },
-                monthSum: { $sum: '$price' },
+                billsSum: { $sum: '$price' },
+            },
+        },
+        {
+            $merge: {
+                into: 'stats',
+                on: '_id',
+                whenMatched: 'merge',
+                whenNotMatched: 'insert',
             },
         },
     ]);
 
-    // données mensuelles des factures réglées
+    // crée données mensuelles des factures réglées
     const paidStats = await Bill.aggregate([
         {
             // phase 1 : récupère tous les projets sauf ceux qui sont avortés ou en proposition
@@ -132,16 +149,35 @@ exports.getBillingStats = catchAsync(async (req, res, next) => {
         {
             $group: {
                 _id: { year: { $year: '$paidAt' }, month: { $month: '$paidAt' } },
-                monthSum: { $sum: '$price' },
+                paidBillsSum: { $sum: '$price' },
+            },
+        },
+        {
+            $merge: {
+                into: 'stats',
+                on: '_id',
+                whenMatched: 'merge',
+                whenNotMatched: 'insert',
             },
         },
     ]);
 
+    next();
+});
+
+// WATCH récupère les stats par mois pour la page de facturations
+exports.getStats = catchAsync(async (req, res, next) => {
+    // récupère toutes les stats de l'utilisateur...
+    const monthlyStats = await Stat.aggregate([
+        {
+            $match: { user: req.user._id },
+        },
+    ]);
+
+    // et render la page
     res.status(200).render('stats', {
         title: 'Statistiques',
-        projectStats,
-        billStats,
-        paidStats,
+        monthlyStats,
     });
 });
 
