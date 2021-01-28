@@ -3,4 +3,9 @@ extends base
 block content
     main.stats
         h1 coucou
-        -console.log(projectStats)
+        p= `${projectStats}`
+        p= `${billStats}`
+        p= `${paidStats}`
+        - console.log(projectStats[0]._id.month)
+        - console.log(billStats)
+        - console.log(paidStats)

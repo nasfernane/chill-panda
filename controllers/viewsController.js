@@ -1,5 +1,4 @@
 const Project = require('../models/projectModel');
-const User = require('../models/userModel');
 const Bill = require('../models/billModel');
 const catchAsync = require('../utils/catchAsync');
 const AppError = require('../utils/appError');
@@ -79,17 +78,70 @@ exports.editProject = catchAsync(async (req, res, next) => {
     });
 });
 
+// WATCH récupère les stats par mois pour la page de facturations
 exports.getBillingStats = catchAsync(async (req, res, next) => {
+    // données mensuelles des projets créés
     const projectStats = await Project.aggregate([
         {
-            // phase 1 :
+            // phase 1 : récupère tous les projets sauf ceux qui sont avortés ou en proposition
+            $match: {
+                $and: [
+                    { user: req.user._id },
+                    {
+                        $or: [
+                            { status: 'Terminé' },
+                            { status: 'En pause' },
+                            { status: 'A régler' },
+                            { status: 'En cours' },
+                        ],
+                    },
+                ],
+            },
+        },
+        {
+            $group: {
+                _id: { year: { $year: '$date' }, month: { $month: '$date' } },
+                monthSum: { $sum: '$quote' },
+                // count: { $sum: 1 },
+            },
+        },
+    ]);
+
+    // données mensuelles des factures crées
+    const billStats = await Bill.aggregate([
+        {
+            // phase 1 : récupère tous les projets sauf ceux qui sont avortés ou en proposition
             $match: { user: req.user._id },
+        },
+        {
+            $group: {
+                _id: { year: { $year: '$createdAt' }, month: { $month: '$createdAt' } },
+                monthSum: { $sum: '$price' },
+            },
+        },
+    ]);
+
+    // données mensuelles des factures réglées
+    const paidStats = await Bill.aggregate([
+        {
+            // phase 1 : récupère tous les projets sauf ceux qui sont avortés ou en proposition
+            $match: {
+                $and: [{ user: req.user._id }, { state: 'Effectué' }],
+            },
+        },
+        {
+            $group: {
+                _id: { year: { $year: '$paidAt' }, month: { $month: '$paidAt' } },
+                monthSum: { $sum: '$price' },
+            },
         },
     ]);
 
     res.status(200).render('stats', {
         title: 'Statistiques',
         projectStats,
+        billStats,
+        paidStats,
     });
 });
 
