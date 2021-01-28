@@ -79,6 +79,19 @@ exports.editProject = catchAsync(async (req, res, next) => {
     });
 });
 
+exports.getBillingStats = catchAsync(async (req, res, next) => {
+    const projectStats = await Project.aggregate([
+        {
+            // phase 1 :
+            $match: { user: user.req._id },
+        },
+    ]);
+
+    res.status(200).render('stats', {
+        title: 'Statistiques',
+    });
+});
+
 // création d'un nouveau projet
 exports.newProject = (req, res) => {
     res.status(200).render('newproject', {

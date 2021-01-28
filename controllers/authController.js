@@ -51,7 +51,9 @@ exports.signup = catchAsync(async (req, res, next) => {
 
     // alerte d'erreur si l'adresse mail est déjà utilisée
     const [existingUser] = await User.find({ email: req.body.email });
-    if (existingUser.email) {
+    console.log(existingUser);
+    // si on trouve un résultat, refuse la création
+    if (typeof existingUser !== 'undefined') {
         return next(new AppError('Cette adresse email est déjà utilisée', 400));
     }
 
