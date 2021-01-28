@@ -102,6 +102,7 @@ module.exports = (err, req, res, next) => {
         // hard copy l'erreur pour ne pas ré-assigner la valeur du middleware
         let error = { ...err };
         error.message = err.message;
+        console.log(error);
         // délègue les erreurs mongoose dans des fonctions séparées pour les transformer en erreurs opérationnelles et renvoyer une erreur 'human friendly'
         // si c'est une erreur de champ
         if (error.kind === 'ObjectId') error = handleCastErrorDB(error);
