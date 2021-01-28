@@ -50,7 +50,7 @@ if (userPwForm)
         const passwordConfirm = document.getElementById('password-confirm').value;
 
         if (password !== passwordConfirm) {
-            return next(new AppError('Vos mots de passe ne correspondent pas', 400));
+            return new AppError('Vos mots de passe ne correspondent pas', 400);
         }
 
         // await l'update pour pouvoir clear les saisies après
