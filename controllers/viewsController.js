@@ -83,12 +83,13 @@ exports.getBillingStats = catchAsync(async (req, res, next) => {
     const projectStats = await Project.aggregate([
         {
             // phase 1 :
-            $match: { user: user.req._id },
+            $match: { user: req.user._id },
         },
     ]);
 
     res.status(200).render('stats', {
         title: 'Statistiques',
+        projectStats,
     });
 });
 

@@ -62,11 +62,14 @@ block content
                                 div
                                     input#status-finished.form__input--status(type='radio' name='status', value='Terminé')
                                     label(for='status-finished') Terminé
+                                div
+                                    input#status-paused.form__input--status(type='radio' name='status', value='En pause')
+                                    label(for='status-paused') En pause
+                                div
+                                    input#status-cancelled.form__input--status(type='radio' name='status', value='Avorté')
+                                    label(for='status-cancelled') Avorté
 
 
-                            //- input#status.form__input(type='text', required)
-                            //- input#status.form__input(type='text', required)
-                            //- input#status.form__input(type='text', required)
 
                         .form__group.right
                             button.btn Créer nouveau projet

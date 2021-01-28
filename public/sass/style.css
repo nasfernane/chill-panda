@@ -312,11 +312,15 @@ body {
       .overview .projects__container .card__header.terminé {
         background-color: #4d734d; }
       .overview .projects__container .card__header.proposition {
-        background-color: #ffbf00; }
+        background-color: #cf6a87; }
       .overview .projects__container .card__header.encours {
-        background-color: #444444; }
+        background-color: #ffbf00; }
       .overview .projects__container .card__header.arégler {
         background-color: #d4533d; }
+      .overview .projects__container .card__header.enpause {
+        background-color: #2980b9; }
+      .overview .projects__container .card__header.avorté {
+        background-color: #444444; }
       .overview .projects__container .card__details {
         padding: 1rem 3rem;
         width: 100%;
@@ -337,11 +341,15 @@ body {
     .overview .projects__container .card.terminé {
       border: 2px solid #4d734d; }
     .overview .projects__container .card.proposition {
-      border: 2px solid #ffbf00; }
+      border: 2px solid #cf6a87; }
     .overview .projects__container .card.encours {
-      border: 2px solid #444444; }
+      border: 2px solid #ffbf00; }
     .overview .projects__container .card.arégler {
       border: 2px solid #d4533d; }
+    .overview .projects__container .card.enpause {
+      border: 2px solid #2980b9; }
+    .overview .projects__container .card.avorté {
+      border: 2px solid #444444; }
 
 .projectview {
   width: 100%;
@@ -505,8 +513,14 @@ body {
       .projectview .project .card__header.terminé {
         background-color: #4d734d; }
       .projectview .project .card__header.proposition {
-        background-color: #d4533d; }
+        background-color: #cf6a87; }
       .projectview .project .card__header.encours {
+        background-color: #ffbf00; }
+      .projectview .project .card__header.arégler {
+        background-color: #d4533d; }
+      .projectview .project .card__header.enpause {
+        background-color: #2980b9; }
+      .projectview .project .card__header.avorté {
         background-color: #444444; }
       .projectview .project .card__details {
         padding: 1rem 3rem;
@@ -544,8 +558,14 @@ body {
     .projectview .project .card.terminé {
       border: 2px solid #4d734d; }
     .projectview .project .card.proposition {
-      border: 2px solid #d4533d; }
+      border: 2px solid #cf6a87; }
     .projectview .project .card.encours {
+      border: 2px solid #ffbf00; }
+    .projectview .project .card.arégler {
+      border: 2px solid #d4533d; }
+    .projectview .project .card.enpause {
+      border: 2px solid #2980b9; }
+    .projectview .project .card.avorté {
       border: 2px solid #444444; }
     .projectview .project .billsHeader {
       align-self: flex-start;
@@ -764,7 +784,7 @@ main.editproject {
       font-weight: 500; }
   .newProjectView__form-container {
     margin-left: 5rem;
-    width: 50%;
+    width: 70%;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -793,7 +813,7 @@ main.editproject {
         .newProjectView__form-container--form .form__group.right {
           justify-content: flex-end; }
         .newProjectView__form-container--form .form__group .form__input {
-          width: 20rem;
+          width: 30rem;
           font-family: inherit;
           padding: 1.25rem 1.75rem;
           border: none;

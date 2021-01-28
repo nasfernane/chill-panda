@@ -40,7 +40,7 @@ const projectSchema = new mongoose.Schema(
             required: [true, 'Le projet doit avoir un statut'],
             // vérifie que le statut fait partie des 4 disponibles
             enum: {
-                values: ['En cours', 'Proposition', 'A régler', 'Terminé'],
+                values: ['Avorté', 'En pause', 'En cours', 'Proposition', 'A régler', 'Terminé'],
                 message: `Le statut d'un projet doit être défini sur: En cours, Proposition, A régler ou Terminé`,
             },
         },

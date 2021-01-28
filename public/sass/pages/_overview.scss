@@ -150,15 +150,23 @@
                 }
 
                 &__header.proposition {
-                    background-color: $color-yellow;
+                    background-color: $color-pink;
                 }
 
                 &__header.encours {
-                    background-color: $color-font;
+                    background-color: $color-yellow;
                 }
 
                 &__header.arégler {
                     background-color: $color-orange;
+                }
+
+                &__header.enpause {
+                    background-color: $color-blue;
+                }
+
+                &__header.avorté {
+                    background-color: $color-font;
                 }
 
                 &__details {
@@ -190,15 +198,23 @@
             }
 
             .card.proposition {
-                border: 2px solid $color-yellow;
+                border: 2px solid $color-pink;
             }
 
             .card.encours {
-                border: 2px solid $color-font;
+                border: 2px solid $color-yellow;
             }
 
             .card.arégler {
                 border: 2px solid $color-orange;
+            }
+
+            .card.enpause {
+                border: 2px solid $color-blue;
+            }
+
+            .card.avorté {
+                border: 2px solid $color-font;
             }
         }
     }

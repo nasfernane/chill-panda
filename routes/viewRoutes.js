@@ -13,5 +13,6 @@ router.get('/project/:id', authController.protect, viewsController.getProject);
 router.get('/project/:id/edit', authController.protect, viewsController.editProject);
 router.get('/newproject', authController.protect, viewsController.newProject);
 router.get('/account', authController.protect, viewsController.getAccount);
+router.get('/stats', authController.protect, viewsController.getBillingStats);
 
 module.exports = router;

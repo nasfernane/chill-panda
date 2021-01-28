@@ -67,6 +67,12 @@ block content
                                 div
                                     input#status-finished.form__input--status(type='radio' name='status', value='Terminé' tocheck=`${project.status === 'Terminé' ? 'checked' : ''}`)
                                     label(for='status-finished') Terminé
+                                div
+                                    input#status-paused.form__input--status(type='radio' name='status', value='En pause' tocheck=`${project.status === 'En pause' ? 'checked' : ''}`)
+                                    label(for='status-paused') En pause
+                                div
+                                    input#status-cancelled.form__input--status(type='radio' name='status', value='Avorté' tocheck=`${project.status === 'Avorté' ? 'checked' : ''}`)
+                                    label(for='status-cancelled') Avorté
 
 
                         .form__group.right
