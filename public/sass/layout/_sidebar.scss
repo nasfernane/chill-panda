@@ -51,9 +51,28 @@
             color: $color-grey;
             text-decoration: none;
             line-height: 2.2rem;
+            position: relative;
+            padding-bottom: 0.5rem;
+
+            // pour effet surlignage dynamique
+            &::after {
+                content: '';
+                position: absolute;
+                left: 50%;
+                bottom: 0;
+                transform: translateX(-50%) scaleX(0);
+                transform-origin: 50% 50%;
+                width: 100%;
+                height: 1px;
+                background-color: rgba(255, 255, 255, 0.8);
+                transition: transform 250ms;
+            }
 
             &:hover {
-                color: $color-orange;
+                // pour effet surlignage dynamique
+                &::after {
+                    transform: translateX(-50%) scaleX(1);
+                }
             }
         }
 
@@ -63,6 +82,7 @@
 
             li {
                 margin-left: 3rem;
+                display: inline-flex;
             }
 
             .logout {
@@ -70,13 +90,12 @@
 
                 img {
                     transform: translateY(25%);
-                    padding-left: 1rem;
                     transition-duration: 0.3s;
                 }
 
                 &:hover {
                     img {
-                        padding-left: 0;
+                        transform: rotate(180deg) translateY(-25%);
                     }
                 }
             }

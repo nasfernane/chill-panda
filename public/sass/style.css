@@ -83,24 +83,39 @@ body {
     .sidebar__nav a:visited {
       color: #f5f5f5;
       text-decoration: none;
-      line-height: 2.2rem; }
-      .sidebar__nav a:hover,
-      .sidebar__nav a:link:hover,
-      .sidebar__nav a:visited:hover {
-        color: #d4533d; }
+      line-height: 2.2rem;
+      position: relative;
+      padding-bottom: 0.5rem; }
+      .sidebar__nav a::after,
+      .sidebar__nav a:link::after,
+      .sidebar__nav a:visited::after {
+        content: '';
+        position: absolute;
+        left: 50%;
+        bottom: 0;
+        transform: translateX(-50%) scaleX(0);
+        transform-origin: 50% 50%;
+        width: 100%;
+        height: 1px;
+        background-color: rgba(255, 255, 255, 0.8);
+        transition: transform 250ms; }
+      .sidebar__nav a:hover::after,
+      .sidebar__nav a:link:hover::after,
+      .sidebar__nav a:visited:hover::after {
+        transform: translateX(-50%) scaleX(1); }
     .sidebar__nav ul {
       list-style-type: none;
       padding-bottom: 1rem; }
       .sidebar__nav ul li {
-        margin-left: 3rem; }
+        margin-left: 3rem;
+        display: inline-flex; }
       .sidebar__nav ul .logout {
         width: 100%; }
         .sidebar__nav ul .logout img {
           transform: translateY(25%);
-          padding-left: 1rem;
           transition-duration: 0.3s; }
         .sidebar__nav ul .logout:hover img {
-          padding-left: 0; }
+          transform: rotate(180deg) translateY(-25%); }
 
 .error {
   display: flex; }
