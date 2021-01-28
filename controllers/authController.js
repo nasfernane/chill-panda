@@ -231,6 +231,10 @@ exports.resetPassword = catchAsync(async (req, res, next) => {
 exports.updatePassword = catchAsync(async (req, res, next) => {
     // 1) récupérer l'utilisateur
     const user = await User.findById(req.user.id).select('+password');
+
+    if (req.body.password !== req.body.passwordConfirm) {
+        return next(new AppError(`Vos mots de passe ne correspondent pas`), 401);
+    }
     // 2) Si le mdp est incorrect...
     if (!(await user.correctPassword(req.body.currentPassword, user.password))) {
         // ... return et faire suivre erreur (unauthorised)
