@@ -830,4 +830,17 @@ main.editproject {
                 margin: 1rem; }
 
 main.stats .stats-container {
-  margin-left: 18vw; }
+  margin-left: 15vw; }
+  main.stats .stats-container header {
+    height: 15vw;
+    background: url("../../img/walking_panda.gif") no-repeat bottom;
+    border-bottom: 1px solid #444444;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-end; }
+    main.stats .stats-container header h1 {
+      margin-left: 5%;
+      padding-bottom: 3rem;
+      font-size: 5rem;
+      font-variant: small-caps;
+      font-weight: 500; }

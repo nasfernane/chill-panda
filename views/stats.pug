@@ -5,15 +5,23 @@ block content
     main.stats
         include _sidebar
         .stats-container
+
             header.header 
                 h1 Facturation
             
             each month in monthlyStats
-                h1.year-title= `${month._id.year}`
+                - projectYearSum = projectYearSum + month.projectsSum * 1
+                - billYearSum = billYearSum + month.billsSum * 1
+                - paidBillYearSum = paidBillYearSum + month.paidBillsSum * 1
+                - console.log(billYearSum)
+                
+                p.year-title= `${month._id.year}`
                 h2.month-title= `${month._id.month}`
                 p= month.projectsSum ? `Projets : ${month.projectsSum} €` : 'Projets : 0 €'
                 p= month.billsSum ? `Factures : ${month.billsSum} €` : 'Factures : 0 €'
                 p= month.paidBillsSum ? `Règlements : ${month.paidBillsSum} €` : 'Règlements : 0 €'
+            
+            
         
         
         

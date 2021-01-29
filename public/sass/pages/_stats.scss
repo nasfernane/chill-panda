@@ -1,5 +1,22 @@
 main.stats {
     .stats-container {
-        margin-left: 18vw;
+        margin-left: 15vw;
+
+        header {
+            height: 15vw;
+            background: url('../../img/walking_panda.gif') no-repeat bottom;
+            border-bottom: 1px solid $color-font;
+            display: flex;
+            justify-content: flex-start;
+            align-items: flex-end;
+
+            h1 {
+                margin-left: 5%;
+                padding-bottom: 3rem;
+                font-size: 5rem;
+                font-variant: small-caps;
+                font-weight: 500;
+            }
+        }
     }
 }
