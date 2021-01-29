@@ -13,14 +13,14 @@ block content
                 .year-container
                     .year-container__header
                         h2= `${year._id.year}`
-                        span Devis
-                        span Factures
-                        span Règlements
+                        strong Devis
+                        strong Factures
+                        strong Règlements
 
                     each month in monthlyStats
                         if (month._id.year == year._id.year)
                             .year-container__month
-                                h3.month-title= `${month._id.month}`
+                                span.month-title= `${month._id.month}`
                                 span= month.projectsSum ? `${month.projectsSum} €` : '0 €'
                                 span= month.billsSum ? `${month.billsSum} €` : '0 €'
                                 span= month.paidBillsSum ? `${month.paidBillsSum} €` : '0 €'

@@ -696,16 +696,20 @@ body {
   font-size: 1.8rem; }
   .accountView .user-view {
     width: 85vw;
-    margin-left: 18vw; }
+    margin-left: 15vw; }
     .accountView .user-view header {
       height: 15vw;
       display: flex;
-      align-items: flex-end; }
+      align-items: flex-end;
+      background: url("../../img/running_panda.gif") no-repeat bottom;
+      border-bottom: 1px solid #444444;
+      margin-bottom: 5rem; }
       .accountView .user-view header h1 {
-        font-size: 4rem;
+        font-size: 5rem;
         font-variant: small-caps;
         font-weight: 500;
-        padding: 0; }
+        margin-left: 5%;
+        padding-bottom: 3rem; }
     .accountView .user-view h2 {
       font-size: 3.5rem;
       font-variant: small-caps;
@@ -713,42 +717,48 @@ body {
       margin-bottom: 2rem;
       margin-top: 2rem; }
     .accountView .user-view__form-container {
-      width: 40%;
       display: flex;
-      flex-direction: column;
-      align-items: center;
-      background: whitesmoke;
-      box-shadow: 1rem 1rem 2rem rgba(0, 0, 0, 0.1);
-      padding: 3rem 6rem;
-      border-radius: 8px; }
-      .accountView .user-view__form-container .form {
-        width: 100%; }
-        .accountView .user-view__form-container .form .form__group {
-          width: 100%;
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-          margin-bottom: 2rem; }
-          .accountView .user-view__form-container .form .form__group .form__input {
-            width: 20rem;
-            font-family: inherit;
-            padding: 1.25rem 1.75rem;
-            border: none;
-            border-top: 3px solid transparent;
-            border-bottom: 3px solid transparent;
-            -webkit-transition: all 0.3s;
-            transition: all 0.3s;
-            border-radius: 4px;
-            -webkit-box-sizing: border-box;
-            box-sizing: border-box; }
-            .accountView .user-view__form-container .form .form__group .form__input:focus {
-              outline: none;
-              border-bottom: 3px solid #4d734d; }
-            .accountView .user-view__form-container .form .form__group .form__input:focus:invalid {
-              border-bottom: 3px solid #d4533d; }
-        .accountView .user-view__form-container .form .form__group.right {
-          justify-content: flex-end;
-          margin-bottom: 0; }
+      justify-content: space-between;
+      padding: 3rem;
+      width: 90%;
+      margin: 0 auto; }
+      .accountView .user-view__form-container--el {
+        width: 45%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        background: whitesmoke;
+        box-shadow: 1rem 1rem 2rem rgba(0, 0, 0, 0.1);
+        padding: 3rem 6rem;
+        border-radius: 8px; }
+        .accountView .user-view__form-container--el .form {
+          width: 100%; }
+          .accountView .user-view__form-container--el .form .form__group {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem; }
+            .accountView .user-view__form-container--el .form .form__group .form__input {
+              width: 20rem;
+              font-family: inherit;
+              padding: 1.25rem 1.75rem;
+              border: none;
+              border-top: 3px solid transparent;
+              border-bottom: 3px solid transparent;
+              -webkit-transition: all 0.3s;
+              transition: all 0.3s;
+              border-radius: 4px;
+              -webkit-box-sizing: border-box;
+              box-sizing: border-box; }
+              .accountView .user-view__form-container--el .form .form__group .form__input:focus {
+                outline: none;
+                border-bottom: 3px solid #4d734d; }
+              .accountView .user-view__form-container--el .form .form__group .form__input:focus:invalid {
+                border-bottom: 3px solid #d4533d; }
+          .accountView .user-view__form-container--el .form .form__group.right {
+            justify-content: flex-end;
+            margin-bottom: 0; }
 
 main.newproject,
 main.editproject {
@@ -846,7 +856,7 @@ main.stats .stats-container {
       font-variant: small-caps;
       font-weight: 500; }
   main.stats .stats-container .year-container {
-    width: 70%;
+    width: 60%;
     margin: 0 auto;
     font-size: 1.8rem;
     display: flex;
@@ -861,7 +871,7 @@ main.stats .stats-container {
       main.stats .stats-container .year-container__header h2 {
         display: inline-block; }
       main.stats .stats-container .year-container__header h2,
-      main.stats .stats-container .year-container__header span {
+      main.stats .stats-container .year-container__header strong {
         width: 25%;
         margin: 0 auto; }
     main.stats .stats-container .year-container__month {
