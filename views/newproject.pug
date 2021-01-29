@@ -4,15 +4,17 @@ block content
     main.newproject
         include _sidebar
 
+        //- déstructure le projet avec le plus grand nombre existant
+        - const [lastProject] = lastProjectNumber
+        //- pour lui ajouter +1 et obtenir la valeur par défaut du numéro d'un nouveau projet
+        - const defaultProjectNumber = lastProject.quoteNumber + 1
+
         .newProjectView
-            - let date = new Date(Date.now()).toLocaleString('fr-FR', {day: 'numeric', month: 'long', year: 'numeric'});
 
             header
                 h1 Nouveau projet
 
             .newProjectView__form-container 
-                .newProjectView__form-container--header
-                    p= `${date}`
                 
                 .newProjectView__form-container--form
                     form.form-newProject
@@ -21,6 +23,24 @@ block content
                             label.form__label(for='projectName')
                                 p Nom du projet
                             input#projectName.form__input(type='text', required)
+
+                        .form__group
+                            label.form__label(for='projectNumber')
+                                p Numéro de devis
+                            .quoteNumberContainer
+                                span DEV
+                                input#projectNumber.form__input(type='text', required, value=`${defaultProjectNumber}`)
+                        
+                        .form__group
+                            - const currentDate = new Date(Date.now())
+                            - const yyyy = currentDate.getFullYear()
+                            - const mm = currentDate.getMonth() < 10 ? `0${currentDate.getMonth() + 1}` : currentDate.getMonth() + 1
+                            - const dd = currentDate.getDate() < 10 ? `0${currentDate.getDate()}` : currentDate.getDate()
+                            - const formatedDate = `${yyyy}-${mm}-${dd}`
+
+                            label.form__label(for='projectDate')
+                                p Date de création du projet
+                            input#projectDate.form__input(type='date', required, value=`${formatedDate}`)
 
                         .form__group
                             label.form__label(for='client')

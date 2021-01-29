@@ -4,20 +4,29 @@ div.editBill-modal
     div.editBill-modal__content
         span.close &times;
 
-        header 
-            p#edit-bill-number
-            p créée le 
-                span#edit-bill-date= `${date}`
 
         form.editBill-form
             .form__group
-                label.form__label(for='bill-name')
+                label.form__label(for='edit-bill-number')
+                    p Numéro de facture                              
+                input#edit-bill-number.form__input(type='number', required)
+
+            .form__group
+
+                label.form__label(for='edit-bill-date')
+                    p Date de création de la facture
+                input#edit-bill-date.form__input(type='date', required)
+
+            .form__group
+                label.form__label(for='edit-bill-name')
                     p Nom de la facture
                 input#edit-bill-name.form__input(type='text', required)
+
             .form__group
-                label.form__label(for='bill-price')
+                label.form__label(for='edit-bill-price')
                     p Montant
                 input#edit-bill-price.form__input(type='number', required)
+
             .form__group.form__group--radios
                 p Catégorie
                 .radio-container

@@ -806,6 +806,12 @@ main.editproject {
         justify-content: space-between;
         align-items: center;
         margin-bottom: 2rem; }
+        .newProjectView__form-container--form .form__group .quoteNumberContainer {
+          display: flex;
+          align-items: center; }
+          .newProjectView__form-container--form .form__group .quoteNumberContainer span {
+            font-weight: bold;
+            margin-right: 0.5rem; }
         .newProjectView__form-container--form .form__group p {
           font-weight: bold; }
         .newProjectView__form-container--form .form__group.right {

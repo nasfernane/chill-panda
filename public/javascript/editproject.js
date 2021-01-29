@@ -2,7 +2,7 @@ import { showAlert } from './alert.js';
 
 const editProjectForm = document.querySelector('.form-editProject');
 
-const editProject = async (name, client, projectType, quote, status) => {
+const editProject = async (name, quoteNumber, date, client, projectType, quote, status) => {
     // récupère l'id du projet à modifier sur l'url
     const projectId = window.location.href.split('/')[4];
 
@@ -12,6 +12,8 @@ const editProject = async (name, client, projectType, quote, status) => {
             url: `/api/v1/projects/${projectId}`,
             data: {
                 name,
+                quoteNumber,
+                date,
                 client,
                 projectType,
                 quote,
@@ -49,6 +51,8 @@ if (editProjectForm) {
     editProjectForm.addEventListener('submit', e => {
         e.preventDefault();
         const name = document.getElementById('projectName').value;
+        const quoteNumber = document.getElementById('projectNumber').value;
+        const date = document.getElementById('projectDate').value;
         const client = document.getElementById('client').value;
         const quote = document.getElementById('quote').value;
         let projectType;
@@ -68,6 +72,6 @@ if (editProjectForm) {
             }
         }
 
-        editProject(name, client, projectType, quote, status);
+        editProject(name, quoteNumber, date, client, projectType, quote, status);
     });
 }

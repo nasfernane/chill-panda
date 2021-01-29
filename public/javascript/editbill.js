@@ -12,7 +12,7 @@ let billId;
 // FONCTIONS
 //
 
-const editBill = async (billName, price, category, state, paidAt) => {
+const editBill = async (billName, billNumber, createdAt, price, category, state, paidAt) => {
     // récupère l'id du projet sur lequel créer une nouvelle facture
     const projectId = window.location.href.split('/')[4];
 
@@ -22,6 +22,8 @@ const editBill = async (billName, price, category, state, paidAt) => {
             url: `/api/v1/bills/${billId}`,
             data: {
                 billName,
+                billNumber,
+                createdAt,
                 price,
                 category,
                 state,
@@ -67,11 +69,23 @@ editBillButtons.forEach(el => {
         // nom de la facture initiale
         document.querySelector('#edit-bill-name').value = billCard.firstChild.firstChild.innerText;
         //date
-        document.querySelector('#edit-bill-date').innerText =
-            billCard.firstChild.children[1].innerText;
+
+        const initialDate = new Date(billCard.firstChild.children[1].innerText);
+        const yyyy = initialDate.getFullYear();
+        const mm =
+            initialDate.getMonth() < 10
+                ? `0${initialDate.getMonth() + 1}`
+                : initialDate.getMonth() + 1;
+        const dd = initialDate.getDate() < 10 ? `0${initialDate.getDate}` : initialDate.getDate();
+        const formatedDate = `${yyyy}-${mm}-${dd}`;
+
+        document.querySelector('#edit-bill-date').value = `${formatedDate}`;
+
         // numéro facture
-        document.querySelector('#edit-bill-number').innerText =
-            billCard.children[1].firstChild.firstChild.innerText;
+        document.querySelector(
+            '#edit-bill-number'
+        ).value = billCard.children[1].firstChild.firstChild.innerText.split(' : ')[1];
+
         // montant devis
         document.querySelector(
             '#edit-bill-price'
@@ -138,6 +152,8 @@ if (editBillForm) {
         e.preventDefault();
         const billName = document.getElementById('edit-bill-name').value;
         const price = document.getElementById('edit-bill-price').value;
+        const billNumber = document.getElementById('edit-bill-number').value;
+        const createdAt = document.getElementById('edit-bill-date').value;
         let category;
         let state;
         let paidAt;
@@ -164,6 +180,6 @@ if (editBillForm) {
             paidAt = '';
         }
 
-        editBill(billName, price, category, state, paidAt);
+        editBill(billName, billNumber, createdAt, price, category, state, paidAt);
     });
 }

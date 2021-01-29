@@ -44,7 +44,7 @@ if (process.env.NODE_ENV === 'development') {
 // limite le nombre de requêtes pour pallier aux "brute force attacks"
 const limiter = rateLimit({
     // max 100...
-    max: 100,
+    max: 1000,
     // ... sur une fenêtre d'une heure
     windowMs: 60 * 60 * 1000,
     message: `Vous avez envoyé trop de requêtes, veuillez ré-essayer dans une heure`,

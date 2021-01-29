@@ -26,7 +26,7 @@ block content
                                 div
                                     li 
                                         strong N° devis : 
-                                        |  #{project.quoteNumber }
+                                        span=  `DEV${project.quoteNumber }`
                                     li
                                         strong Montant : 
                                         |  #{project.quote} €

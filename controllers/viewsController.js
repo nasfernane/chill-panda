@@ -8,15 +8,6 @@ const AppError = require('../utils/appError');
 const APIFeatures = require('../utils/apiFeatures');
 
 // overview de tous les projets
-// exports.getOverview = catchAsync(async (req, res, next) => {
-//     // récupération de tous les projets de la collection
-//     const projects = await Project.find({ user: req.user._id });
-
-//     res.status(200).render('overview', {
-//         title: 'All Projects',
-//         projects,
-//     });
-// });
 
 exports.getOverview = catchAsync(async (req, res, next) => {
     // filtre pour ne récupérer que les documents de l'utilisateur
@@ -43,6 +34,24 @@ exports.getProject = catchAsync(async (req, res, next) => {
         path: 'bills',
     });
 
+    // récupère le numéro du dernier devis pour pré-remplir le champ du nouveau projet
+    const lastBill = await Bill.aggregate([
+        {
+            $match: { user: req.user._id },
+        },
+        {
+            $sort: {
+                billNumber: -1,
+            },
+        },
+        {
+            $limit: 1,
+        },
+    ]);
+
+    const [lastBillNumber] = lastBill;
+    const defaultBillNumber = lastBillNumber.billNumber + 1;
+
     // renvoie une erreur personnalisée si le projet n'est pas trouvé
     if (!project) {
         return next(
@@ -56,6 +65,7 @@ exports.getProject = catchAsync(async (req, res, next) => {
     res.status(200).render('project', {
         title: 'Projet',
         project,
+        defaultBillNumber,
     });
 });
 
@@ -85,7 +95,7 @@ exports.createStats = catchAsync(async (req, res, next) => {
     await Stat.deleteMany();
 
     // crée données mensuelles des projets créés
-    const projectStats = await Project.aggregate([
+    await Project.aggregate([
         {
             // phase 1 : récupère tous les projets sauf ceux qui sont avortés ou en proposition
             $match: {
@@ -120,7 +130,7 @@ exports.createStats = catchAsync(async (req, res, next) => {
     ]);
 
     // crée données mensuelles des factures crées
-    const billStats = await Bill.aggregate([
+    await Bill.aggregate([
         {
             // phase 1 : récupère tous les projets sauf ceux qui sont avortés ou en proposition
             $match: { user: req.user._id },
@@ -143,7 +153,7 @@ exports.createStats = catchAsync(async (req, res, next) => {
     ]);
 
     // crée données mensuelles des factures réglées
-    const paidStats = await Bill.aggregate([
+    await Bill.aggregate([
         {
             // phase 1 : récupère tous les projets sauf ceux qui sont avortés ou en proposition
             $match: {
@@ -179,6 +189,7 @@ exports.getStats = catchAsync(async (req, res, next) => {
         },
     ]);
 
+    // ...puis annuelles
     const yearStats = await Stat.aggregate([
         {
             $match: { user: req.user._id },
@@ -198,11 +209,6 @@ exports.getStats = catchAsync(async (req, res, next) => {
         },
     ]);
 
-    // // ... puis annuelles
-    // const yearStats = await Yearstat.find({ user: req.user._id });
-
-    console.log(yearStats);
-
     // et render la page
     res.status(200).render('stats', {
         title: 'Statistiques',
@@ -212,11 +218,27 @@ exports.getStats = catchAsync(async (req, res, next) => {
 });
 
 // création d'un nouveau projet
-exports.newProject = (req, res) => {
+exports.newProject = catchAsync(async (req, res, next) => {
+    // récupère le numéro du dernier devis pour pré-remplir le champ du nouveau projet
+    const lastProjectNumber = await Project.aggregate([
+        {
+            $match: { user: req.user._id },
+        },
+        {
+            $sort: {
+                quoteNumber: -1,
+            },
+        },
+        {
+            $limit: 1,
+        },
+    ]);
+
     res.status(200).render('newproject', {
         title: 'Nouveau projet',
+        lastProjectNumber,
     });
-};
+});
 
 exports.getLoginForm = (req, res) => {
     res.status(200).render('login', {

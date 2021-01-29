@@ -3,13 +3,15 @@ import { showAlert } from './alert.js';
 
 const newProjectForm = document.querySelector('.form-newProject');
 
-const createNewProject = async (name, client, projectType, quote, status) => {
+const createNewProject = async (name, date, quoteNumber, client, projectType, quote, status) => {
     try {
         const res = await axios({
             method: 'POST',
             url: '/api/v1/projects',
             data: {
                 name,
+                date,
+                quoteNumber,
                 client,
                 projectType,
                 quote,
@@ -43,6 +45,9 @@ if (newProjectForm) {
         const name = document.getElementById('projectName').value;
         const client = document.getElementById('client').value;
         const quote = document.getElementById('quote').value;
+        const date = document.getElementById('projectDate').value;
+        const quoteNumber = document.getElementById('projectNumber').value;
+
         let projectType;
         let status;
 
@@ -60,6 +65,6 @@ if (newProjectForm) {
             }
         }
 
-        createNewProject(name, client, projectType, quote, status);
+        createNewProject(name, date, quoteNumber, client, projectType, quote, status);
     });
 }

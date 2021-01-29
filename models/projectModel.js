@@ -1,8 +1,4 @@
 const mongoose = require('mongoose');
-// librairie pour obtenir des slugs (noms optimisés pour des urls)
-const slugify = require('slugify');
-// librairie pour importer des validators
-const validator = require('validator');
 
 // schéma pour construire un nouveau Projet
 const projectSchema = new mongoose.Schema(

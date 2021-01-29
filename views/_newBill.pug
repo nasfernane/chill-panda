@@ -4,19 +4,33 @@ div.newBill-modal
     div.newBill-modal__content
         span.close &times;
 
-        header 
-            p Nouvelle facture 
-            p= `${date}`
-
         form.newBill-form
+            .form__group
+                label.form__label(for='projectNumber')
+                    p Numéro de facture                              
+                input#bill-number.form__input(type='number', required, value=`${defaultBillNumber}`)
+
+            .form__group
+                - const currentDate = new Date()
+                - const y = currentDate.getFullYear()
+                - const m = currentDate.getMonth() < 10 ? `0${currentDate.getMonth() + 1}` : currentDate.getMonth() + 1
+                - const d = currentDate.getDate() < 10 ? `0${currentDate.getDate()}` : currentDate.getDate()
+                - const formatedDate = `${y}-${m}-${d}`
+
+                label.form__label(for='bill-date')
+                    p Date de création de la facture
+                input#bill-date.form__input(type='date', required, value=`${formatedDate}`)
+
             .form__group
                 label.form__label(for='bill-name')
                     p Nom de la facture
                 input#bill-name.form__input(type='text', required)
+
             .form__group
                 label.form__label(for='bill-price')
                     p Montant
                 input#bill-price.form__input(type='number', required)
+
             .form__group.form__group--radios
                 p Catégorie
                 .radio-container

@@ -55,6 +55,16 @@ main.editproject {
                 align-items: center;
                 margin-bottom: 2rem;
 
+                .quoteNumberContainer {
+                    display: flex;
+                    align-items: center;
+
+                    span {
+                        font-weight: bold;
+                        margin-right: 0.5rem;
+                    }
+                }
+
                 p {
                     font-weight: bold;
                 }

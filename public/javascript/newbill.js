@@ -5,7 +5,7 @@ const newBillForm = document.querySelector('.newBill-form');
 const newBillButton = document.querySelector('#newBillButton');
 const closeButton = document.querySelector('.newBill-modal__content span.close');
 
-const createNewBill = async (billName, price, category, state, paidAt) => {
+const createNewBill = async (billName, billNumber, date, price, category, state, paidAt) => {
     // récupère l'id du projet sur lequel créer une nouvelle facture
     const projectId = window.location.href.split('/')[4];
 
@@ -15,6 +15,8 @@ const createNewBill = async (billName, price, category, state, paidAt) => {
             url: `/api/v1/projects/${projectId}/bills`,
             data: {
                 billName,
+                billNumber,
+                date,
                 price,
                 category,
                 state,
@@ -74,6 +76,9 @@ if (newBillForm) {
         e.preventDefault();
         const billName = document.getElementById('bill-name').value;
         const price = document.getElementById('bill-price').value;
+        const billNumber = document.getElementById('bill-number').value;
+        const date = document.getElementById('bill-date').value;
+
         let category;
         let state;
         let paidAt;
@@ -106,6 +111,6 @@ if (newBillForm) {
             }
         }
 
-        createNewBill(billName, price, category, state, paidAt);
+        createNewBill(billName, billNumber, date, price, category, state, paidAt);
     });
 }

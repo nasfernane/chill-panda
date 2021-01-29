@@ -10,12 +10,12 @@ const catchAsync = require('../utils/catchAsync');
 const factory = require('./handlerFactory');
 
 // définit le numéro de devis en fonction du nombre de projets existants
-exports.setQuoteNumber = catchAsync(async (req, res, next) => {
-    // détermine le numéro de facture en fonction du nombre de documents lié à l'utilisateur
-    req.body.quoteNumber = (await Project.countDocuments({ user: req.user._id })) + 1;
+// exports.setQuoteNumber = catchAsync(async (req, res, next) => {
+//     // détermine le numéro de facture en fonction du nombre de documents lié à l'utilisateur
+//     req.body.quoteNumber = (await Project.countDocuments({ user: req.user._id })) + 1;
 
-    next();
-});
+//     next();
+// });
 
 // met à jour un projet
 exports.updateProject = factory.updateOne(Project);

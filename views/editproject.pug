@@ -13,9 +13,6 @@ block content
                 h1 Modification du projet 
 
             .newProjectView__form-container 
-                .newProjectView__form-container--header
-                    p= `Devis n° ${project.quoteNumber}`
-                    p= `Créé le ${date}`
                 
                 .newProjectView__form-container--form
                     form.form-editProject
@@ -24,6 +21,24 @@ block content
                             label.form__label(for='projectName')
                                 p Nom du projet
                             input#projectName.form__input(type='text', value=`${project.name}` required)
+
+                        .form__group
+                            label.form__label(for='projectNumber')
+                                p Numéro de devis
+                            .quoteNumberContainer
+                                span DEV
+                                input#projectNumber.form__input(type='number', required, value=`${project.quoteNumber}`)
+
+                        .form__group
+                            - const currentDate = project.date
+                            - const yyyy = currentDate.getFullYear()
+                            - const mm = currentDate.getMonth() < 10 ? `0${currentDate.getMonth() + 1}` : currentDate.getMonth() + 1
+                            - const dd = currentDate.getDate() < 10 ? `0${currentDate.getDate()}` : currentDate.getDate()
+                            - const formatedDate = `${yyyy}-${mm}-${dd}`
+
+                            label.form__label(for='projectDate')
+                                p Date de création du projet
+                            input#projectDate.form__input(type='date', required, value=`${formatedDate}`)
 
                         .form__group
                             label.form__label(for='client')
