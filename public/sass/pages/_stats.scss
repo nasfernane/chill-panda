@@ -9,6 +9,7 @@ main.stats {
             display: flex;
             justify-content: flex-start;
             align-items: flex-end;
+            margin-bottom: 5rem;
 
             h1 {
                 margin-left: 5%;
@@ -16,6 +17,66 @@ main.stats {
                 font-size: 5rem;
                 font-variant: small-caps;
                 font-weight: 500;
+            }
+        }
+
+        .year-container {
+            width: 70%;
+            margin: 0 auto;
+            font-size: 1.8rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 3rem;
+
+            &__header {
+                width: 100%;
+                display: flex;
+                align-items: center;
+                border-bottom: 1px solid $color-font;
+
+                h2 {
+                    display: inline-block;
+                }
+
+                h2,
+                span {
+                    width: 25%;
+                    margin: 0 auto;
+                }
+            }
+
+            &__month {
+                width: 100%;
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+
+                h3 {
+                    display: inline-block;
+                }
+
+                h3,
+                span {
+                    width: 25%;
+                    margin: 0 auto;
+                }
+            }
+
+            &__total {
+                width: 100%;
+                display: flex;
+                align-items: center;
+
+                h3 {
+                    display: inline-block;
+                }
+
+                h3,
+                strong {
+                    width: 25%;
+                    margin: 0 auto;
+                }
             }
         }
     }

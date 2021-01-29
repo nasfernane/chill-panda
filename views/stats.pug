@@ -9,18 +9,28 @@ block content
             header.header 
                 h1 Facturation
             
-            each month in monthlyStats
-                - projectYearSum = projectYearSum + month.projectsSum * 1
-                - billYearSum = billYearSum + month.billsSum * 1
-                - paidBillYearSum = paidBillYearSum + month.paidBillsSum * 1
-                - console.log(billYearSum)
-                
-                p.year-title= `${month._id.year}`
-                h2.month-title= `${month._id.month}`
-                p= month.projectsSum ? `Projets : ${month.projectsSum} €` : 'Projets : 0 €'
-                p= month.billsSum ? `Factures : ${month.billsSum} €` : 'Factures : 0 €'
-                p= month.paidBillsSum ? `Règlements : ${month.paidBillsSum} €` : 'Règlements : 0 €'
-            
+            each year in yearStats
+                .year-container
+                    .year-container__header
+                        h2= `${year._id.year}`
+                        span Devis
+                        span Factures
+                        span Règlements
+
+                    each month in monthlyStats
+                        if (month._id.year == year._id.year)
+                            .year-container__month
+                                h3.month-title= `${month._id.month}`
+                                span= month.projectsSum ? `${month.projectsSum} €` : '0 €'
+                                span= month.billsSum ? `${month.billsSum} €` : '0 €'
+                                span= month.paidBillsSum ? `${month.paidBillsSum} €` : '0 €'
+                    
+                    .year-container__total
+                        h3 Total
+                        strong= `${year.projectTotal} €`
+                        strong= `${year.billTotal} €`
+                        strong= `${year.paidBillTotal} €`
+
             
         
         

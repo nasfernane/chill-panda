@@ -1,6 +1,7 @@
 const Project = require('../models/projectModel');
 const Bill = require('../models/billModel');
 const Stat = require('../models/statModel');
+const Yearstat = require('../models/yearStatModel');
 const catchAsync = require('../utils/catchAsync');
 const AppError = require('../utils/appError');
 // regroupe les méthodes de tri, filtres et pagination
@@ -81,6 +82,8 @@ exports.editProject = catchAsync(async (req, res, next) => {
 
 // WATCH crée les stats par mois pour la page de facturations
 exports.createStats = catchAsync(async (req, res, next) => {
+    await Stat.deleteMany();
+
     // crée données mensuelles des projets créés
     const projectStats = await Project.aggregate([
         {
@@ -126,6 +129,7 @@ exports.createStats = catchAsync(async (req, res, next) => {
             $group: {
                 _id: { year: { $year: '$createdAt' }, month: { $month: '$createdAt' } },
                 billsSum: { $sum: '$price' },
+                user: { $first: '$user' },
             },
         },
         {
@@ -150,6 +154,7 @@ exports.createStats = catchAsync(async (req, res, next) => {
             $group: {
                 _id: { year: { $year: '$paidAt' }, month: { $month: '$paidAt' } },
                 paidBillsSum: { $sum: '$price' },
+                user: { $first: '$user' },
             },
         },
         {
@@ -167,17 +172,42 @@ exports.createStats = catchAsync(async (req, res, next) => {
 
 // WATCH récupère les stats par mois pour la page de facturations
 exports.getStats = catchAsync(async (req, res, next) => {
-    // récupère toutes les stats de l'utilisateur...
+    // récupère toutes les stats mensuelles...
     const monthlyStats = await Stat.aggregate([
         {
             $match: { user: req.user._id },
         },
     ]);
 
+    const yearStats = await Stat.aggregate([
+        {
+            $match: { user: req.user._id },
+        },
+        {
+            $group: {
+                _id: { year: '$_id.year' },
+                projectTotal: { $sum: '$projectsSum' },
+                billTotal: { $sum: '$billsSum' },
+                paidBillTotal: { $sum: '$paidBillsSum' },
+            },
+        },
+        {
+            $sort: {
+                '_id.year': -1,
+            },
+        },
+    ]);
+
+    // // ... puis annuelles
+    // const yearStats = await Yearstat.find({ user: req.user._id });
+
+    console.log(yearStats);
+
     // et render la page
     res.status(200).render('stats', {
         title: 'Statistiques',
         monthlyStats,
+        yearStats,
     });
 });
 
