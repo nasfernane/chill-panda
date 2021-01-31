@@ -1,0 +1,56 @@
+extends base
+
+block content
+    main.overview
+        include _sidebar
+        //- fenêtre modale pour éditer une facture
+        include _editBill
+
+        
+        //- //- récupère la date du jour pour l'encadré des nouvelles factures
+        //- - let date = new Date(Date.now()).toLocaleString('fr-FR', {day: 'numeric', month: 'long', year: 'numeric'});
+
+        .projects
+            .projects__header
+                h1 Toutes vos factures
+                .filters
+                    img#filtersButton(src='/img/settings.png')
+            
+            .projects__container
+                include _filters
+
+                each bill in bills
+                    - let billcolor = bill.state === 'Effectué' ? 'terminé' : 'arégler';
+
+                    div(class=`card ${billcolor}`)
+                        div(class=`card__header ${billcolor}`)
+                            p= `${bill.billName} `
+                            p= `${bill.createdAt.toLocaleString('fr-FR', {day: 'numeric', month: 'long', year: 'numeric'})}`
+
+                        .card__details.card__details--bill
+                            ul
+                                li
+                                    strong N° facture : 
+                                    |  #{bill.billNumber }
+                                li
+                                    strong Montant facture : 
+                                    |  #{bill.price} €
+                                li
+                                    strong Catégorie :
+                                    |   #{bill.category}
+                                li
+                                    - const setDate = bill.paidAt ? new Date(bill.paidAt) : new Date;
+                                    - const yyyy = setDate.getFullYear();
+                                    - const mm = setDate.getMonth() < 10 ? `0${setDate.getMonth() + 1}` : setDate.getMonth() + 1;
+                                    - const dd = setDate.getDate()
+
+                                    strong Règlement : 
+                                    |   #{bill.state === 'Effectué' ? `${dd}/${mm}/${yyyy}` : 'En attente'}
+                                
+
+                            img.editBillButton(src='/img/edit.png' data-id=`${bill._id}`)
+
+        
+
+        
+

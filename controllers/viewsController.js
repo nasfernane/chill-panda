@@ -27,6 +27,24 @@ exports.getOverview = catchAsync(async (req, res, next) => {
     });
 });
 
+// fonction pour récupérer l'ensemble des factures. Même structure que l'overview des projets
+exports.getBillsOverview = catchAsync(async (req, res, next) => {
+    let filter = { user: `${req.user._id}` };
+
+    const docs = new APIFeatures(Bill.find(filter), req.query)
+        .filter()
+        .sort()
+        .limitFields()
+        .paginate();
+
+    const bills = await docs.query;
+
+    res.status(200).render('bills', {
+        title: 'Vos factures',
+        bills,
+    });
+});
+
 // page projet individuel
 exports.getProject = catchAsync(async (req, res, next) => {
     // récupère le projet sur son id et populate ses factures
