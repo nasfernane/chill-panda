@@ -156,22 +156,24 @@
 
         &__header {
             height: 15vw;
-            width: 70vw;
+            width: 85vw;
             display: flex;
             justify-content: flex-start;
             align-items: flex-end;
             padding-top: 10rem;
-            padding-bottom: 3rem;
 
             h1 {
+                margin-left: 5%;
+                padding-bottom: 3rem;
                 font-size: 5rem;
                 font-variant: small-caps;
                 font-weight: 500;
-                padding-right: 3rem;
             }
 
             .filters {
-                transform: translateY(-20%);
+                transform: translateY(-10%);
+                padding-bottom: 3rem;
+                padding-left: 1rem;
                 img {
                     height: 4.5rem;
                     width: 4.5rem;

@@ -6,7 +6,7 @@ main.editproject {
 
 .newProjectView {
     width: 85vw;
-    margin-left: 18vw;
+    margin-left: 15vw;
     display: flex;
     flex-direction: column;
 
@@ -15,17 +15,18 @@ main.editproject {
         background: #fff;
         display: flex;
         align-items: flex-end;
-        padding-bottom: 2rem;
 
         h1 {
-            font-size: 4.5rem;
+            margin-left: 5%;
+            padding-bottom: 3rem;
+            font-size: 5rem;
             font-variant: small-caps;
             font-weight: 500;
         }
     }
 
     &__form-container {
-        margin-left: 5rem;
+        margin-left: 8rem;
         width: 70%;
         display: flex;
         flex-direction: column;

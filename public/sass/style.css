@@ -306,19 +306,21 @@ body {
     align-items: center; }
     .overview .projects__header {
       height: 15vw;
-      width: 70vw;
+      width: 85vw;
       display: flex;
       justify-content: flex-start;
       align-items: flex-end;
-      padding-top: 10rem;
-      padding-bottom: 3rem; }
+      padding-top: 10rem; }
       .overview .projects__header h1 {
+        margin-left: 5%;
+        padding-bottom: 3rem;
         font-size: 5rem;
         font-variant: small-caps;
-        font-weight: 500;
-        padding-right: 3rem; }
+        font-weight: 500; }
       .overview .projects__header .filters {
-        transform: translateY(-20%); }
+        transform: translateY(-10%);
+        padding-bottom: 3rem;
+        padding-left: 1rem; }
         .overview .projects__header .filters img {
           height: 4.5rem;
           width: 4.5rem;
@@ -869,21 +871,22 @@ main.editproject {
 
 .newProjectView {
   width: 85vw;
-  margin-left: 18vw;
+  margin-left: 15vw;
   display: flex;
   flex-direction: column; }
   .newProjectView header {
     height: 15vw;
     background: #fff;
     display: flex;
-    align-items: flex-end;
-    padding-bottom: 2rem; }
+    align-items: flex-end; }
     .newProjectView header h1 {
-      font-size: 4.5rem;
+      margin-left: 5%;
+      padding-bottom: 3rem;
+      font-size: 5rem;
       font-variant: small-caps;
       font-weight: 500; }
   .newProjectView__form-container {
-    margin-left: 5rem;
+    margin-left: 8rem;
     width: 70%;
     display: flex;
     flex-direction: column;

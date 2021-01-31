@@ -53,7 +53,6 @@ const fillSearch = function () {
 const newSearch = function () {
     // récupération des éléments
     const sortBy = document.querySelector('#sort-by').value;
-    const statusInputs = document.querySelectorAll('.filters-form__container--status input');
     const dateInputs = document.querySelectorAll('.filters-form__container--date input');
     const filterByStatus = document.querySelector('#filterByStatus').value;
     const filterQuoteGte = document.querySelector('#filter-quote-gte').value;
@@ -99,6 +98,7 @@ if (filtersForm) {
         newSearch();
     });
 
+    // pré-remplit les filtres si une recherche est déjà en cours, au chargement de lap age
     window.addEventListener('load', () => {
         fillSearch();
     });
