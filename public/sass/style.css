@@ -786,6 +786,18 @@ body {
         justify-content: space-between;
         align-items: center;
         margin-bottom: 1rem; }
+        .signup .signup-form .form__group .pwContainer {
+          display: flex;
+          align-items: center;
+          width: calc(50% + 3.4rem); }
+          .signup .signup-form .form__group .pwContainer img {
+            width: 2.4rem;
+            height: 2.4rem;
+            margin-right: 1rem; }
+            .signup .signup-form .form__group .pwContainer img:hover {
+              cursor: pointer; }
+          .signup .signup-form .form__group .pwContainer input {
+            width: calc(100% - 3.5rem); }
       .signup .signup-form .form__group.alignRight {
         margin-top: 0.5rem;
         display: flex;

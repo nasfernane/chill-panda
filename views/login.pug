@@ -10,9 +10,11 @@ block content
                     input#email.form__input(type='email', placeholder='mail@exemple.com', required)
                 .form__group
                     label.form__label(for='password') Mot de passe
-                    div.pwContainer
+                    .pwContainer
                         img.showPw(src='/img/focus.png')
                         input#password.form__input(type='password', placeholder='••••••••', required, minlength='8' autocomplete='false')
                 .form__group
                     a(href='/signup') Inscription
                     button.btn.btn--login Connexion
+
+    

@@ -40,6 +40,27 @@
                 justify-content: space-between;
                 align-items: center;
                 margin-bottom: 1rem;
+
+                .pwContainer {
+                    display: flex;
+                    align-items: center;
+
+                    width: calc(50% + 3.4rem);
+
+                    img {
+                        width: 2.4rem;
+                        height: 2.4rem;
+                        margin-right: 1rem;
+
+                        &:hover {
+                            cursor: pointer;
+                        }
+                    }
+
+                    input {
+                        width: calc(100% - 3.5rem);
+                    }
+                }
             }
 
             &__group.alignRight {

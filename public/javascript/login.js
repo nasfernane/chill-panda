@@ -7,7 +7,9 @@ const logOutBtn = document.querySelector('.logout');
 // récupération du message d'erreur pour les visiteurs non identifiés qui essaient d'accéder à une page
 const error = document.querySelector('.error__container header h2');
 const showPwBtn = document.querySelector('.showPw');
-let pwInput = document.querySelector('#password');
+const showPwConfirmBtn = document.querySelector('.showPwConfirm');
+const pwInput = document.querySelector('#password');
+const pwConfirmInput = document.querySelector('#passwordConfirm');
 
 // utilise le client HTTP Axios pour envoyer les identifiants de connexion à l'API
 const login = async (email, password) => {
@@ -70,11 +72,21 @@ if (error && error.innerText.includes(`Vous n'êtes pas identifié.`)) {
 }
 
 if (showPwBtn) {
-    showPwBtn.addEventListener('click', function () {
-        if (pwInput.type === 'password') {
-            pwInput.type = 'text';
-        } else {
-            pwInput.type = 'password';
-        }
+    showPwBtn.addEventListener('mousedown', function () {
+        pwInput.type = pwInput.type === 'password' ? 'text' : 'password';
+    });
+
+    showPwBtn.addEventListener('mouseup', function () {
+        pwInput.type = pwInput.type === 'text' ? 'password' : 'text';
+    });
+}
+
+if (showPwConfirmBtn) {
+    showPwConfirmBtn.addEventListener('mousedown', function () {
+        pwConfirmInput.type = pwConfirmInput.type === 'password' ? 'text' : 'password';
+    });
+
+    showPwConfirmBtn.addEventListener('mouseup', function () {
+        pwConfirmInput.type = pwConfirmInput.type === 'text' ? 'password' : 'text';
     });
 }
