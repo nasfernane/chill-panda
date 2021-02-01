@@ -6,6 +6,7 @@
 
     .user {
         width: 15vw;
+
         height: 15vw;
         display: flex;
         flex-direction: column;
@@ -38,6 +39,7 @@
         font-size: 1.8rem;
         color: $color-grey;
         padding: 3rem;
+        padding-right: 2rem;
 
         p {
             font-variant: small-caps;

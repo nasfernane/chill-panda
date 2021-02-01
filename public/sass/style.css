@@ -61,7 +61,8 @@ body {
   .sidebar__nav {
     font-size: 1.8rem;
     color: #f5f5f5;
-    padding: 3rem; }
+    padding: 3rem;
+    padding-right: 2rem; }
     .sidebar__nav p {
       font-variant: small-caps;
       font-size: 2rem;
