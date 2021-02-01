@@ -6,6 +6,8 @@ const loginForm = document.querySelector('.loginForm');
 const logOutBtn = document.querySelector('.logout');
 // récupération du message d'erreur pour les visiteurs non identifiés qui essaient d'accéder à une page
 const error = document.querySelector('.error__container header h2');
+const showPwBtn = document.querySelector('.showPw');
+let pwInput = document.querySelector('#password');
 
 // utilise le client HTTP Axios pour envoyer les identifiants de connexion à l'API
 const login = async (email, password) => {
@@ -65,4 +67,14 @@ if (error && error.innerText.includes(`Vous n'êtes pas identifié.`)) {
     window.setTimeout(function () {
         window.location.replace('/');
     }, 3000);
+}
+
+if (showPwBtn) {
+    showPwBtn.addEventListener('click', function () {
+        if (pwInput.type === 'password') {
+            pwInput.type = 'text';
+        } else {
+            pwInput.type = 'password';
+        }
+    });
 }
