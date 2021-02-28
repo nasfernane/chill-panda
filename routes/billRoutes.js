@@ -5,9 +5,6 @@ const authController = require('../controllers/authController');
 // création du routeur avec le middleware d'express
 const router = express.Router({ mergeParams: true });
 
-// rend obligatoire la connexion pour tous les itinéraires
-// router.use(authController.protect);
-
 router
     .route('/')
     .get(authController.protect, billController.getAllBills)
