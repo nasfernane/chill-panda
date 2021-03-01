@@ -15,13 +15,20 @@ main.editproject {
         background: #fff;
         display: flex;
         align-items: flex-end;
+        padding-bottom: 3rem;
 
         h1 {
+            display: inline;
+            width: auto;
             margin-left: 5%;
-            padding-bottom: 3rem;
+            margin-right: 3rem;
             font-size: 5rem;
             font-variant: small-caps;
             font-weight: 500;
+        }
+
+        .header__undo {
+            margin-bottom: 1.5rem;
         }
     }
 

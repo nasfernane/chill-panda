@@ -18,8 +18,9 @@ block content
 
         .project
             .project__header 
-                h1 Project Details
-                .btn Revenir en arrière
+                h1.projectHeader Project Details
+                a.project__header__undo(href="/overview" title="Revenir à tous les projets")
+                    img(src="/img/undo.png")
 
             div(class=`card ${statuscolor}`)
                 div(class=`card__header ${statuscolor}`)
