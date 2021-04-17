@@ -1,15 +1,19 @@
 const express = require('express');
-// importe les controllers, sous forme de méthodes qui seront appliquées au retour pour répondre aux différentes requêtes http
+
+// controllers
 const projectController = require('../controllers/projectController');
 const authController = require('../controllers/authController');
+
+// router des factures
 const billRouter = require('./billRoutes');
 
 // création du routeur avec le middleware d'express
 const router = express.Router();
-// monte le routeur des factures pour tu lui transmettre toutes les url de type /:projectid/bills
+
+// redirige toutes les url de type /:projectid/bills vers le routeur des factures
 router.use('/:projectid/bills', billRouter);
 
-// rend obligatoire la connexion pour tous les itinéraires ci-dessous
+// rend obligatoire la connexion pour tous les itinéraires qui suivent
 router.use(authController.protect);
 
 router.route('/').get(projectController.getAllProjects).post(projectController.createProject);
