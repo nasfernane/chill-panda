@@ -4,7 +4,7 @@ class AppError extends Error {
         super(message);
 
         this.statusCode = statusCode;
-        // Si le statusCode commence par un 4, l'erreur est un fail, si c'est un 500, c'est une erreur
+        // statusCode = 4xx = fail // 500 = erreur serveur
         this.status = `${statusCode}`.startsWith('4') ? 'fail' : 'error';
         // Distinction des erreurs opérationnelles des erreurs de code
         this.isOperational = true;
