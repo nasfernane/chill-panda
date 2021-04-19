@@ -192,7 +192,7 @@ Dans le but de structurer les données en fonction des besoins de l'application,
 
 C'est en général une bonne pratique d'opter pour des données imbriquées, surtout dans les relations 1:FEW et 1:MANY, tandis que des relations référencées seront plus adaptées pour les cas relevant du 1:TON ou MANY:MANY. 
 
-Il est également conseillé d'utiliser le référencement quand les données sont souvent mises à jour, tandis que l'imbrication est plus adaptée lorsque les données sont souvent lues mais rarement mises à jour, ou quand deux types de données sont sont fondamentalement liées. 
+Il est également conseillé d'utiliser le référencement quand les données sont souvent mises à jour, tandis que l'imbrication est plus adaptée lorsque les données sont souvent lues mais rarement mises à jour, ou quand deux types de données sont fondamentalement liées. 
 
 Dans le cas d'utilisation de données référencées, il est nécessaire d'empêcher un tableau de références de grandir indéfiniment. Selon l'usage, on préfèrera le "parent referencing" au "child referencing" pour que ce soit la sous-donnée qui pointe vers son parent. On utilise le référencement à double sens dans les relations MANY:MANY
 
