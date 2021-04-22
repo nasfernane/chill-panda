@@ -20,7 +20,6 @@ const fillSearch = function () {
         // pré-remplit les filtres en fonction de l'url
         for (let i = 0; i < variables.length; i++) {
             const el = variables[i].split('=');
-            console.log(el);
 
             if (el[0].includes('sort')) document.querySelector('#sort-by').value = el[1];
 
@@ -49,7 +48,7 @@ const fillSearch = function () {
     }
 };
 
-// fonction qui crée une url en fonction des filtres sélectionnés et envoie sur la nouvelle page au submit du formulaire
+// fonction qui crée une url en fonction des filtres sélectionnés et redirige sur la nouvelle page au submit du formulaire
 const newSearch = function () {
     // récupération des éléments
     const sortBy = document.querySelector('#sort-by').value;
