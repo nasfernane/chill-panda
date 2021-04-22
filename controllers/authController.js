@@ -42,7 +42,7 @@ const createSendToken = (user, statusCode, res) => {
     });
 };
 
-// fonction asynchrone pour la création d'un nouvel utilisateur
+// méthode asynchrone pour la création d'un nouvel utilisateur
 exports.signup = catchAsync(async (req, res, next) => {
     // alerte d'erreur si les mots de passe ne correspondent pas
     if (req.body.password !== req.body.passwordConfirm) {

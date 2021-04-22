@@ -87,7 +87,7 @@ exports.getProject = catchAsync(async (req, res, next) => {
     });
 });
 
-// page projet individuel
+// affiche le formulaire d'édition de projet
 exports.editProject = catchAsync(async (req, res, next) => {
     // récupère le projet sur son id
     const project = await Project.findOne({ _id: req.params.id, user: req.user._id });
@@ -96,7 +96,7 @@ exports.editProject = catchAsync(async (req, res, next) => {
     if (!project) {
         return next(
             new AppError(
-                `Chill panda est trop fatigué pour aller chercher des projets qui n'existent pas.`,
+                `Chill Panda est trop fatigué pour aller chercher des projets qui n'existent pas.`,
                 404
             )
         );
@@ -118,9 +118,11 @@ exports.createStats = catchAsync(async (req, res, next) => {
             // phase 1 : récupère tous les projets sauf ceux qui sont avortés ou en proposition
             $match: {
                 $and: [
+                    // et qui appartiennent à l'utilisateur
                     { user: req.user._id },
                     {
                         $or: [
+                            // et dont le statut est l'un des suivants
                             { status: 'Terminé' },
                             { status: 'En pause' },
                             { status: 'A régler' },
@@ -131,6 +133,7 @@ exports.createStats = catchAsync(async (req, res, next) => {
             },
         },
         {
+            // groupe par année et par mois
             $group: {
                 _id: { year: { $year: '$date' }, month: { $month: '$date' } },
                 projectsSum: { $sum: '$quote' },
@@ -235,7 +238,7 @@ exports.getStats = catchAsync(async (req, res, next) => {
     });
 });
 
-// création d'un nouveau projet
+// affiche le formulaire de création d'un nouveau projet
 exports.newProject = catchAsync(async (req, res, next) => {
     // récupère le numéro du dernier devis pour pré-remplir le champ du nouveau projet
     const lastProjectNumber = await Project.aggregate([
