@@ -20,7 +20,7 @@ const signToken = id =>
 const createSendToken = (user, statusCode, res) => {
     const token = signToken(user._id);
     const cookieOptions = {
-        // expire dans maintenant + date d'expiration (trois mois)
+        // expire dans maintenant + date d'expiration
         expires: new Date(Date.now() + process.env.JWT_COOKIE_EXPIRES_IN * 24 * 60 * 60 * 1000),
         httpOnly: true,
     };
@@ -149,7 +149,7 @@ exports.protect = catchAsync(async (req, res, next) => {
     next();
 });
 
-// création d'une fonction enveloppant le middleware pour lui faire passer des arguments multiples sous la forme d'un spread operator
+// middleware pour limiter la
 exports.restrictTo = (...roles) => (req, res, next) => {
     // roles est un tableau. par ex: ['admin', 'lead-guide']
     // si le tableau entré en paramètre pour les permissions ne contient pas le rôle de l'utilisateur...
