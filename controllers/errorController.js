@@ -43,7 +43,6 @@ const sendErrorDev = (err, req, res) => {
     }
 
     // B) erreur sur rendu du site réel
-
     console.error('ERROR 💥', err);
 
     return res.status(err.statusCode).render('error', {

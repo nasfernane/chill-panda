@@ -149,9 +149,9 @@ exports.protect = catchAsync(async (req, res, next) => {
     next();
 });
 
-// middleware pour limiter la
+// middleware pour limiter l'accès à certains routes selon le rôle utilisateur
+// roles est un tableau. par ex: ['admin', 'lead-dev']
 exports.restrictTo = (...roles) => (req, res, next) => {
-    // roles est un tableau. par ex: ['admin', 'lead-guide']
     // si le tableau entré en paramètre pour les permissions ne contient pas le rôle de l'utilisateur...
     if (!roles.includes(req.user.role)) {
         // return et transmet l'erreur 403 (forbidden)
