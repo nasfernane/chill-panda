@@ -63,7 +63,7 @@ exports.updateOne = Model =>
 // création d'un document
 exports.createOne = Model =>
     catchAsync(async (req, res, next) => {
-        // Si on ne précise pas l'user, on le récupère depuis le middleware protect()
+        // Si on ne précise pas user dans le corps de la requête, on le récupère depuis le middleware protect()
         if (!req.body.user) req.body.user = req.user.id;
 
         const doc = await Model.create(req.body);

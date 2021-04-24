@@ -8,19 +8,20 @@ const AppError = require('../utils/appError');
 const APIFeatures = require('../utils/apiFeatures');
 
 // overview de tous les projets
-
 exports.getOverview = catchAsync(async (req, res, next) => {
     // filtre pour ne récupérer que les documents de l'utilisateur
     let filter = { user: `${req.user._id}` };
-    // crée une instance d'APIFeatures pour récupérer les méthodes sur API, on choisit quelle fonctions appliquer à cette méthode
+    // crée une instance d'APIFeatures sur une requête, sur laquelle on choisit quelle fonctions on souhaite appliquer
     const docs = new APIFeatures(Project.find(filter), req.query)
         .filter()
         .sort()
         .limitFields()
         .paginate();
-    // on récupère la requête transformée
+
+    // on récupère les données de la requête transformée
     const projects = await docs.query;
 
+    // on projette la vue avec les données récupérées
     res.status(200).render('overview', {
         title: 'All Projects',
         projects,
@@ -153,7 +154,6 @@ exports.createStats = catchAsync(async (req, res, next) => {
     // crée données mensuelles des factures crées
     await Bill.aggregate([
         {
-            // phase 1 : récupère tous les projets sauf ceux qui sont avortés ou en proposition
             $match: { user: req.user._id },
         },
         {

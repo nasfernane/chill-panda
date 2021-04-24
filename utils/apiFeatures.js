@@ -24,7 +24,6 @@ class APIFeatures {
     }
 
     sort() {
-        // 2) Triage (sorting)
         // sur une requête du style 127.0.0.1:8000/projects?sort=price
         if (this.queryString.sort) {
             // transforme les virgules en espace dans le paramètre sort pour implémenter un deuxième critère en cas d'égalité
