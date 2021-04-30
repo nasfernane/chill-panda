@@ -97,7 +97,7 @@ if (filtersForm) {
         newSearch();
     });
 
-    // pré-remplit les filtres si une recherche est déjà en cours, au chargement de lap age
+    // pré-remplit les filtres si une recherche est déjà en cours, au chargement de la page
     window.addEventListener('load', () => {
         fillSearch();
     });
